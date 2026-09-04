@@ -1,10 +1,193 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
-    <title>QuizMaster</title>
+    <title>Owly - Study Smarter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            text-align: center;
+            margin: 0;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 42px;
+        }
+
+        .card {
+            background: white;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 8px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #333;
+            color: white;
+            font-size: 16px;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #flashcard {
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        #studyArea {
+            display: none;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Welcome to QuizMaster!</h1>
-    <p>Your new study website.</p>
+
+    <h1>🦉 Owly</h1>
+    <p>Study smarter with flashcards.</p>
+
+    <div class="card" id="createArea">
+        <h2>Create a Flashcard</h2>
+
+        <input id="question" type="text" placeholder="Question or term">
+
+        <input id="answer" type="text" placeholder="Answer or definition">
+
+        <br>
+
+        <button onclick="addCard()">Add Flashcard</button>
+        <button onclick="startStudying()">Study</button>
+
+        <p id="cardCount">0 flashcards</p>
+    </div>
+
+    <div class="card" id="studyArea">
+
+        <h2>📚 Study Mode</h2>
+
+        <p id="progress">Card 0 of 0</p>
+
+        <div id="flashcard" onclick="flipCard()">
+            Add some flashcards first!
+        </div>
+
+        <button onclick="previousCard()">⬅ Previous</button>
+        <button onclick="nextCard()">Next ➡</button>
+
+        <br>
+
+        <button onclick="backToCreate()">Back to Create</button>
+
+    </div>
+
+    <script>
+        let cards = [];
+        let currentCard = 0;
+        let showingAnswer = false;
+
+        function addCard() {
+            const question = document.getElementById("question").value;
+            const answer = document.getElementById("answer").value;
+
+            if (question === "" || answer === "") {
+                alert("Please enter both a question and an answer!");
+                return;
+            }
+
+            cards.push({
+                question: question,
+                answer: answer
+            });
+
+            document.getElementById("question").value = "";
+            document.getElementById("answer").value = "";
+
+            updateCount();
+        }
+
+        function updateCount() {
+            document.getElementById("cardCount").textContent =
+                cards.length + " flashcards";
+        }
+
+        function startStudying() {
+            if (cards.length === 0) {
+                alert("Add some flashcards first!");
+                return;
+            }
+
+            currentCard = 0;
+            showingAnswer = false;
+
+            document.getElementById("createArea").style.display = "none";
+            document.getElementById("studyArea").style.display = "block";
+
+            showCard();
+        }
+
+        function showCard() {
+            const card = cards[currentCard];
+
+            if (showingAnswer) {
+                document.getElementById("flashcard").textContent = card.answer;
+            } else {
+                document.getElementById("flashcard").textContent = card.question;
+            }
+
+            document.getElementById("progress").textContent =
+                "Card " + (currentCard + 1) + " of " + cards.length;
+        }
+
+        function flipCard() {
+            showingAnswer = !showingAnswer;
+            showCard();
+        }
+
+        function nextCard() {
+            if (currentCard < cards.length - 1) {
+                currentCard++;
+                showingAnswer = false;
+                showCard();
+            }
+        }
+
+        function previousCard() {
+            if (currentCard > 0) {
+                currentCard--;
+                showingAnswer = false;
+                showCard();
+            }
+        }
+
+        function backToCreate() {
+            document.getElementById("studyArea").style.display = "none";
+            document.getElementById("createArea").style.display = "block";
+        }
+    </script>
+
 </body>
 </html>
+```
