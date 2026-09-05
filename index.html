@@ -294,13 +294,15 @@ function showCardList() {
             showingAnswer = false;
             if (shuffleCards) {
                 shuffleOrder = cards.slice();
-                for (let i = 0; i < cards.length; i++) {
-                    let randomIndex = Math.floor(Math.random() * cards.length);
-                    let temp = shuffleOrder[i];
-                    shuffleOrder[i] = shuffleOrder[randomIndex];
-                    shuffleOrder[randomIndex] = temp;
-                }
-            }
+
+                 for (let i = shuffleOrder.length - 1; i > 0; i--) {
+                    let randomIndex = Math.floor(Math.random() * (i + 1));
+
+                let temp = shuffleOrder[i];
+                 shuffleOrder[i] = shuffleOrder[randomIndex];
+                shuffleOrder[randomIndex] = temp;
+    }
+}
 
             /*
              * Hide the card creation section
@@ -351,13 +353,22 @@ function showCardList() {
                 "Card " + (currentCard + 1) + " of " + cards.length;
         }
         
-function deleteCard(index) {
-    cards.splice(index, 1);
-
-    localStorage.setItem("owlyCards", JSON.stringify(cards));
-
-    updateCount();
-}
+            function deleteCard(index) {
+                cards.splice(index, 1);
+            
+                localStorage.setItem("owlyCards", JSON.stringify(cards));
+            
+                // Reset the shuffle order
+                shuffleOrder = [];
+            
+                // Turn off shuffle mode
+                shuffleCards = false;
+            
+                // Start from the beginning
+                currentCard = 0;
+            
+                updateCount();
+            }
 
         /*
          * FLIP CARD
