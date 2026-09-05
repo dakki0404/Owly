@@ -99,7 +99,10 @@
 
         <!-- Calls startStudying() when clicked -->
         <button onclick="startStudying()">Study</button>
+        <button onclick="Normal()">Normal</button>
+        <button onclick="shuffle()">Shuffle</button>
 
+        
         <!-- Shows how many flashcards have been created -->
         <p id="cardCount">0 flashcards</p>
         <div id="cardList"></div>
@@ -157,6 +160,9 @@
          */
         let currentCard = 0;
 
+        let shuffleCards = false;
+        let shuffleOrder = [];
+        
         /*
          * Keeps track of whether we are showing
          * the question or the answer.
@@ -165,6 +171,14 @@
          * true = answer
          */
         let showingAnswer = false;
+        function Normal() {
+            shuffleCards = false;
+            startStudying();
+        }
+        function shuffle() {
+        shuffleCards = true;
+        startStudying();
+        }
         updateCount();
 
         /*
@@ -278,7 +292,15 @@ function showCardList() {
 
             // Start by showing the question
             showingAnswer = false;
-
+            if (shuffleCards) {
+                shuffleOrder = cards.slice();
+                for (let i = 0; i < cards.length; i++) {
+                    let randomIndex = Math.floor(Math.random() * cards.length);
+                    let temp = shuffleOrder[i];
+                    shuffleOrder[i] = shuffleOrder[randomIndex];
+                    shuffleOrder[randomIndex] = temp;
+                }
+            }
 
             /*
              * Hide the card creation section
