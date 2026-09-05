@@ -326,8 +326,7 @@ function showCardList() {
         function showCard() {
 
             // Gets the flashcard the user is currently studying
-            const card = cards[currentCard];
-
+            const card = shuffleCards ? shuffleOrder[currentCard] : cards[currentCard];
 
             /*
              * If showingAnswer is true,
