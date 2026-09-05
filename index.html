@@ -2,9 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <!-- The title that appears on the browser tab -->
     <title>Owly - Study Smarter</title>
 
     <style>
+        /* Controls the overall appearance of the webpage */
         body {
             font-family: Arial, sans-serif;
             background: #f4f6f8;
@@ -13,10 +15,12 @@
             padding: 40px;
         }
 
+        /* Makes the main Owly heading large */
         h1 {
             font-size: 42px;
         }
 
+        /* Creates the white boxes used for the flashcard sections */
         .card {
             background: white;
             max-width: 500px;
@@ -26,6 +30,7 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
+        /* Styles the text input boxes */
         input {
             width: 80%;
             padding: 12px;
@@ -34,6 +39,7 @@
             border-radius: 8px;
         }
 
+        /* Styles all buttons */
         button {
             padding: 12px 20px;
             margin: 8px;
@@ -45,10 +51,12 @@
             font-size: 16px;
         }
 
+        /* Makes buttons slightly transparent when the mouse is over them */
         button:hover {
             opacity: 0.8;
         }
 
+        /* Controls the flashcard's size and centers its text */
         #flashcard {
             min-height: 150px;
             display: flex;
@@ -58,6 +66,7 @@
             cursor: pointer;
         }
 
+        /* Hides Study Mode when the page first loads */
         #studyArea {
             display: none;
         }
@@ -66,126 +75,323 @@
 
 <body>
 
+    <!-- Main Owly title -->
     <h1>🦉 Owly</h1>
+
+    <!-- Short description underneath the title -->
     <p>Study smarter with flashcards.</p>
 
+    <!-- Section where the user creates flashcards -->
     <div class="card" id="createArea">
+
         <h2>Create a Flashcard</h2>
 
+        <!-- Input where the user types the question or term -->
         <input id="question" type="text" placeholder="Question or term">
 
+        <!-- Input where the user types the answer or definition -->
         <input id="answer" type="text" placeholder="Answer or definition">
 
         <br>
 
+        <!-- Calls addCard() when clicked -->
         <button onclick="addCard()">Add Flashcard</button>
+
+        <!-- Calls startStudying() when clicked -->
         <button onclick="startStudying()">Study</button>
 
+        <!-- Shows how many flashcards have been created -->
         <p id="cardCount">0 flashcards</p>
     </div>
 
+    <!-- Section used when the user enters Study Mode -->
     <div class="card" id="studyArea">
 
         <h2>📚 Study Mode</h2>
 
+        <!-- Shows which card the user is currently studying -->
         <p id="progress">Card 0 of 0</p>
 
+        <!--
+            This is the actual flashcard.
+            Clicking it calls flipCard() to switch
+            between the question and answer.
+        -->
         <div id="flashcard" onclick="flipCard()">
             Add some flashcards first!
         </div>
 
+        <!-- Moves to the previous flashcard -->
         <button onclick="previousCard()">⬅ Previous</button>
+
+        <!-- Moves to the next flashcard -->
         <button onclick="nextCard()">Next ➡</button>
 
         <br>
 
+        <!-- Returns the user to the flashcard creation area -->
         <button onclick="backToCreate()">Back to Create</button>
 
     </div>
 
     <script>
+
+        /*
+         * This array stores all of the flashcards.
+         *
+         * Each flashcard will look like:
+         *
+         * {
+         *     question: "What is 2 + 2?",
+         *     answer: "4"
+         * }
+         */
         let cards = [];
+
+        /*
+         * Keeps track of which flashcard the user
+         * is currently looking at.
+         *
+         * JavaScript starts counting from 0.
+         */
         let currentCard = 0;
+
+        /*
+         * Keeps track of whether we are showing
+         * the question or the answer.
+         *
+         * false = question
+         * true = answer
+         */
         let showingAnswer = false;
 
+
+        /*
+         * ADD CARD
+         *
+         * This function runs when the user clicks
+         * the "Add Flashcard" button.
+         */
         function addCard() {
+
+            // Gets whatever the user typed into the question box
             const question = document.getElementById("question").value;
+
+            // Gets whatever the user typed into the answer box
             const answer = document.getElementById("answer").value;
 
+
+            /*
+             * Checks if either box is empty.
+             *
+             * If one is empty, stop the function
+             * and show an alert.
+             */
             if (question === "" || answer === "") {
                 alert("Please enter both a question and an answer!");
                 return;
             }
 
+
+            /*
+             * Adds a new flashcard to the cards array.
+             */
             cards.push({
                 question: question,
                 answer: answer
             });
 
+
+            /*
+             * Clears the question box after
+             * the card has been created.
+             */
             document.getElementById("question").value = "";
+
+            /*
+             * Clears the answer box after
+             * the card has been created.
+             */
             document.getElementById("answer").value = "";
 
+
+            // Updates the flashcard counter
             updateCount();
         }
 
+
+        /*
+         * UPDATE COUNT
+         *
+         * Updates the text that says
+         * "0 flashcards", "1 flashcard", etc.
+         */
         function updateCount() {
+
             document.getElementById("cardCount").textContent =
                 cards.length + " flashcards";
         }
 
+
+        /*
+         * START STUDYING
+         *
+         * Switches the website from the
+         * creation screen to Study Mode.
+         */
         function startStudying() {
+
+            // Don't allow Study Mode if there are no cards
             if (cards.length === 0) {
                 alert("Add some flashcards first!");
                 return;
             }
 
+
+            // Start with the first card
             currentCard = 0;
+
+            // Start by showing the question
             showingAnswer = false;
 
+
+            /*
+             * Hide the card creation section
+             */
             document.getElementById("createArea").style.display = "none";
+
+            /*
+             * Show the Study Mode section
+             */
             document.getElementById("studyArea").style.display = "block";
 
+
+            // Display the first flashcard
             showCard();
         }
 
+
+        /*
+         * SHOW CARD
+         *
+         * Displays the current flashcard on the screen.
+         */
         function showCard() {
+
+            // Gets the flashcard the user is currently studying
             const card = cards[currentCard];
 
+
+            /*
+             * If showingAnswer is true,
+             * display the answer.
+             *
+             * Otherwise display the question.
+             */
             if (showingAnswer) {
                 document.getElementById("flashcard").textContent = card.answer;
             } else {
                 document.getElementById("flashcard").textContent = card.question;
             }
 
+
+            /*
+             * Updates the progress text.
+             *
+             * Example:
+             * Card 1 of 10
+             */
             document.getElementById("progress").textContent =
                 "Card " + (currentCard + 1) + " of " + cards.length;
         }
 
+
+        /*
+         * FLIP CARD
+         *
+         * Switches between the question and answer.
+         *
+         * If we're showing the question,
+         * show the answer.
+         *
+         * If we're showing the answer,
+         * show the question.
+         */
         function flipCard() {
+
+            // Changes true to false or false to true
             showingAnswer = !showingAnswer;
+
+            // Updates the card on the screen
             showCard();
         }
 
+
+        /*
+         * NEXT CARD
+         *
+         * Moves the user to the next flashcard.
+         */
         function nextCard() {
+
+            /*
+             * Make sure we aren't already
+             * on the final card.
+             */
             if (currentCard < cards.length - 1) {
+
+                // Move to the next card
                 currentCard++;
+
+                // Start the new card on its question
                 showingAnswer = false;
+
+                // Display the new card
                 showCard();
             }
         }
 
+
+        /*
+         * PREVIOUS CARD
+         *
+         * Moves the user to the previous flashcard.
+         */
         function previousCard() {
+
+            /*
+             * Make sure we aren't already
+             * on the first card.
+             */
             if (currentCard > 0) {
+
+                // Move to the previous card
                 currentCard--;
+
+                // Start the card on its question
                 showingAnswer = false;
+
+                // Display the card
                 showCard();
             }
         }
 
+
+        /*
+         * BACK TO CREATE
+         *
+         * Takes the user out of Study Mode
+         * and back to the flashcard creation screen.
+         */
         function backToCreate() {
+
+            // Hide Study Mode
             document.getElementById("studyArea").style.display = "none";
+
+            // Show the creation area
             document.getElementById("createArea").style.display = "block";
         }
+
     </script>
 
 </body>
