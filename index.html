@@ -146,7 +146,7 @@
          *     answer: "4"
          * }
          */
-        let cards = [];
+        let cards = JSON.parse(localStorage.getItem("owlyCards")) || [];
 
         /*
          * Keeps track of which flashcard the user
@@ -164,7 +164,7 @@
          * true = answer
          */
         let showingAnswer = false;
-
+        updateCount();
 
         /*
          * ADD CARD
@@ -200,6 +200,7 @@
                 question: question,
                 answer: answer
             });
+            localStorage.setItem("owlyCards", JSON.stringify(cards));
 
 
             /*
