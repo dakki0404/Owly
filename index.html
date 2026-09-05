@@ -102,6 +102,7 @@
 
         <!-- Shows how many flashcards have been created -->
         <p id="cardCount">0 flashcards</p>
+        <div id="cardList"></div>
     </div>
 
     <!-- Section used when the user enters Study Mode -->
@@ -228,11 +229,34 @@
          * "0 flashcards", "1 flashcard", etc.
          */
         function updateCount() {
-
             document.getElementById("cardCount").textContent =
                 cards.length + " flashcards";
-        }
 
+            showCardList();
+            }
+
+        
+        function showCardList() {
+    const list = document.getElementById("cardList");
+
+    list.innerHTML = "";
+
+    cards.forEach((card, index) => {
+        const cardDiv = document.createElement("div");
+
+        cardDiv.innerHTML = `
+            <p>
+                <strong>${card.question}</strong>
+                → ${card.answer}
+                <button onclick="deleteCard(${index})">Delete</button>
+            </p>
+        `;
+
+        list.appendChild(cardDiv);
+    });
+}
+        
+        
 
         /*
          * START STUDYING
@@ -305,7 +329,14 @@
             document.getElementById("progress").textContent =
                 "Card " + (currentCard + 1) + " of " + cards.length;
         }
+        
+function deleteCard(index) {
+    cards.splice(index, 1);
 
+    localStorage.setItem("owlyCards", JSON.stringify(cards));
+
+    updateCount();
+}
 
         /*
          * FLIP CARD
