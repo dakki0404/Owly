@@ -111,6 +111,32 @@
         #studyArea {
             display: none;
         }
+
+#studyPopup {
+    display: none;
+    width: 400px;
+    margin: 30px auto;
+}
+
+#studyPopupBox {
+    position: relative;
+    background: #101b32;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+#closePopup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    padding: 5px 10px;
+    background: transparent;
+    font-size: 20px;
+}
+
+
+        
     </style>
 </head>
 
@@ -139,9 +165,8 @@
         <button onclick="addCard()">Add Flashcard</button>
 
         <!-- Calls startStudying() when clicked -->
-        <button onclick="startStudying()">Study</button>
-        <button onclick="Normal()">Normal</button>
-        <button onclick="shuffle()">Shuffle</button>
+        <button onclick="openStudyPopup()">📚 Study</button>
+        
 
         
         <!-- Shows how many flashcards have been created -->
@@ -149,6 +174,20 @@
         <div id="cardList"></div>
     </div>
 
+   <div id="studyPopup">
+    <div id="studyPopupBox">
+
+        <button id="closePopup" onclick="closeStudyPopup()">✕</button>
+
+        <h2>📚 How do you want to study?</h2>
+
+        <button onclick="Normal()">Normal</button>
+        <button onclick="shuffle()">🔀 Shuffle</button>
+
+    </div>
+</div>
+
+    
     <!-- Section used when the user enters Study Mode -->
     <div class="card" id="studyArea">
 
@@ -209,6 +248,7 @@
          */
         let currentCard = 0;
         let correctCards = 0;
+        let reviewCards = [];
         let shuffleCards = false;
         let shuffleOrder = [];
         
@@ -327,6 +367,18 @@ function showCardList() {
          * Switches the website from the
          * creation screen to Study Mode.
          */
+
+
+        function openStudyPopup() {
+        document.getElementById("studyPopup").style.display = "flex";
+        }
+        function closeStudyPopup() {
+        document.getElementById("studyPopup").style.display = "none";
+        }
+
+
+
+        
         function startStudying() {
 
             // Don't allow Study Mode if there are no cards
@@ -450,6 +502,10 @@ document.getElementById("progressFill").style.width =
 
 
         function dontKnowCard() {
+            const card = shuffleCards ? shuffleOrder[currentCard] : cards[currentCard];
+
+            reviewCards.push(card);
+            
             nextCard();
         }
 
