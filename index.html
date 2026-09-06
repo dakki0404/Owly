@@ -400,7 +400,7 @@ function showCardList() {
              */
             document.getElementById("progress").textContent =
                 "Card " + (currentCard + 1) + " of " + cards.length;
-            let progressPercent = ((currentCard + 1) / cards.length) * 100;
+            let progressPercent = (currentCard / cards.length) * 100;
 
 document.getElementById("progressFill").style.width =
     progressPercent + "%";
