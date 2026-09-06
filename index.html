@@ -173,6 +173,10 @@
         <!-- Moves to the previous flashcard -->
         <button onclick="previousCard()">⬅ Previous</button>
 
+        <button onclick="knowCard()">✅ Know</button>
+
+        <button onclick="dontKnowCard()">❌ Don't Know</button>
+        
         <!-- Moves to the next flashcard -->
         <button onclick="nextCard()">Next ➡</button>
 
@@ -204,7 +208,7 @@
          * JavaScript starts counting from 0.
          */
         let currentCard = 0;
-
+        let correctCards = 0;
         let shuffleCards = false;
         let shuffleOrder = [];
         
@@ -439,6 +443,15 @@ document.getElementById("progressFill").style.width =
             showCard();
         }
 
+        function knowCard() {
+            correctCards++;
+            nextCard();
+        }
+
+
+        function dontKnowCard() {
+            nextCard();
+        }
 
         /*
          * NEXT CARD
