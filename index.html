@@ -16,6 +16,25 @@
             padding: 40px;
         }
 
+
+        #progressBar {
+        width: 80%;
+        height: 10px;
+        background: #263858;
+        border-radius: 10px;
+        margin: 15px auto;
+        overflow: hidden;
+        }
+    
+        #progressFill {
+        width: 0%;
+        height: 100%;
+        background: #6c8cff;
+        border-radius: 10px;
+        transition: width 0.3s ease;
+        }
+
+        
         /* Makes the main Owly heading large */
         h1 {
             font-size: 42px;
@@ -121,6 +140,10 @@
 
         <!-- Shows which card the user is currently studying -->
         <p id="progress">Card 0 of 0</p>
+
+        <div id="progressBar">
+            <div id="progressFill"></div>
+        </div>
 
         <!--
             This is the actual flashcard.
@@ -358,9 +381,13 @@ function showCardList() {
             document.getElementById("progress").textContent =
                 "Card " + (currentCard + 1) + " of " + cards.length;
         }
+            let progressPercent = ((currentCard + 1) / cards.length) * 100;
+
+                document.getElementById("progressFill").style.width =
+                progressPercent + "%"; 
         
-            function deleteCard(index) {
-                cards.splice(index, 1);
+                function deleteCard(index) {
+                    cards.splice(index, 1);
             
                 localStorage.setItem("owlyCards", JSON.stringify(cards));
             
