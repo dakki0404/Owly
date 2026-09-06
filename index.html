@@ -43,7 +43,7 @@
         /* Creates the white boxes used for the flashcard sections */
         .card {
             background: #101b32;
-            max-width: 500px;
+            max-width: 750px;
             margin: 30px auto;
             padding: 30px;
             border-radius: 15px;
@@ -83,12 +83,28 @@
 
         /* Controls the flashcard's size and centers its text */
         #flashcard {
-            min-height: 150px;
+            width: 85%;
+            min-height: 320px;
+            margin: 25px auto;
+            padding: 40px;
+        
+            background: #162442;
+            border: 2px solid #263858;
+            border-radius: 20px;
+        
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
+        
+            font-size: 34px;
+            font-weight: bold;
+            text-align: center;
+        
             cursor: pointer;
+        
+            box-sizing: border-box;
+        
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         /* Hides Study Mode when the page first loads */
