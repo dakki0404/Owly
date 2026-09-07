@@ -82,36 +82,64 @@
         }
 
         /* Controls the flashcard's size and centers its text */
-        #flashcard {
-            width: 85%;
-            min-height: 320px;
-            margin: 25px auto;
-            padding: 40px;
-        
-            background: #162442;
-            border: 2px solid #263858;
-            border-radius: 20px;
-        
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        
-            font-size: 34px;
-            font-weight: bold;
-            text-align: center;
-        
-            cursor: pointer;
-        
-            box-sizing: border-box;
-        
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
+#flashcard {
+    width: 85%;
+    min-height: 320px;
+    margin: 25px auto;
+    position: relative;
 
-        /* This class makes the card flip */
-        
-        #flashcard.flipping {
-            transform: rotateY(90deg);
-        }
+    cursor: pointer;
+    box-sizing: border-box;
+
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+
+    perspective: 1000px;
+}
+
+.flashcard-inner {
+    width: 100%;
+    height: 320px;
+    position: relative;
+
+    transform-style: preserve-3d;
+    transform-origin: center center;
+    transition: transform 0.7s ease-in-out;
+}
+
+.flashcard-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    width: 100%;
+    min-height: 320px;
+    box-sizing: border-box;
+
+    background: #162442;
+    border: 2px solid #263858;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    backface-visibility: hidden;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+}
         
         /* Hides Study Mode when the page first loads */
         #studyArea {
@@ -219,8 +247,18 @@
             between the question and answer.
         -->
         <div id="flashcard" onclick="flipCard()">
-            Add some flashcards first!
+    <div class="flashcard-inner">
+
+            <div class="flashcard-front" id="flashcardFront">
+                Add some flashcards first!
+            </div>
+    
+            <div class="flashcard-back" id="flashcardBack">
+                Add some flashcards first!
+            </div>
+    
         </div>
+    </div>
 
         <!-- Moves to the previous flashcard -->
         <button onclick="previousCard()">⬅ Previous</button>
@@ -439,37 +477,35 @@ function showCardList() {
          *
          * Displays the current flashcard on the screen.
          */
-        function showCard() {
+function showCard() {
 
-            // Gets the flashcard the user is currently studying
-            const card = shuffleCards ? shuffleOrder[currentCard] : cards[currentCard];
+    const card = shuffleCards
+        ? shuffleOrder[currentCard]
+        : cards[currentCard];
 
-            /*
-             * If showingAnswer is true,
-             * display the answer.
-             *
-             * Otherwise display the question.
-             */
-            if (showingAnswer) {
-                document.getElementById("flashcard").textContent = card.answer;
-            } else {
-                document.getElementById("flashcard").textContent = card.question;
-            }
+    // Put the question on the front
+    document.getElementById("flashcardFront").textContent =
+        card.question;
 
+    // Put the answer on the back
+    document.getElementById("flashcardBack").textContent =
+        card.answer;
 
-            /*
-             * Updates the progress text.
-             *
-             * Example:
-             * Card 1 of 10
-             */
-            document.getElementById("progress").textContent =
-                "Card " + (currentCard + 1) + " of " + cards.length;
-            let progressPercent = (currentCard / cards.length) * 100;
+    // Make sure a new card starts on the question side
+    document.querySelector(".flashcard-inner")
+        .classList.remove("flipped");
 
-document.getElementById("progressFill").style.width =
-    progressPercent + "%";
-        }
+    document.getElementById("progress").textContent =
+        "Card " + (currentCard + 1) + " of " + cards.length;
+
+    let progressPercent =
+        (currentCard / cards.length) * 100;
+
+    document.getElementById("progressFill").style.width =
+        progressPercent + "%";
+}
+
+        
         
                 function deleteCard(index) {
                     cards.splice(index, 1);
@@ -499,24 +535,17 @@ document.getElementById("progressFill").style.width =
          * If we're showing the answer,
          * show the question.
          */
-        function flipCard() {
-        
-            const flashcard = document.getElementById("flashcard");
-        
-            // Start the flip
-            flashcard.classList.add("flipping");
-        
-            // Change the card while it is turned
-            setTimeout(() => {
-        
-                showingAnswer = !showingAnswer;
-                showCard();
-        
-                // Finish the flip
-                flashcard.classList.remove("flipping");
-        
-            }, 250);
-        }
+function flipCard() {
+
+    const flashcardInner =
+        document.querySelector(".flashcard-inner");
+
+    // Flip the card around its center
+    flashcardInner.classList.toggle("flipped");
+
+    // Keep track of which side we're viewing
+    showingAnswer = !showingAnswer;
+}
 
         function knowCard() {
             correctCards++;
