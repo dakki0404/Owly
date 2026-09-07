@@ -641,6 +641,12 @@ function flipCard() {
 
             document.getElementById("reviewText").textContent =
                 reviewCards.length + " cards need review.";
+
+            const masteredPercent = (correctCards / cards.length) * 100;
+            const remainingPercent = 100 - masteredPercent;
+
+            document.getElementById("reviewText").textContent =
+            remainingPercent + "% remaining to review.";
         }
                 
 
