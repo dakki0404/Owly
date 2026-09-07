@@ -107,6 +107,12 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
+        /* This class makes the card flip */
+        
+        #flashcard.flipping {
+            transform: rotateY(90deg);
+        }
+        
         /* Hides Study Mode when the page first loads */
         #studyArea {
             display: none;
@@ -494,12 +500,22 @@ document.getElementById("progressFill").style.width =
          * show the question.
          */
         function flipCard() {
-
-            // Changes true to false or false to true
-            showingAnswer = !showingAnswer;
-
-            // Updates the card on the screen
-            showCard();
+        
+            const flashcard = document.getElementById("flashcard");
+        
+            // Start the flip
+            flashcard.classList.add("flipping");
+        
+            // Change the card while it is turned
+            setTimeout(() => {
+        
+                showingAnswer = !showingAnswer;
+                showCard();
+        
+                // Finish the flip
+                flashcard.classList.remove("flipping");
+        
+            }, 250);
         }
 
         function knowCard() {
