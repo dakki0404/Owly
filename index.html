@@ -147,9 +147,36 @@
         }
 
         #studyComplete {
-            display: none;
+            background: #101b32;
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            font-size: 36px;
+            margin-bottom: 25px;
         }
 
+        #scoreText {
+            font-size: 22px;
+            margin: 15px 0;
+        }
+
+        #studyComplete button {
+            margin: 10px 6px;
+            padding: 12px 22px;
+            font-size: 16px;
+        }
+        #studyComplete button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        #reviewText {
+            font-size: 20px;
+            margin: 10px 0 25px;
+            font-weight: bold;
+        }
 #studyPopup {
     display: none;
     position: fixed;
@@ -639,9 +666,6 @@ function flipCard() {
             document.getElementById("scoreText").textContent =
             "You knew " + correctCards + " out of " + cards.length + " cards!";
 
-            document.getElementById("reviewText").textContent =
-                reviewCards.length + " cards need review.";
-
             const masteredPercent = (correctCards / cards.length) * 100;
             const remainingPercent = 100 - masteredPercent;
 
@@ -658,6 +682,7 @@ function flipCard() {
          */
         
         function backToCreate() {
+            document.getElementById("studyComplete").style.display = "none";
 
             // Hide Study Mode
             document.getElementById("studyArea").style.display = "none";
