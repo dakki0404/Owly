@@ -146,6 +146,10 @@
             display: none;
         }
 
+        #studyComplete {
+            display: none;
+        }
+
 #studyPopup {
     display: none;
     position: fixed;
@@ -277,6 +281,23 @@
 
     </div>
 
+    <div id="studyComplete">
+
+        <h2>🎉 Study Complete!</h2>
+    
+        <p id="scoreText"></p>
+        <p id="reviewText"></p>
+    
+        <button onclick="startStudying()">Study Again</button>
+        <button onclick="backToCreate()">Back to Create</button>
+    
+    </div>
+
+
+
+
+
+    
     <script>
 
         /*
@@ -437,11 +458,13 @@ function showCardList() {
                 alert("Add some flashcards first!");
                 return;
             }
+            document.getElementById("studyComplete").style.display = "none";
 
 
             // Start with the first card
             currentCard = 0;
-
+            correctCards = 0;
+            reviewCards = [];
             // Start by showing the question
             showingAnswer = false;
             if (shuffleCards) {
@@ -567,21 +590,18 @@ function flipCard() {
          * Moves the user to the next flashcard.
          */
         function nextCard() {
-
-            /*
-             * Make sure we aren't already
-             * on the final card.
-             */
+        
             if (currentCard < cards.length - 1) {
-
-                // Move to the next card
+        
                 currentCard++;
-
-                // Start the new card on its question
+        
                 showingAnswer = false;
-
-                // Display the new card
+        
                 showCard();
+        
+            } else {
+        
+                showStudyComplete();
             }
         }
 
@@ -610,6 +630,19 @@ function flipCard() {
             }
         }
 
+        function showStudyComplete() {
+
+            document.getElementById("studyArea").style.display = "none";
+        
+            document.getElementById("studyComplete").style.display = "block";
+
+            document.getElementById("scoreText").textContent =
+            "You knew " + correctCards + " out of " + cards.length + " cards!";
+
+            document.getElementById("reviewText").textContent =
+                reviewCards.length + " cards need review.";
+        }
+                
 
         /*
          * BACK TO CREATE
@@ -617,6 +650,7 @@ function flipCard() {
          * Takes the user out of Study Mode
          * and back to the flashcard creation screen.
          */
+        
         function backToCreate() {
 
             // Hide Study Mode
@@ -625,6 +659,7 @@ function flipCard() {
             // Show the creation area
             document.getElementById("createArea").style.display = "block";
         }
+        
 
     </script>
 
