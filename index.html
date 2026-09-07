@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -170,6 +169,110 @@
         .card h2 {
             margin-top: 0;
             font-size: 23px;
+        }
+
+        /* =========================
+           HOME PAGE
+        ========================= */
+
+        #homePage {
+            display: none;
+        }
+
+        .homeHeader {
+            background: #101f3b;
+            border: 1px solid #203a63;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+        }
+
+        .homeHeader h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        .homeHeader p {
+            margin: 8px 0 0;
+            color: #8fa4cc;
+        }
+
+        .homeSetsGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .homeSetCard {
+            background: #101f3b;
+            border: 1px solid #203a63;
+            border-radius: 14px;
+            padding: 20px;
+            cursor: pointer;
+            min-height: 175px;
+            transition: 0.2s ease;
+            position: relative;
+        }
+
+        .homeSetCard:hover {
+            transform: translateY(-4px);
+            border-color: #4b8fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.28);
+        }
+
+        .homeSetIcon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: #132443;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .homeSetName {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 7px;
+            word-break: break-word;
+        }
+
+        .homeSetInfo {
+            color: #8195bd;
+            font-size: 13px;
+            margin-bottom: 17px;
+        }
+
+        .homeStudyButton {
+            width: 100%;
+            margin: 0;
+            background: #287cff;
+        }
+
+        .homeStudyButton:hover {
+            background: #3b8cff;
+        }
+
+        .emptyHome {
+            grid-column: 1 / -1;
+            background: #101f3b;
+            border: 1px dashed #28466f;
+            border-radius: 14px;
+            padding: 55px 25px;
+            text-align: center;
+            color: #8195bd;
+        }
+
+        .emptyHome h2 {
+            color: #f1f5ff;
+            margin: 0 0 10px;
+        }
+
+        .emptyHome button {
+            margin-top: 15px;
         }
 
         /* =========================
@@ -515,7 +618,7 @@
         }
 
         /* =========================
-           POPUP
+           POPUPS
         ========================= */
 
         #studyPopup,
@@ -639,6 +742,14 @@
                 align-items: flex-start;
                 flex-direction: column;
             }
+
+            .homeSetsGrid {
+                grid-template-columns: 1fr;
+            }
+
+            .homeHeader {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -647,16 +758,32 @@
 
 <header id="topbar">
 
-    <img id="logo"
-        src="data:image/png;base64,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"
-        alt="Owly logo">
+    <!-- Your Owly logo is embedded directly in the page -->
+    <img
+        id="logo"
+        src="data:image/png;base64,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"
+        alt="Owly Logo">
 
     <nav id="nav" aria-label="Main navigation">
-        <button class="navButton" onclick="showFlashcards()">Home</button>
-        <button class="navButton active" id="flashcardsNav" onclick="showFlashcards()">Flashcards</button>
-        <button class="navButton" id="setsNav" onclick="showSets()">Sets</button>
-        <button class="navButton">Progress</button>
-        <button class="navButton">Settings</button>
+        <button class="navButton active" id="homeNav" onclick="showHome()">
+            Home
+        </button>
+
+        <button class="navButton" id="flashcardsNav" onclick="showFlashcards()">
+            Flashcards
+        </button>
+
+        <button class="navButton" id="setsNav" onclick="showSets()">
+            Sets
+        </button>
+
+        <button class="navButton">
+            Progress
+        </button>
+
+        <button class="navButton">
+            Settings
+        </button>
     </nav>
 
 </header>
@@ -691,26 +818,65 @@
     <!-- MAIN -->
     <main id="mainContent">
 
-        <!-- FLASHCARDS -->
+        <!-- =========================
+             HOME PAGE
+        ========================= -->
+
+        <section id="homePage">
+
+            <div class="homeHeader">
+
+                <h1>Your Flashcard Sets</h1>
+
+                <p>
+                    Choose a set and start studying. 🦉
+                </p>
+
+            </div>
+
+            <div id="homeSetsGrid" class="homeSetsGrid"></div>
+
+        </section>
+
+
+        <!-- =========================
+             FLASHCARDS PAGE
+        ========================= -->
+
         <section id="flashcardsPage">
 
             <div class="hero">
+
                 <h1>Flashcards</h1>
-                <p>Study smarter, one card at a time. 🦉</p>
+
+                <p>
+                    Study smarter, one card at a time. 🦉
+                </p>
+
             </div>
 
+
+            <!-- CREATE -->
             <div class="card" id="createArea">
 
                 <div id="selectedSetBar">
+
                     <div>
+
                         <div>📁 Current Set</div>
-                        <div id="selectedSetName">General</div>
+
+                        <div id="selectedSetName">
+                            General
+                        </div>
+
                     </div>
 
                     <div id="selectedSetCount">
                         0 cards
                     </div>
+
                 </div>
+
 
                 <h2>Create a Flashcard</h2>
 
@@ -728,15 +894,21 @@
 
                 <br>
 
-                <button class="primaryButton" onclick="addCard()">
+                <button
+                    class="primaryButton"
+                    onclick="addCard()">
                     Add Flashcard
                 </button>
 
-                <button class="secondaryButton" onclick="openStudyPopup()">
+                <button
+                    class="secondaryButton"
+                    onclick="openStudyPopup()">
                     📚 Study
                 </button>
 
-                <p id="cardCount">0 flashcards</p>
+                <p id="cardCount">
+                    0 flashcards
+                </p>
 
                 <div id="cardList"></div>
 
@@ -748,13 +920,20 @@
 
                 <h2>📚 Study Mode</h2>
 
-                <p id="progress">Card 0 of 0</p>
+                <p id="progress">
+                    Card 0 of 0
+                </p>
 
                 <div id="progressBar">
+
                     <div id="progressFill"></div>
+
                 </div>
 
-                <div id="flashcard" onclick="flipCard()">
+
+                <div
+                    id="flashcard"
+                    onclick="flipCard()">
 
                     <div class="flashcard-inner">
 
@@ -774,9 +953,14 @@
 
                 </div>
 
-                <button onclick="previousCard()">⬅ Previous</button>
 
-                <button class="primaryButton" onclick="knowCard()">
+                <button onclick="previousCard()">
+                    ⬅ Previous
+                </button>
+
+                <button
+                    class="primaryButton"
+                    onclick="knowCard()">
                     ✅ Know
                 </button>
 
@@ -823,24 +1007,37 @@
         </section>
 
 
-        <!-- SETS PAGE -->
+        <!-- =========================
+             SETS PAGE
+        ========================= -->
+
         <section id="setsArea">
 
             <div class="hero">
+
                 <h1>Your Sets</h1>
-                <p>Keep your subjects organized and ready to study. 🗂️</p>
+
+                <p>
+                    Keep your subjects organized and ready to study. 🗂️
+                </p>
+
             </div>
+
 
             <div class="card">
 
                 <div class="setsHeader">
 
                     <div>
-                        <h2>📚 Flashcard Sets</h2>
+
+                        <h2>
+                            📚 Flashcard Sets
+                        </h2>
 
                         <p class="rightText">
                             Create a set for each subject, unit, or topic.
                         </p>
+
                     </div>
 
                     <button
@@ -884,7 +1081,9 @@
 
             <h3>Your Progress</h3>
 
-            <div class="statValue" id="rightCardCount">
+            <div
+                class="statValue"
+                id="rightCardCount">
                 0
             </div>
 
@@ -899,11 +1098,15 @@
 
             <h3>Current Set</h3>
 
-            <div class="statValue" id="rightSetCount">
+            <div
+                class="statValue"
+                id="rightSetCount">
                 0
             </div>
 
-            <div class="rightText" id="rightSetName">
+            <div
+                class="rightText"
+                id="rightSetName">
                 General
             </div>
 
@@ -944,7 +1147,10 @@
 
 <footer>
 
-    <strong>Small steps. Big progress.</strong> 🦉
+    <strong>
+        Small steps. Big progress.
+    </strong>
+    🦉
 
     <div style="margin-top:8px;">
         Owly helps you learn, one question at a time.
@@ -957,7 +1163,10 @@
 </footer>
 
 
-<!-- STUDY POPUP -->
+<!-- =========================
+     STUDY POPUP
+========================= -->
+
 <div id="studyPopup">
 
     <div id="studyPopupBox">
@@ -968,9 +1177,13 @@
             ✕
         </button>
 
-        <h2>📚 How do you want to study?</h2>
+        <h2>
+            📚 How do you want to study?
+        </h2>
 
-        <p class="rightText" id="studyPopupDescription">
+        <p
+            class="rightText"
+            id="studyPopupDescription">
             Study your current set.
         </p>
 
@@ -990,7 +1203,10 @@
 </div>
 
 
-<!-- SET CREATION POPUP -->
+<!-- =========================
+     SET CREATION POPUP
+========================= -->
+
 <div id="setPopup">
 
     <div id="setPopupBox">
@@ -1001,7 +1217,9 @@
             ✕
         </button>
 
-        <h2>🗂️ Create a Set</h2>
+        <h2>
+            🗂️ Create a Set
+        </h2>
 
         <p class="rightText">
             Give your new flashcard set a name.
@@ -1031,24 +1249,33 @@
    DATA
 ===================================================== */
 
-let cards = JSON.parse(localStorage.getItem("owlyCards")) || [];
+let cards =
+    JSON.parse(localStorage.getItem("owlyCards")) || [];
 
-let sets = JSON.parse(localStorage.getItem("owlySets")) || [];
+let sets =
+    JSON.parse(localStorage.getItem("owlySets")) || [];
 
 let selectedSetId =
     localStorage.getItem("owlySelectedSet");
 
 
 /* =====================================================
-   MIGRATION FROM OLD OWLY VERSION
+   ID GENERATOR
 ===================================================== */
 
-/*
-    If this is an older version of Owly, cards may not
-    have a setId.
+function createId() {
 
-    We create a General set and place those cards there.
-*/
+    return Date.now().toString() +
+        Math.random()
+            .toString(36)
+            .substring(2);
+
+}
+
+
+/* =====================================================
+   MIGRATION
+===================================================== */
 
 if (sets.length === 0) {
 
@@ -1059,16 +1286,13 @@ if (sets.length === 0) {
 
 }
 
-if (!selectedSetId) {
+if (!selectedSetId ||
+    !sets.some(set => set.id === selectedSetId)) {
 
     selectedSetId = sets[0].id;
 
 }
 
-
-/*
-    Give old cards a set.
-*/
 
 let changedCards = false;
 
@@ -1112,18 +1336,6 @@ let shuffleCards = false;
 let shuffleOrder = [];
 
 let showingAnswer = false;
-
-
-/* =====================================================
-   ID GENERATOR
-===================================================== */
-
-function createId() {
-
-    return Date.now().toString() +
-        Math.random().toString(36).substring(2);
-
-}
 
 
 /* =====================================================
@@ -1181,7 +1393,37 @@ function getCurrentCards() {
    NAVIGATION
 ===================================================== */
 
+function showHome() {
+
+    document.getElementById("homePage")
+        .style.display = "block";
+
+    document.getElementById("flashcardsPage")
+        .style.display = "none";
+
+    document.getElementById("setsArea")
+        .style.display = "none";
+
+
+    document.getElementById("homeNav")
+        .classList.add("active");
+
+    document.getElementById("flashcardsNav")
+        .classList.remove("active");
+
+    document.getElementById("setsNav")
+        .classList.remove("active");
+
+
+    renderHomeSets();
+
+}
+
+
 function showFlashcards() {
+
+    document.getElementById("homePage")
+        .style.display = "none";
 
     document.getElementById("flashcardsPage")
         .style.display = "block";
@@ -1189,11 +1431,16 @@ function showFlashcards() {
     document.getElementById("setsArea")
         .style.display = "none";
 
-    document.getElementById("setsNav")
+
+    document.getElementById("homeNav")
         .classList.remove("active");
 
     document.getElementById("flashcardsNav")
         .classList.add("active");
+
+    document.getElementById("setsNav")
+        .classList.remove("active");
+
 
     backToCreate();
 
@@ -1202,11 +1449,18 @@ function showFlashcards() {
 
 function showSets() {
 
+    document.getElementById("homePage")
+        .style.display = "none";
+
     document.getElementById("flashcardsPage")
         .style.display = "none";
 
     document.getElementById("setsArea")
         .style.display = "block";
+
+
+    document.getElementById("homeNav")
+        .classList.remove("active");
 
     document.getElementById("flashcardsNav")
         .classList.remove("active");
@@ -1214,7 +1468,149 @@ function showSets() {
     document.getElementById("setsNav")
         .classList.add("active");
 
+
     renderSets();
+
+}
+
+
+/* =====================================================
+   HOME SETS
+===================================================== */
+
+function renderHomeSets() {
+
+    const grid =
+        document.getElementById("homeSetsGrid");
+
+    grid.innerHTML = "";
+
+
+    if (sets.length === 0) {
+
+        grid.innerHTML = `
+
+            <div class="emptyHome">
+
+                <h2>
+                    No sets yet 🦉
+                </h2>
+
+                <p>
+                    Create your first set to start studying.
+                </p>
+
+                <button
+                    class="primaryButton"
+                    onclick="openSetPopup()">
+                    ＋ Create a Set
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    sets.forEach(set => {
+
+        const cardAmount =
+            cards.filter(
+                card => card.setId === set.id
+            ).length;
+
+
+        const div =
+            document.createElement("div");
+
+        div.className = "homeSetCard";
+
+
+        div.onclick = function() {
+
+            studySetFromHome(set.id);
+
+        };
+
+
+        div.innerHTML = `
+
+            <div class="homeSetIcon">
+                📚
+            </div>
+
+            <div class="homeSetName">
+                ${escapeHTML(set.name)}
+            </div>
+
+            <div class="homeSetInfo">
+
+                ${cardAmount}
+                ${cardAmount === 1
+                    ? "flashcard"
+                    : "flashcards"}
+
+            </div>
+
+            <button
+                class="homeStudyButton"
+                onclick="
+                    event.stopPropagation();
+                    studySetFromHome('${set.id}');
+                ">
+
+                Study →
+
+            </button>
+
+        `;
+
+
+        grid.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   STUDY SET FROM HOME
+===================================================== */
+
+function studySetFromHome(setId) {
+
+    selectedSetId = setId;
+
+    saveSets();
+
+    const currentCards =
+        getCurrentCards();
+
+
+    if (currentCards.length === 0) {
+
+        showFlashcards();
+
+        alert(
+            "This set has no flashcards yet. Add some first!"
+        );
+
+        return;
+
+    }
+
+
+    showFlashcards();
+
+
+    setTimeout(() => {
+
+        openStudyPopup();
+
+    }, 50);
 
 }
 
@@ -1227,6 +1623,7 @@ function openSetPopup() {
 
     document.getElementById("setPopup")
         .style.display = "flex";
+
 
     setTimeout(() => {
 
@@ -1251,28 +1648,39 @@ function createSet() {
     const input =
         document.getElementById("setNameInput");
 
-    const name = input.value.trim();
+    const name =
+        input.value.trim();
+
 
     if (name === "") {
 
-        alert("Please enter a set name!");
+        alert(
+            "Please enter a set name!"
+        );
 
         return;
 
     }
+
 
     const alreadyExists =
         sets.some(
-            set => set.name.toLowerCase() === name.toLowerCase()
+            set =>
+                set.name.toLowerCase() ===
+                name.toLowerCase()
         );
+
 
     if (alreadyExists) {
 
-        alert("A set with that name already exists!");
+        alert(
+            "A set with that name already exists!"
+        );
 
         return;
 
     }
+
 
     const newSet = {
 
@@ -1282,9 +1690,12 @@ function createSet() {
 
     };
 
+
     sets.push(newSet);
 
-    selectedSetId = newSet.id;
+    selectedSetId =
+        newSet.id;
+
 
     saveSets();
 
@@ -1292,9 +1703,9 @@ function createSet() {
 
     closeSetPopup();
 
-    renderSets();
-
     updateEverything();
+
+    showSets();
 
 }
 
@@ -1308,7 +1719,9 @@ function createSetFromQuickBox() {
     const input =
         document.getElementById("quickSetName");
 
-    const name = input.value.trim();
+    const name =
+        input.value.trim();
+
 
     if (name === "") {
 
@@ -1316,18 +1729,25 @@ function createSetFromQuickBox() {
 
     }
 
+
     const alreadyExists =
         sets.some(
-            set => set.name.toLowerCase() === name.toLowerCase()
+            set =>
+                set.name.toLowerCase() ===
+                name.toLowerCase()
         );
+
 
     if (alreadyExists) {
 
-        alert("A set with that name already exists!");
+        alert(
+            "A set with that name already exists!"
+        );
 
         return;
 
     }
+
 
     const newSet = {
 
@@ -1337,15 +1757,16 @@ function createSetFromQuickBox() {
 
     };
 
+
     sets.push(newSet);
 
-    selectedSetId = newSet.id;
+    selectedSetId =
+        newSet.id;
+
 
     saveSets();
 
     input.value = "";
-
-    renderSets();
 
     updateEverything();
 
@@ -1360,24 +1781,38 @@ function deleteSet(id, event) {
 
     event.stopPropagation();
 
+
     if (sets.length === 1) {
 
-        alert("You need to keep at least one set.");
+        alert(
+            "You need to keep at least one set."
+        );
 
         return;
 
     }
 
+
     const set =
-        sets.find(s => s.id === id);
+        sets.find(
+            s => s.id === id
+        );
+
 
     if (!set) return;
 
+
     const cardAmount =
-        cards.filter(card => card.setId === id).length;
+        cards.filter(
+            card => card.setId === id
+        ).length;
+
 
     let message =
-        "Delete the set \"" + set.name + "\"?";
+        'Delete the set "' +
+        set.name +
+        '"?';
+
 
     if (cardAmount > 0) {
 
@@ -1385,10 +1820,13 @@ function deleteSet(id, event) {
             "\n\nThis will also delete " +
             cardAmount +
             " flashcard" +
-            (cardAmount === 1 ? "" : "s") +
+            (cardAmount === 1
+                ? ""
+                : "s") +
             " inside it.";
 
     }
+
 
     if (!confirm(message)) {
 
@@ -1396,27 +1834,30 @@ function deleteSet(id, event) {
 
     }
 
+
     sets =
         sets.filter(
             set => set.id !== id
         );
+
 
     cards =
         cards.filter(
             card => card.setId !== id
         );
 
+
     if (selectedSetId === id) {
 
-        selectedSetId = sets[0].id;
+        selectedSetId =
+            sets[0].id;
 
     }
+
 
     saveCards();
 
     saveSets();
-
-    renderSets();
 
     updateEverything();
 
@@ -1451,46 +1892,69 @@ function renderSets() {
 
     grid.innerHTML = "";
 
+
     sets.forEach(set => {
 
         const cardAmount =
             cards.filter(
-                card => card.setId === set.id
+                card =>
+                    card.setId === set.id
             ).length;
+
 
         const div =
             document.createElement("div");
 
+
         div.className =
             "setCard" +
-            (set.id === selectedSetId
-                ? " selected"
-                : "");
+            (
+                set.id === selectedSetId
+                    ? " selected"
+                    : ""
+            );
 
-        div.onclick = () => selectSet(set.id);
+
+        div.onclick =
+            () => selectSet(set.id);
+
 
         div.innerHTML = `
 
             <button
                 class="deleteSet"
-                onclick="deleteSet('${set.id}', event)">
+                onclick="
+                    deleteSet('${set.id}', event)
+                ">
+
                 🗑️
+
             </button>
+
 
             <div class="setIcon">
                 📁
             </div>
 
+
             <div class="setName">
+
                 ${escapeHTML(set.name)}
+
             </div>
 
+
             <div class="setInfo">
+
                 ${cardAmount}
-                ${cardAmount === 1 ? "flashcard" : "flashcards"}
+                ${cardAmount === 1
+                    ? "flashcard"
+                    : "flashcards"}
+
             </div>
 
         `;
+
 
         grid.appendChild(div);
 
@@ -1527,6 +1991,7 @@ function updateCount() {
     const total =
         cards.length;
 
+
     document.getElementById("cardCount")
         .textContent =
             currentCards.length +
@@ -1537,23 +2002,36 @@ function updateCount() {
             ) +
             " in this set";
 
+
     document.getElementById("rightCardCount")
-        .textContent = total;
+        .textContent =
+            total;
+
 
     document.getElementById("rightSetCount")
-        .textContent = currentCards.length;
+        .textContent =
+            currentCards.length;
+
 
     const set =
         getCurrentSet();
 
+
     const setName =
-        set ? set.name : "General";
+        set
+            ? set.name
+            : "General";
+
 
     document.getElementById("rightSetName")
-        .textContent = setName;
+        .textContent =
+            setName;
+
 
     document.getElementById("selectedSetName")
-        .textContent = setName;
+        .textContent =
+            setName;
+
 
     document.getElementById("selectedSetCount")
         .textContent =
@@ -1563,6 +2041,7 @@ function updateCount() {
                     ? " card"
                     : " cards"
             );
+
 
     showCardList();
 
@@ -1579,11 +2058,16 @@ function addCard() {
         document.getElementById("question")
             .value.trim();
 
+
     const answer =
         document.getElementById("answer")
             .value.trim();
 
-    if (question === "" || answer === "") {
+
+    if (
+        question === "" ||
+        answer === ""
+    ) {
 
         alert(
             "Please enter both a question and an answer!"
@@ -1592,6 +2076,7 @@ function addCard() {
         return;
 
     }
+
 
     cards.push({
 
@@ -1605,15 +2090,20 @@ function addCard() {
 
     });
 
+
     saveCards();
+
 
     document.getElementById("question")
         .value = "";
 
+
     document.getElementById("answer")
         .value = "";
 
+
     updateEverything();
+
 
     document.getElementById("question")
         .focus();
@@ -1628,6 +2118,7 @@ function addCard() {
 function focusQuestion() {
 
     showFlashcards();
+
 
     setTimeout(() => {
 
@@ -1650,33 +2141,42 @@ function showCardList() {
 
     list.innerHTML = "";
 
+
     const currentCards =
         getCurrentCards();
+
 
     if (currentCards.length === 0) {
 
         list.innerHTML = `
+
             <p style="
                 text-align:center;
                 color:#8195bd;
                 padding:20px;
             ">
+
                 No flashcards in this set yet.
                 Create your first one above! 🦉
+
             </p>
+
         `;
 
         return;
 
     }
 
+
     currentCards.forEach(card => {
 
         const originalIndex =
             cards.indexOf(card);
 
+
         const cardDiv =
             document.createElement("div");
+
 
         cardDiv.innerHTML = `
 
@@ -1686,16 +2186,22 @@ function showCardList() {
                     ${escapeHTML(card.question)}
                 </strong>
 
-                → ${escapeHTML(card.answer)}
+                →
+                ${escapeHTML(card.answer)}
 
                 <button
-                    onclick="deleteCard(${originalIndex})">
+                    onclick="
+                        deleteCard(${originalIndex})
+                    ">
+
                     Delete
+
                 </button>
 
             </p>
 
         `;
+
 
         list.appendChild(cardDiv);
 
@@ -1732,6 +2238,7 @@ function openStudyPopup() {
     const currentCards =
         getCurrentCards();
 
+
     if (currentCards.length === 0) {
 
         alert(
@@ -1742,15 +2249,18 @@ function openStudyPopup() {
 
     }
 
+
     const set =
         getCurrentSet();
+
 
     document.getElementById(
         "studyPopupDescription"
     ).textContent =
-        "Study your \"" +
+        'Study your "' +
         set.name +
-        "\" set.";
+        '" set.';
+
 
     document.getElementById("studyPopup")
         .style.display = "flex";
@@ -1797,6 +2307,7 @@ function startStudying() {
     const currentCards =
         getCurrentCards();
 
+
     if (currentCards.length === 0) {
 
         alert(
@@ -1807,8 +2318,36 @@ function startStudying() {
 
     }
 
+
+    /*
+        Make sure the Flashcards page is visible.
+        This is important when starting a study session
+        directly from the Home page.
+    */
+
+    document.getElementById("homePage")
+        .style.display = "none";
+
+    document.getElementById("flashcardsPage")
+        .style.display = "block";
+
+    document.getElementById("setsArea")
+        .style.display = "none";
+
+
+    document.getElementById("homeNav")
+        .classList.remove("active");
+
+    document.getElementById("flashcardsNav")
+        .classList.add("active");
+
+    document.getElementById("setsNav")
+        .classList.remove("active");
+
+
     document.getElementById("studyComplete")
         .style.display = "none";
+
 
     currentCard = 0;
 
@@ -1824,22 +2363,26 @@ function startStudying() {
         shuffleOrder =
             currentCards.slice();
 
+
         for (
             let i = shuffleOrder.length - 1;
             i > 0;
             i--
         ) {
 
-            let randomIndex =
+            const randomIndex =
                 Math.floor(
                     Math.random() * (i + 1)
                 );
 
-            let temp =
+
+            const temp =
                 shuffleOrder[i];
+
 
             shuffleOrder[i] =
                 shuffleOrder[randomIndex];
+
 
             shuffleOrder[randomIndex] =
                 temp;
@@ -1856,14 +2399,17 @@ function startStudying() {
     document.getElementById("createArea")
         .style.display = "none";
 
+
     document.getElementById("studyArea")
         .style.display = "block";
+
 
     document.getElementById("mainContent")
         .scrollIntoView({
             behavior: "smooth",
             block: "start"
         });
+
 
     showCard();
 
@@ -1879,6 +2425,7 @@ function showCard() {
     const currentCards =
         getCurrentCards();
 
+
     if (currentCards.length === 0) {
 
         backToCreate();
@@ -1887,19 +2434,26 @@ function showCard() {
 
     }
 
+
     const card =
         shuffleCards
             ? shuffleOrder[currentCard]
             : currentCards[currentCard];
 
+
     document.getElementById("flashcardFront")
-        .textContent = card.question;
+        .textContent =
+            card.question;
+
 
     document.getElementById("flashcardBack")
-        .textContent = card.answer;
+        .textContent =
+            card.answer;
+
 
     document.querySelector(".flashcard-inner")
         .classList.remove("flipped");
+
 
     showingAnswer = false;
 
@@ -1912,8 +2466,16 @@ function showCard() {
             currentCards.length;
 
 
-    let progressPercent =
-        (currentCard / currentCards.length) * 100;
+    /*
+        The final percentage is intentionally left
+        for the Study Complete screen.
+    */
+
+    const progressPercent =
+        (currentCard /
+            currentCards.length) *
+        100;
+
 
     document.getElementById("progressFill")
         .style.width =
@@ -1929,9 +2491,14 @@ function showCard() {
 function flipCard() {
 
     const flashcardInner =
-        document.querySelector(".flashcard-inner");
+        document.querySelector(
+            ".flashcard-inner"
+        );
 
-    flashcardInner.classList.toggle("flipped");
+
+    flashcardInner
+        .classList.toggle("flipped");
+
 
     showingAnswer =
         !showingAnswer;
@@ -1957,10 +2524,12 @@ function dontKnowCard() {
     const currentCards =
         getCurrentCards();
 
+
     const card =
         shuffleCards
             ? shuffleOrder[currentCard]
             : currentCards[currentCard];
+
 
     reviewCards.push(card);
 
@@ -1977,6 +2546,7 @@ function nextCard() {
 
     const currentCards =
         getCurrentCards();
+
 
     if (
         currentCard <
@@ -2026,8 +2596,10 @@ function showStudyComplete() {
     const currentCards =
         getCurrentCards();
 
+
     document.getElementById("studyArea")
         .style.display = "none";
+
 
     document.getElementById("studyComplete")
         .style.display = "block";
@@ -2048,6 +2620,7 @@ function showStudyComplete() {
                 currentCards.length) *
             100
         );
+
 
     const remainingPercent =
         100 - masteredPercent;
@@ -2070,11 +2643,14 @@ function backToCreate() {
     document.getElementById("studyComplete")
         .style.display = "none";
 
+
     document.getElementById("studyArea")
         .style.display = "none";
 
+
     document.getElementById("createArea")
         .style.display = "block";
+
 
     updateEverything();
 
@@ -2091,6 +2667,8 @@ function updateEverything() {
 
     renderSets();
 
+    renderHomeSets();
+
 }
 
 
@@ -2099,52 +2677,64 @@ function updateEverything() {
 ===================================================== */
 
 document.getElementById("question")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key === "Enter") {
+            if (event.key === "Enter") {
 
-            document.getElementById("answer")
-                .focus();
+                document.getElementById("answer")
+                    .focus();
+
+            }
 
         }
-
-    });
+    );
 
 
 document.getElementById("answer")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key === "Enter") {
+            if (event.key === "Enter") {
 
-            addCard();
+                addCard();
+
+            }
 
         }
-
-    });
+    );
 
 
 document.getElementById("setNameInput")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key === "Enter") {
+            if (event.key === "Enter") {
 
-            createSet();
+                createSet();
+
+            }
 
         }
-
-    });
+    );
 
 
 document.getElementById("quickSetName")
-    .addEventListener("keydown", function(event) {
+    .addEventListener(
+        "keydown",
+        function(event) {
 
-        if (event.key === "Enter") {
+            if (event.key === "Enter") {
 
-            createSetFromQuickBox();
+                createSetFromQuickBox();
+
+            }
 
         }
-
-    });
+    );
 
 
 /* =====================================================
@@ -2153,8 +2743,9 @@ document.getElementById("quickSetName")
 
 updateEverything();
 
+showHome();
+
 </script>
 
 </body>
 </html>
-```
