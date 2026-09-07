@@ -1,716 +1,775 @@
-```html
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- The title that appears on the browser tab -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Owly - Study Smarter</title>
 
     <style>
-        /* Controls the overall appearance of the webpage */
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background: #080f1f;
             color: #f1f5ff;
-            text-align: center;
             margin: 0;
-            padding: 40px;
-            padding-left: 260px;
+            min-height: 100vh;
         }
 
-        /* Left sidebar for extra Owly features */
-        #sidebar {
-            position: fixed;
-            left: 0;
+        /* Top navigation */
+        #topbar {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 0 26px;
+            background: #0a1731;
+            border-bottom: 1px solid #1d3154;
+            position: sticky;
             top: 0;
-            width: 220px;
-            height: 100vh;
-            background: #101b32;
-            border-right: 2px solid #263858;
-            padding: 20px;
-            box-sizing: border-box;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 900;
         }
 
-        
-        #progressBar {
-        width: 80%;
-        height: 10px;
-        background: #263858;
-        border-radius: 10px;
-        margin: 15px auto;
-        overflow: hidden;
-        }
-    
-        #progressFill {
-        width: 0%;
-        height: 100%;
-        background: #6c8cff;
-        border-radius: 10px;
-        transition: width 0.3s ease;
+        #logo {
+            width: 150px;
+            height: 51px;
+            object-fit: contain;
+            object-position: left center;
+            flex-shrink: 0;
         }
 
-        
-        /* Makes the main Owly heading large */
-        h1 {
-            font-size: 42px;
+        #nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            height: 100%;
         }
 
-        /* Creates the white boxes used for the flashcard sections */
+        .navButton {
+            border: none;
+            background: transparent;
+            color: #a8b8d8;
+            padding: 22px 2px 18px;
+            margin: 0;
+            border-radius: 0;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .navButton:hover {
+            opacity: 1;
+            color: #f1f5ff;
+        }
+
+        .navButton.active {
+            color: #62a2ff;
+            border-bottom: 3px solid #2f7cff;
+        }
+
+        #page {
+            display: grid;
+            grid-template-columns: 225px minmax(420px, 1fr) 225px;
+            gap: 16px;
+            padding: 22px 16px 0;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: #0d1a35;
+            border: 1px solid #203a63;
+            border-radius: 12px;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+        }
+
+        /* Left menu */
+        #sidebar {
+            padding: 18px;
+            align-self: start;
+            position: sticky;
+            top: 92px;
+        }
+
+        #sidebar h3 {
+            margin: 0 0 16px;
+            font-size: 18px;
+        }
+
+        .sideButton {
+            width: 100%;
+            margin: 6px 0;
+            text-align: left;
+            background: #132443;
+            border: 1px solid #233d66;
+            color: #dbe6ff;
+        }
+
+        .sideButton:hover {
+            background: #19315a;
+            opacity: 1;
+        }
+
+        .sideButton.primary {
+            background: #2779ff;
+            border-color: #2779ff;
+        }
+
+        .sideHint {
+            margin: 16px 2px 0;
+            color: #8195bd;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        /* Main content */
+        #mainContent {
+            min-width: 0;
+        }
+
+        .hero {
+            padding: 4px 10px 2px;
+            text-align: left;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .hero p {
+            margin: 7px 0 0;
+            color: #8fa4cc;
+            font-size: 15px;
+        }
+
         .card {
-            background: #101b32;
-            max-width: 750px;
-            margin: 30px auto;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            background: #101f3b;
+            border: 1px solid #203a63;
+            max-width: none;
+            margin: 16px 0;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
         }
 
-        /* Styles the text input boxes */
+        .card h2 {
+            margin-top: 0;
+            font-size: 23px;
+        }
+
         input {
             width: 80%;
-            padding: 12px;
-            margin: 8px;
-            border: 1px solid #263858;
+            max-width: 620px;
+            padding: 13px 14px;
+            margin: 7px;
+            border: 1px solid #29446f;
             border-radius: 8px;
-            background: #162442;
+            background: #152849;
             color: white;
+            outline: none;
+            font-size: 15px;
+        }
 
+        input:focus {
+            border-color: #4d91ff;
         }
+
         input::placeholder {
-        color: #8d9bb8;
+            color: #8d9bb8;
         }
-        /* Styles all buttons */
+
         button {
-            padding: 12px 20px;
-            margin: 8px;
+            padding: 11px 18px;
+            margin: 7px 5px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            background: #333;
+            background: #243b63;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.15s ease;
         }
 
-        /* Makes buttons slightly transparent when the mouse is over them */
         button:hover {
-            opacity: 0.8;
+            transform: translateY(-1px);
+            opacity: 0.92;
         }
 
-        /* Controls the flashcard's size and centers its text */
-#flashcard {
-    width: 85%;
-    min-height: 320px;
-    margin: 25px auto;
-    position: relative;
+        .primaryButton {
+            background: #287cff;
+        }
 
-    cursor: pointer;
-    box-sizing: border-box;
+        .secondaryButton {
+            background: #1d3154;
+        }
 
-    font-size: 34px;
-    font-weight: bold;
-    text-align: center;
+        #cardCount {
+            color: #8fa4cc;
+        }
 
-    perspective: 1000px;
-}
+        #cardList {
+            text-align: left;
+            margin-top: 18px;
+            max-height: 260px;
+            overflow-y: auto;
+        }
 
-.flashcard-inner {
-    width: 100%;
-    height: 320px;
-    position: relative;
+        #cardList p {
+            background: #142542;
+            border: 1px solid #213d66;
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin: 7px 0;
+            font-size: 14px;
+        }
 
-    transform-style: preserve-3d;
-    transform-origin: center center;
-    transition: transform 0.5s ease-in-out;
-}
+        #cardList button {
+            float: right;
+            margin: -4px 0 0 8px;
+            padding: 7px 10px;
+            font-size: 12px;
+            background: #4a2730;
+        }
 
-.flashcard-inner.flipped {
-    transform: rotateY(180deg);
-}
-
-.flashcard-front,
-.flashcard-back {
-    width: 100%;
-    min-height: 320px;
-    box-sizing: border-box;
-
-    background: #162442;
-    border: 2px solid #263858;
-    border-radius: 20px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 40px;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    backface-visibility: hidden;
-
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-.flashcard-back {
-    transform: rotateY(180deg);
-}
-        
-        /* Hides Study Mode when the page first loads */
+        /* Study area */
         #studyArea {
             display: none;
         }
 
-        #studyComplete {
-            background: #101b32;
-            max-width: 600px;
-            margin: 80px auto;
+        #progress {
+            color: #8fa4cc;
+        }
+
+        #progressBar {
+            width: 80%;
+            height: 10px;
+            background: #263858;
+            border-radius: 10px;
+            margin: 15px auto;
+            overflow: hidden;
+        }
+
+        #progressFill {
+            width: 0%;
+            height: 100%;
+            background: #6c8cff;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        #flashcard {
+            width: 92%;
+            min-height: 320px;
+            margin: 25px auto;
+            position: relative;
+            cursor: pointer;
+            font-size: 34px;
+            font-weight: bold;
+            text-align: center;
+            perspective: 1000px;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 320px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform-origin: center center;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .flashcard-inner.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            width: 100%;
+            min-height: 320px;
+            background: #162442;
+            border: 2px solid #263858;
+            border-radius: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            font-size: 36px;
-            margin-bottom: 25px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .flashcard-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Study complete */
+        #studyComplete {
+            display: none;
+            background: #101f3b;
+            border: 1px solid #203a63;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+            text-align: center;
+        }
+
+        #studyComplete h2 {
+            font-size: 34px;
+            margin-top: 0;
         }
 
         #scoreText {
-            font-size: 22px;
+            font-size: 21px;
             margin: 15px 0;
         }
 
-        #studyComplete button {
-            margin: 10px 6px;
-            padding: 12px 22px;
-            font-size: 16px;
-        }
-        #studyComplete button:hover {
-            transform: translateY(-2px);
-            opacity: 0.9;
-        }
-        
         #reviewText {
-            font-size: 20px;
+            font-size: 18px;
             margin: 10px 0 25px;
             font-weight: bold;
+            color: #a9c0e9;
         }
-#studyPopup {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    background: rgba(0, 0, 0, 0.45);
-}
 
-#studyPopupBox {
-    position: relative;
-    background: #101b32;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-#closePopup {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    margin: 0;
-    padding: 5px 10px;
-    background: transparent;
-    font-size: 20px;
-}
+        /* Right rail */
+        #rightRail {
+            align-self: start;
+        }
 
+        .rightCard {
+            padding: 18px;
+            margin-bottom: 12px;
+        }
 
-        
+        .rightCard h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+        }
+
+        .statValue {
+            font-size: 28px;
+            font-weight: bold;
+            color: #6aa7ff;
+        }
+
+        .rightText {
+            color: #8195bd;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        #studyPopup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.55);
+        }
+
+        #studyPopupBox {
+            position: relative;
+            width: min(420px, 90vw);
+            background: #101f3b;
+            border: 1px solid #28466f;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+        }
+
+        #closePopup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            margin: 0;
+            padding: 5px 10px;
+            background: transparent;
+            font-size: 20px;
+        }
+
+        footer {
+            border-top: 1px solid #1a2d4e;
+            margin-top: 48px;
+            padding: 34px 16px 40px;
+            text-align: center;
+            color: #8195bd;
+        }
+
+        footer strong {
+            color: #65a4ff;
+        }
+
+        @media (max-width: 1050px) {
+            #page {
+                grid-template-columns: 190px minmax(0, 1fr);
+            }
+
+            #rightRail {
+                display: none;
+            }
+        }
+
+        @media (max-width: 760px) {
+            #topbar {
+                gap: 12px;
+                padding: 0 14px;
+            }
+
+            #logo {
+                width: 125px;
+            }
+
+            #nav {
+                gap: 12px;
+                overflow-x: auto;
+            }
+
+            .navButton {
+                font-size: 13px;
+            }
+
+            #page {
+                display: block;
+                padding: 16px;
+            }
+
+            #sidebar {
+                position: static;
+                margin-bottom: 16px;
+            }
+
+            input {
+                width: 100%;
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            #flashcard {
+                width: 100%;
+                font-size: 27px;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <header id="topbar">
+        <img id="logo" src="data:image/png;base64,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" alt="Owly logo">
 
-    <!-- Main Owly title -->
-    <h1>🦉 Owly</h1>
-    <div id="sidebar">
-        <h3>📚 Owly</h3>
-    </div>
-    <!-- Short description underneath the title -->
-    <p>Study smarter with flashcards.</p>
+        <nav id="nav" aria-label="Main navigation">
+            <button class="navButton" onclick="backToCreate()">Home</button>
+            <button class="navButton active" onclick="backToCreate()">Flashcards</button>
+            <button class="navButton">Sets</button>
+            <button class="navButton">Progress</button>
+            <button class="navButton">Settings</button>
+        </nav>
+    </header>
 
-    <!-- Section where the user creates flashcards -->
-    <div class="card" id="createArea">
+    <div id="page">
+        <aside id="sidebar" class="panel">
+            <h3>📚 Flashcards</h3>
+            <button class="sideButton primary" onclick="focusQuestion()">＋ New Flashcard</button>
+            <button class="sideButton" onclick="backToCreate()">▣ All Flashcards</button>
+            <button class="sideButton">🗂️ Sets</button>
+            <p class="sideHint">Keep your cards organized into sets as your library grows.</p>
+        </aside>
 
-        <h2>Create a Flashcard</h2>
-
-        <!-- Input where the user types the question or term -->
-        <input id="question" type="text" placeholder="Question or term">
-
-        <!-- Input where the user types the answer or definition -->
-        <input id="answer" type="text" placeholder="Answer or definition">
-
-        <br>
-
-        <!-- Calls addCard() when clicked -->
-        <button onclick="addCard()">Add Flashcard</button>
-
-        <!-- Calls startStudying() when clicked -->
-        <button onclick="openStudyPopup()">📚 Study</button>
-        
-
-        
-        <!-- Shows how many flashcards have been created -->
-        <p id="cardCount">0 flashcards</p>
-        <div id="cardList"></div>
-    </div>
-
-   <div id="studyPopup">
-    <div id="studyPopupBox">
-
-        <button id="closePopup" onclick="closeStudyPopup()">✕</button>
-
-        <h2>📚 How do you want to study?</h2>
-
-        <button onclick="closeStudyPopup(); Normal()">Normal</button>
-        <button onclick="closeStudyPopup(); shuffle()">🔀 Shuffle</button>
-
-    </div>
-</div>
-
-    
-    <!-- Section used when the user enters Study Mode -->
-    <div class="card" id="studyArea">
-
-        <h2>📚 Study Mode</h2>
-
-        <!-- Shows which card the user is currently studying -->
-        <p id="progress">Card 0 of 0</p>
-
-        <div id="progressBar">
-            <div id="progressFill"></div>
-        </div>
-
-        <!--
-            This is the actual flashcard.
-            Clicking it calls flipCard() to switch
-            between the question and answer.
-        -->
-        <div id="flashcard" onclick="flipCard()">
-    <div class="flashcard-inner">
-
-            <div class="flashcard-front" id="flashcardFront">
-                Add some flashcards first!
+        <main id="mainContent">
+            <div class="hero">
+                <h1>Flashcards</h1>
+                <p>Study smarter, one card at a time. 🦉</p>
             </div>
-    
-            <div class="flashcard-back" id="flashcardBack">
-                Add some flashcards first!
+
+            <div class="card" id="createArea">
+                <h2>Create a Flashcard</h2>
+
+                <input id="question" type="text" placeholder="Question or term">
+                <br>
+                <input id="answer" type="text" placeholder="Answer or definition">
+                <br>
+
+                <button class="primaryButton" onclick="addCard()">Add Flashcard</button>
+                <button class="secondaryButton" onclick="openStudyPopup()">📚 Study</button>
+
+                <p id="cardCount">0 flashcards</p>
+                <div id="cardList"></div>
             </div>
-    
+
+            <div class="card" id="studyArea">
+                <h2>📚 Study Mode</h2>
+                <p id="progress">Card 0 of 0</p>
+
+                <div id="progressBar">
+                    <div id="progressFill"></div>
+                </div>
+
+                <div id="flashcard" onclick="flipCard()">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front" id="flashcardFront">Add some flashcards first!</div>
+                        <div class="flashcard-back" id="flashcardBack">Add some flashcards first!</div>
+                    </div>
+                </div>
+
+                <button onclick="previousCard()">⬅ Previous</button>
+                <button class="primaryButton" onclick="knowCard()">✅ Know</button>
+                <button onclick="dontKnowCard()">❌ Don't Know</button>
+                <button onclick="nextCard()">Next ➡</button>
+                <br>
+                <button class="secondaryButton" onclick="backToCreate()">Back to Create</button>
+            </div>
+
+            <div id="studyComplete">
+                <h2>🎉 Study Complete!</h2>
+                <p id="scoreText"></p>
+                <p id="reviewText"></p>
+                <button class="primaryButton" onclick="startStudying()">Study Again</button>
+                <button onclick="backToCreate()">Back to Create</button>
+            </div>
+        </main>
+
+        <aside id="rightRail">
+            <div class="panel rightCard">
+                <h3>Your Progress</h3>
+                <div class="statValue" id="rightCardCount">0</div>
+                <div class="rightText">flashcards in your library</div>
+            </div>
+
+            <div class="panel rightCard">
+                <h3>Quick Study</h3>
+                <div class="rightText">Ready to review your cards?</div>
+                <button class="primaryButton" onclick="openStudyPopup()">📚 Start Studying</button>
+            </div>
+
+            <div class="panel rightCard">
+                <h3>Study Tips</h3>
+                <div class="rightText">Tap a card to flip it, then mark whether you know it.</div>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <strong>Small steps. Big progress.</strong> 🦉
+        <div style="margin-top:8px;">Owly helps you learn, one question at a time.</div>
+        <div style="margin-top:22px;font-size:12px;">© 2026 Owly. Study Smarter.</div>
+    </footer>
+
+    <div id="studyPopup">
+        <div id="studyPopupBox">
+            <button id="closePopup" onclick="closeStudyPopup()">✕</button>
+            <h2>📚 How do you want to study?</h2>
+            <button class="primaryButton" onclick="closeStudyPopup(); Normal()">Normal</button>
+            <button onclick="closeStudyPopup(); shuffle()">🔀 Shuffle</button>
         </div>
     </div>
 
-        <!-- Moves to the previous flashcard -->
-        <button onclick="previousCard()">⬅ Previous</button>
-
-        <button onclick="knowCard()">✅ Know</button>
-
-        <button onclick="dontKnowCard()">❌ Don't Know</button>
-        
-        <!-- Moves to the next flashcard -->
-        <button onclick="nextCard()">Next ➡</button>
-
-        <br>
-
-        <!-- Returns the user to the flashcard creation area -->
-        <button onclick="backToCreate()">Back to Create</button>
-
-    </div>
-
-    <div id="studyComplete">
-
-        <h2>🎉 Study Complete!</h2>
-    
-        <p id="scoreText"></p>
-        <p id="reviewText"></p>
-    
-        <button onclick="startStudying()">Study Again</button>
-        <button onclick="backToCreate()">Back to Create</button>
-    
-    </div>
-
-
-
-
-
-    
     <script>
-
-        /*
-         * This array stores all of the flashcards.
-         *
-         * Each flashcard will look like:
-         *
-         * {
-         *     question: "What is 2 + 2?",
-         *     answer: "4"
-         * }
-         */
         let cards = JSON.parse(localStorage.getItem("owlyCards")) || [];
-
-        /*
-         * Keeps track of which flashcard the user
-         * is currently looking at.
-         *
-         * JavaScript starts counting from 0.
-         */
         let currentCard = 0;
         let correctCards = 0;
         let reviewCards = [];
         let shuffleCards = false;
         let shuffleOrder = [];
-        
-        /*
-         * Keeps track of whether we are showing
-         * the question or the answer.
-         *
-         * false = question
-         * true = answer
-         */
         let showingAnswer = false;
+
         function Normal() {
             shuffleCards = false;
             startStudying();
         }
+
         function shuffle() {
-        shuffleCards = true;
-        startStudying();
+            shuffleCards = true;
+            startStudying();
         }
-        updateCount();
 
-        /*
-         * ADD CARD
-         *
-         * This function runs when the user clicks
-         * the "Add Flashcard" button.
-         */
+        function updateCount() {
+            document.getElementById("cardCount").textContent =
+                cards.length + (cards.length === 1 ? " flashcard" : " flashcards");
+            document.getElementById("rightCardCount").textContent = cards.length;
+            showCardList();
+        }
+
         function addCard() {
+            const question = document.getElementById("question").value.trim();
+            const answer = document.getElementById("answer").value.trim();
 
-            // Gets whatever the user typed into the question box
-            const question = document.getElementById("question").value;
-
-            // Gets whatever the user typed into the answer box
-            const answer = document.getElementById("answer").value;
-
-
-            /*
-             * Checks if either box is empty.
-             *
-             * If one is empty, stop the function
-             * and show an alert.
-             */
             if (question === "" || answer === "") {
                 alert("Please enter both a question and an answer!");
                 return;
             }
 
-
-            /*
-             * Adds a new flashcard to the cards array.
-             */
             cards.push({
                 question: question,
                 answer: answer
             });
+
             localStorage.setItem("owlyCards", JSON.stringify(cards));
 
-
-            /*
-             * Clears the question box after
-             * the card has been created.
-             */
             document.getElementById("question").value = "";
-
-            /*
-             * Clears the answer box after
-             * the card has been created.
-             */
             document.getElementById("answer").value = "";
 
-
-            // Updates the flashcard counter
             updateCount();
+            document.getElementById("question").focus();
         }
 
+        function focusQuestion() {
+            backToCreate();
+            setTimeout(() => document.getElementById("question").focus(), 50);
+        }
 
-        /*
-         * UPDATE COUNT
-         *
-         * Updates the text that says
-         * "0 flashcards", "1 flashcard", etc.
-         */
-        function updateCount() {
-            document.getElementById("cardCount").textContent =
-                cards.length + " flashcards";
+        function showCardList() {
+            const list = document.getElementById("cardList");
+            list.innerHTML = "";
 
-            showCardList();
-            }
+            cards.forEach((card, index) => {
+                const cardDiv = document.createElement("div");
 
-        
-function showCardList() {
-    const list = document.getElementById("cardList");
+                cardDiv.innerHTML = `
+                    <p>
+                        <strong>${card.question}</strong>
+                        → ${card.answer}
+                        <button onclick="deleteCard(${index})">Delete</button>
+                    </p>
+                `;
 
-    list.innerHTML = "";
-
-    cards.forEach((card, index) => {
-        const cardDiv = document.createElement("div");
-
-        cardDiv.innerHTML = `
-            <p>
-                <strong>${card.question}</strong>
-                → ${card.answer}
-                <button onclick="deleteCard(${index})">Delete</button>
-            </p>
-        `;
-
-        list.appendChild(cardDiv);
-    });
-}
-        
-        
-
-        /*
-         * START STUDYING
-         *
-         * Switches the website from the
-         * creation screen to Study Mode.
-         */
-
+                list.appendChild(cardDiv);
+            });
+        }
 
         function openStudyPopup() {
-        document.getElementById("studyPopup").style.display = "flex";
+            document.getElementById("studyPopup").style.display = "flex";
         }
+
         function closeStudyPopup() {
-        document.getElementById("studyPopup").style.display = "none";
+            document.getElementById("studyPopup").style.display = "none";
         }
 
-
-
-        
         function startStudying() {
-
-            // Don't allow Study Mode if there are no cards
             if (cards.length === 0) {
                 alert("Add some flashcards first!");
                 return;
             }
+
             document.getElementById("studyComplete").style.display = "none";
-
-
-            // Start with the first card
             currentCard = 0;
             correctCards = 0;
             reviewCards = [];
-            // Start by showing the question
             showingAnswer = false;
+
             if (shuffleCards) {
                 shuffleOrder = cards.slice();
 
-                 for (let i = shuffleOrder.length - 1; i > 0; i--) {
+                for (let i = shuffleOrder.length - 1; i > 0; i--) {
                     let randomIndex = Math.floor(Math.random() * (i + 1));
+                    let temp = shuffleOrder[i];
+                    shuffleOrder[i] = shuffleOrder[randomIndex];
+                    shuffleOrder[randomIndex] = temp;
+                }
+            } else {
+                shuffleOrder = [];
+            }
 
-                let temp = shuffleOrder[i];
-                 shuffleOrder[i] = shuffleOrder[randomIndex];
-                shuffleOrder[randomIndex] = temp;
-    }
-}
-
-            /*
-             * Hide the card creation section
-             */
             document.getElementById("createArea").style.display = "none";
-
-            /*
-             * Show the Study Mode section
-             */
             document.getElementById("studyArea").style.display = "block";
-
-
-            // Display the first flashcard
+            document.getElementById("mainContent").scrollIntoView({ behavior: "smooth", block: "start" });
             showCard();
         }
 
+        function showCard() {
+            const card = shuffleCards
+                ? shuffleOrder[currentCard]
+                : cards[currentCard];
 
-        /*
-         * SHOW CARD
-         *
-         * Displays the current flashcard on the screen.
-         */
-function showCard() {
+            document.getElementById("flashcardFront").textContent = card.question;
+            document.getElementById("flashcardBack").textContent = card.answer;
 
-    const card = shuffleCards
-        ? shuffleOrder[currentCard]
-        : cards[currentCard];
+            document.querySelector(".flashcard-inner").classList.remove("flipped");
+            showingAnswer = false;
 
-    // Put the question on the front
-    document.getElementById("flashcardFront").textContent =
-        card.question;
+            document.getElementById("progress").textContent =
+                "Card " + (currentCard + 1) + " of " + cards.length;
 
-    // Put the answer on the back
-    document.getElementById("flashcardBack").textContent =
-        card.answer;
+            /* Existing study progress bar calculation kept unchanged. */
+            let progressPercent = (currentCard / cards.length) * 100;
+            document.getElementById("progressFill").style.width =
+                progressPercent + "%";
+        }
 
-    // Make sure a new card starts on the question side
-    document.querySelector(".flashcard-inner")
-        .classList.remove("flipped");
+        function deleteCard(index) {
+            cards.splice(index, 1);
+            localStorage.setItem("owlyCards", JSON.stringify(cards));
 
-    document.getElementById("progress").textContent =
-        "Card " + (currentCard + 1) + " of " + cards.length;
+            shuffleOrder = [];
+            shuffleCards = false;
+            currentCard = 0;
 
-    let progressPercent =
-        (currentCard / cards.length) * 100;
+            updateCount();
+        }
 
-    document.getElementById("progressFill").style.width =
-        progressPercent + "%";
-}
-
-        
-        
-                function deleteCard(index) {
-                    cards.splice(index, 1);
-            
-                localStorage.setItem("owlyCards", JSON.stringify(cards));
-            
-                // Reset the shuffle order
-                shuffleOrder = [];
-            
-                // Turn off shuffle mode
-                shuffleCards = false;
-            
-                // Start from the beginning
-                currentCard = 0;
-            
-                updateCount();
-            }
-
-        /*
-         * FLIP CARD
-         *
-         * Switches between the question and answer.
-         *
-         * If we're showing the question,
-         * show the answer.
-         *
-         * If we're showing the answer,
-         * show the question.
-         */
-function flipCard() {
-
-    const flashcardInner =
-        document.querySelector(".flashcard-inner");
-
-    // Flip the card around its center
-    flashcardInner.classList.toggle("flipped");
-
-    // Keep track of which side we're viewing
-    showingAnswer = !showingAnswer;
-}
+        function flipCard() {
+            const flashcardInner = document.querySelector(".flashcard-inner");
+            flashcardInner.classList.toggle("flipped");
+            showingAnswer = !showingAnswer;
+        }
 
         function knowCard() {
             correctCards++;
             nextCard();
         }
 
-
         function dontKnowCard() {
             const card = shuffleCards ? shuffleOrder[currentCard] : cards[currentCard];
-
             reviewCards.push(card);
-            
             nextCard();
         }
 
-        /*
-         * NEXT CARD
-         *
-         * Moves the user to the next flashcard.
-         */
         function nextCard() {
-        
             if (currentCard < cards.length - 1) {
-        
                 currentCard++;
-        
                 showingAnswer = false;
-        
                 showCard();
-        
             } else {
-        
                 showStudyComplete();
             }
         }
 
-
-        /*
-         * PREVIOUS CARD
-         *
-         * Moves the user to the previous flashcard.
-         */
         function previousCard() {
-
-            /*
-             * Make sure we aren't already
-             * on the first card.
-             */
             if (currentCard > 0) {
-
-                // Move to the previous card
                 currentCard--;
-
-                // Start the card on its question
                 showingAnswer = false;
-
-                // Display the card
                 showCard();
             }
         }
 
         function showStudyComplete() {
-
             document.getElementById("studyArea").style.display = "none";
-        
             document.getElementById("studyComplete").style.display = "block";
 
             document.getElementById("scoreText").textContent =
-            "You knew " + correctCards + " out of " + cards.length + " cards!";
+                "You knew " + correctCards + " out of " + cards.length + " cards!";
 
             const masteredPercent = (correctCards / cards.length) * 100;
             const remainingPercent = 100 - masteredPercent;
 
             document.getElementById("reviewText").textContent =
-            remainingPercent + "% remaining to review.";
+                remainingPercent + "% remaining to review.";
         }
-                
 
-        /*
-         * BACK TO CREATE
-         *
-         * Takes the user out of Study Mode
-         * and back to the flashcard creation screen.
-         */
-        
         function backToCreate() {
             document.getElementById("studyComplete").style.display = "none";
-
-            // Hide Study Mode
             document.getElementById("studyArea").style.display = "none";
-
-            // Show the creation area
             document.getElementById("createArea").style.display = "block";
         }
-        
 
+        updateCount();
     </script>
-
 </body>
 </html>
-```
