@@ -1,1526 +1,1924 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Owly - Study Smarter</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #080f1f;
-            color: #f1f5ff;
-            margin: 0;
-            min-height: 100vh;
-        }
-
-        /* =========================
-           TOP NAVIGATION
-        ========================= */
-
-        #topbar {
-            height: 70px;
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            padding: 0 26px;
-            background: #0a1731;
-            border-bottom: 1px solid #1d3154;
-            position: sticky;
-            top: 0;
-            z-index: 900;
-        }
-
-        #logo {
-            width: 150px;
-            height: 51px;
-            object-fit: contain;
-            object-position: left center;
-            flex-shrink: 0;
-        }
-
-        #nav {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-            height: 100%;
-        }
-
-        .navButton {
-            border: none;
-            background: transparent;
-            color: #a8b8d8;
-            padding: 22px 2px 18px;
-            margin: 0;
-            border-radius: 0;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        .navButton:hover {
-            color: #f1f5ff;
-            transform: none;
-        }
-
-        .navButton.active {
-            color: #62a2ff;
-            border-bottom: 3px solid #2f7cff;
-        }
-
-        /* =========================
-           PAGE LAYOUT
-        ========================= */
-
-        #page {
-            display: grid;
-            grid-template-columns: 240px minmax(420px, 1fr) 225px;
-            gap: 0;
-            padding: 0;
-            width: 100%;
-            max-width: none;
-            margin: 0;
-            align-items: stretch;
-        }
-
-        .panel {
-            background: #0d1a35;
-            border: 1px solid #203a63;
-            border-radius: 12px;
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
-        }
-
-        /* =========================
-           SIDEBAR
-        ========================= */
-
-        #sidebar {
-            padding: 24px 18px;
-            align-self: stretch;
-            position: sticky;
-            top: 70px;
-            height: calc(100vh - 70px);
-            min-height: calc(100vh - 70px);
-            border-radius: 0;
-            border-left: none;
-            border-top: none;
-            border-bottom: none;
-            box-shadow: none;
-        }
-
-        #sidebar h3 {
-            margin: 0 0 16px;
-            font-size: 18px;
-        }
-
-        .sideButton {
-            width: 100%;
-            margin: 6px 0;
-            text-align: left;
-            background: #132443;
-            border: 1px solid #233d66;
-            color: #dbe6ff;
-        }
-
-        .sideButton:hover {
-            background: #19315a;
-            opacity: 1;
-        }
-
-        .sideButton.primary {
-            background: #2779ff;
-            border-color: #2779ff;
-        }
-
-        .sideHint {
-            margin: 16px 2px 0;
-            color: #8195bd;
-            font-size: 13px;
-            line-height: 1.45;
-        }
-
-        /* =========================
-           MAIN
-        ========================= */
-
-        #mainContent {
-            min-width: 0;
-            padding: 22px 22px 0;
-        }
-
-        .hero {
-            padding: 4px 10px 2px;
-            text-align: left;
-        }
-
-        .hero h1 {
-            margin: 0;
-            font-size: 28px;
-        }
-
-        .hero p {
-            margin: 7px 0 0;
-            color: #8fa4cc;
-            font-size: 15px;
-        }
-
-        .card {
-            background: #101f3b;
-            border: 1px solid #203a63;
-            margin: 16px 0;
-            padding: 28px;
-            border-radius: 14px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
-        }
-
-        .card h2 {
-            margin-top: 0;
-            font-size: 23px;
-        }
-
-        /* =========================
-           HOME PAGE
-        ========================= */
-
-        #homePage {
-            display: none;
-        }
-
-        .homeHeader {
-            background: #101f3b;
-            border: 1px solid #203a63;
-            border-radius: 14px;
-            padding: 28px;
-            margin-bottom: 18px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
-        }
-
-        .homeHeader h1 {
-            margin: 0;
-            font-size: 30px;
-        }
-
-        .homeHeader p {
-            margin: 8px 0 0;
-            color: #8fa4cc;
-        }
-
-        .homeSetsGrid {
-            display: grid;
-            grid-template-columns: repeat(
-                auto-fill,
-                minmax(220px, 1fr)
-            );
-            gap: 16px;
-        }
-
-        .homeSetCard {
-            background: #101f3b;
-            border: 1px solid #203a63;
-            border-radius: 14px;
-            padding: 20px;
-            cursor: pointer;
-            min-height: 175px;
-            transition: 0.2s ease;
-            position: relative;
-        }
-
-        .homeSetCard:hover {
-            transform: translateY(-4px);
-            border-color: #4b8fff;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
-        }
-
-        .homeSetIcon {
-            width: 48px;
-            height: 48px;
-            border-radius: 13px;
-            background: #132443;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 25px;
-            margin-bottom: 15px;
-        }
-
-        .homeSetName {
-            font-size: 19px;
-            font-weight: bold;
-            margin-bottom: 7px;
-            word-break: break-word;
-        }
-
-        .homeSetInfo {
-            color: #8195bd;
-            font-size: 13px;
-            margin-bottom: 17px;
-        }
-
-        .homeStudyButton {
-            width: 100%;
-            margin: 0;
-            background: #287cff;
-        }
-
-        .homeStudyButton:hover {
-            background: #3b8cff;
-        }
-
-        .emptyHome {
-            grid-column: 1 / -1;
-            background: #101f3b;
-            border: 1px dashed #28466f;
-            border-radius: 14px;
-            padding: 55px 25px;
-            text-align: center;
-            color: #8195bd;
-        }
-
-        .emptyHome h2 {
-            color: #f1f5ff;
-            margin: 0 0 10px;
-        }
-
-        .emptyHome button {
-            margin-top: 15px;
-        }
-
-        /* =========================
-           INPUTS / BUTTONS
-        ========================= */
-
-        input {
-            width: 80%;
-            max-width: 620px;
-            padding: 13px 14px;
-            margin: 7px;
-            border: 1px solid #29446f;
-            border-radius: 8px;
-            background: #152849;
-            color: white;
-            outline: none;
-            font-size: 15px;
-        }
-
-        input:focus {
-            border-color: #4d91ff;
-        }
-
-        input::placeholder {
-            color: #8d9bb8;
-        }
-
-        button {
-            padding: 11px 18px;
-            margin: 7px 5px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            background: #243b63;
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            transition: 0.15s ease;
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-            opacity: 0.92;
-        }
-
-        button:disabled {
-            cursor: default;
-        }
-
-        .primaryButton {
-            background: #287cff;
-        }
-
-        .secondaryButton {
-            background: #1d3154;
-        }
-
-        /* =========================
-           SELECTED SET BAR
-        ========================= */
-
-        #selectedSetBar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            background: #132443;
-            border: 1px solid #29466f;
-            border-radius: 10px;
-            padding: 12px 15px;
-            margin-bottom: 20px;
-        }
-
-        #selectedSetName {
-            font-weight: bold;
-            color: #72aaff;
-        }
-
-        #selectedSetCount {
-            color: #8195bd;
-            font-size: 13px;
-        }
-
-        /* =========================
-           CARD LIST
-        ========================= */
-
-        #cardCount {
-            color: #8fa4cc;
-        }
-
-        #cardList {
-            text-align: left;
-            margin-top: 18px;
-            max-height: 260px;
-            overflow-y: auto;
-        }
-
-        #cardList p {
-            background: #142542;
-            border: 1px solid #213d66;
-            padding: 10px 12px;
-            border-radius: 8px;
-            margin: 7px 0;
-            font-size: 14px;
-        }
-
-        #cardList button {
-            float: right;
-            margin: -4px 0 0 8px;
-            padding: 7px 10px;
-            font-size: 12px;
-            background: #4a2730;
-        }
-
-        /* =========================
-           SETS
-        ========================= */
-
-        #setsArea {
-            display: none;
-        }
-
-        .setsHeader {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .setsHeader h2 {
-            margin: 0;
-        }
-
-        #setGrid {
-            display: grid;
-            grid-template-columns: repeat(
-                auto-fill,
-                minmax(210px, 1fr)
-            );
-            gap: 15px;
-        }
-
-        .setCard {
-            background: #132443;
-            border: 1px solid #28466f;
-            border-radius: 13px;
-            padding: 18px;
-            cursor: pointer;
-            transition: 0.2s ease;
-            position: relative;
-            min-height: 145px;
-        }
-
-        .setCard:hover {
-            transform: translateY(-3px);
-            border-color: #4b8fff;
-            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
-        }
-
-        .setCard.selected {
-            border-color: #4b8fff;
-            box-shadow:
-                0 0 0 2px rgba(75, 143, 255, 0.18);
-        }
-
-        .setIcon {
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .setName {
-            font-size: 17px;
-            font-weight: bold;
-            margin-bottom: 7px;
-            word-break: break-word;
-            padding-right: 32px;
-        }
-
-        .setInfo {
-            color: #8195bd;
-            font-size: 13px;
-        }
-
-        .deleteSet {
-            position: absolute;
-            top: 7px;
-            right: 7px;
-            margin: 0;
-            padding: 5px 8px;
-            background: transparent;
-            color: #8195bd;
-            font-size: 15px;
-        }
-
-        .deleteSet:hover {
-            color: #ff6b7a;
-        }
-
-        /* =========================
-           STUDY AREA
-        ========================= */
-
-        #studyArea {
-            display: none;
-            text-align: center;
-        }
-
-        #progress,
-        #practiceProgress {
-            color: #8fa4cc;
-        }
-
-        #progressBar,
-        #practiceProgressBar {
-            width: 80%;
-            height: 10px;
-            background: #263858;
-            border-radius: 10px;
-            margin: 15px auto;
-            overflow: hidden;
-        }
-
-        #progressFill,
-        #practiceProgressFill {
-            width: 0%;
-            height: 100%;
-            background: #6c8cff;
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-
-        #flashcard {
-            width: 92%;
-            min-height: 320px;
-            margin: 25px auto;
-            position: relative;
-            cursor: pointer;
-            font-size: 34px;
-            font-weight: bold;
-            text-align: center;
-            perspective: 1000px;
-        }
-
-        .flashcard-inner {
-            width: 100%;
-            height: 320px;
-            position: relative;
-            transform-style: preserve-3d;
-            transform-origin: center center;
-            transition:
-                transform 0.5s ease-in-out;
-        }
-
-        .flashcard-inner.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .flashcard-front,
-        .flashcard-back {
-            width: 100%;
-            min-height: 320px;
-            background: #162442;
-            border: 2px solid #263858;
-            border-radius: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            backface-visibility: hidden;
-            box-shadow:
-                0 8px 20px rgba(0, 0, 0, 0.3);
-            overflow-wrap: anywhere;
-        }
-
-        .flashcard-back {
-            transform: rotateY(180deg);
-        }
-
-        /* =========================
-           KNOW / DON'T KNOW
-        ========================= */
-
-        #knowButtons {
-            display: block;
-        }
-
-        #knowButtons button {
-            min-width: 130px;
-        }
-
-        /* =========================
-           PRACTICE MODE
-        ========================= */
-
-        #practiceArea {
-            display: none;
-            text-align: center;
-        }
-
-        .practiceQuestion {
-            width: 92%;
-            min-height: 220px;
-            margin: 25px auto;
-            padding: 40px;
-            background: #162442;
-            border: 2px solid #263858;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            font-weight: bold;
-            box-shadow:
-                0 8px 20px rgba(0, 0, 0, 0.3);
-            overflow-wrap: anywhere;
-        }
-
-        #practiceChoices {
-            width: 92%;
-            margin: 20px auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .practiceChoice {
-            width: 100%;
-            margin: 0;
-            min-height: 62px;
-            padding: 15px;
-            text-align: left;
-            background: #132443;
-            border: 1px solid #28466f;
-            font-size: 16px;
-        }
-
-        .practiceChoice:hover {
-            background: #19315a;
-            border-color: #4b8fff;
-        }
-
-        .practiceChoice.correct {
-            background: #164c32;
-            border-color: #42c77b;
-        }
-
-        .practiceChoice.wrong {
-            background: #532530;
-            border-color: #ef6473;
-        }
-
-        .practiceChoice:disabled {
-            cursor: default;
-            opacity: 1;
-        }
-
-        #practiceFeedback {
-            min-height: 30px;
-            font-weight: bold;
-            margin: 15px;
-            font-size: 17px;
-        }
-
-        .practiceCorrect {
-            color: #65d68b;
-        }
-
-        .practiceWrong {
-            color: #ff7b87;
-        }
-
-        /* =========================
-           COMPLETE
-        ========================= */
-
-        #studyComplete,
-        #practiceComplete {
-            display: none;
-            background: #101f3b;
-            border: 1px solid #203a63;
-            margin: 50px auto;
-            padding: 40px;
-            border-radius: 18px;
-            box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.24);
-            text-align: center;
-        }
-
-        #studyComplete h2,
-        #practiceComplete h2 {
-            font-size: 34px;
-            margin-top: 0;
-        }
-
-        #scoreText,
-        #practiceScoreText {
-            font-size: 21px;
-            margin: 15px 0;
-        }
-
-        #reviewText,
-        #practiceReviewText {
-            font-size: 18px;
-            margin: 10px 0 25px;
-            font-weight: bold;
-            color: #a9c0e9;
-        }
-
-        #missedStudyButton {
-            display: none;
-        }
-
-        /* =========================
-           RIGHT RAIL
-        ========================= */
-
-        #rightRail {
-            align-self: start;
-            padding: 22px 16px 0 0;
-        }
-
-        .rightCard {
-            padding: 18px;
-            margin-bottom: 12px;
-        }
-
-        .rightCard h3 {
-            margin: 0 0 10px;
-            font-size: 16px;
-        }
-
-        .statValue {
-            font-size: 28px;
-            font-weight: bold;
-            color: #6aa7ff;
-        }
-
-        .rightText {
-            color: #8195bd;
-            font-size: 13px;
-            line-height: 1.45;
-        }
-
-        /* =========================
-           TOGGLE
-        ========================= */
-
-        .toggleRow {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin: 20px 0;
-            padding: 14px;
-            background: #132443;
-            border: 1px solid #28466f;
-            border-radius: 10px;
-            text-align: left;
-        }
-
-        .toggleText strong {
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .toggleText span {
-            color: #8195bd;
-            font-size: 12px;
-        }
-
-        .switch {
-            position: relative;
-            width: 52px;
-            height: 28px;
-            flex-shrink: 0;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-            margin: 0;
-        }
-
-        .slider {
-            position: absolute;
-            inset: 0;
-            background: #263858;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .slider:before {
-            content: "";
-            position: absolute;
-            width: 22px;
-            height: 22px;
-            left: 3px;
-            top: 3px;
-            background: white;
-            border-radius: 50%;
-            transition: 0.2s;
-        }
-
-        .switch input:checked + .slider {
-            background: #287cff;
-        }
-
-        .switch input:checked + .slider:before {
-            transform: translateX(24px);
-        }
-
-        /* =========================
-           SIMPLE CHOOSERS
-        ========================= */
-
-        .inlineChooser {
-            background: #101f3b;
-            border: 1px solid #203a63;
-            border-radius: 12px;
-            padding: 18px;
-            margin: 16px 0;
-        }
-
-        .chooserHeader {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 16px;
-        }
-
-        .chooserHeader h3 {
-            margin: 0 0 5px;
-            font-size: 20px;
-        }
-
-        .closeChooser {
-            margin: 0;
-            padding: 4px 8px;
-            background: transparent;
-            color: #8195bd;
-            font-size: 18px;
-        }
-
-        .closeChooser:hover {
-            color: #f1f5ff;
-            transform: none;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            border-top: 1px solid #1a2d4e;
-            margin-top: 48px;
-            padding: 34px 16px 40px;
-            text-align: center;
-            color: #8195bd;
-        }
-
-        footer strong {
-            color: #65a4ff;
-        }
-
-        /* =========================
-           OWLY HOME ROOM
-        ========================= */
-
-        .homeRoom {
-            position: relative;
-            min-height: 300px;
-            margin-bottom: 18px;
-            overflow: hidden;
-            border: 1px solid #203a63;
-            border-radius: 18px;
-            background:
-                radial-gradient(
-                    circle at 18% 20%,
-                    rgba(93, 146, 255, 0.18),
-                    transparent 26%
-                ),
-                radial-gradient(
-                    circle at 82% 18%,
-                    rgba(120, 151, 255, 0.12),
-                    transparent 24%
-                ),
-                linear-gradient(
-                    180deg,
-                    #101f3b 0%,
-                    #0c1730 65%,
-                    #0a1225 100%
-                );
-            box-shadow:
-                0 14px 35px rgba(0, 0, 0, 0.28);
-        }
-
-        .roomStars {
-            position: absolute;
-            inset: 0 0 38% 0;
-            background-image:
-                radial-gradient(
-                    circle,
-                    rgba(255, 255, 255, 0.75) 1px,
-                    transparent 2px
-                ),
-                radial-gradient(
-                    circle,
-                    rgba(255, 255, 255, 0.38) 1px,
-                    transparent 2px
-                );
-            background-size:
-                82px 70px,
-                127px 93px;
-            opacity: 0.5;
-        }
-
-        .roomWindow {
-            position: absolute;
-            right: 34px;
-            top: 28px;
-            width: 130px;
-            height: 105px;
-            border: 7px solid #203a63;
-            border-radius: 10px;
-            background:
-                linear-gradient(
-                    180deg,
-                    #182f57,
-                    #101d37
-                );
-            box-shadow:
-                inset 0 0 25px rgba(94, 145, 255, 0.12);
-        }
-
-        .roomWindow:before,
-        .roomWindow:after {
-            content: "";
-            position: absolute;
-            background: #203a63;
-        }
-
-        .roomWindow:before {
-            width: 6px;
-            height: 100%;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-        }
-
-        .roomWindow:after {
-            height: 6px;
-            width: 100%;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-
-        .roomFloor {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 95px;
-            background:
-                linear-gradient(
-                    180deg,
-                    #101c33,
-                    #0a1122
-                );
-            border-top: 1px solid #182c4d;
-        }
-
-        .roomDesk {
-            position: absolute;
-            left: 46px;
-            bottom: 46px;
-            width: 250px;
-            height: 18px;
-            border-radius: 8px;
-            background: #182e51;
-            box-shadow:
-                0 10px 0 #0a1224;
-        }
-
-        .roomDesk:before {
-            content: "";
-            position: absolute;
-            left: 22px;
-            top: 15px;
-            width: 14px;
-            height: 66px;
-            background: #152744;
-            box-shadow:
-                192px 0 0 #152744;
-        }
-
-        .deskLamp {
-            position: absolute;
-            left: 95px;
-            bottom: 66px;
-            width: 55px;
-            height: 48px;
-        }
-
-        .deskLamp:before {
-            content: "";
-            position: absolute;
-            left: 18px;
-            top: 0;
-            width: 4px;
-            height: 30px;
-            background: #6f87b3;
-        }
-
-        .deskLamp:after {
-            content: "💡";
-            position: absolute;
-            left: 5px;
-            top: -14px;
-            font-size: 24px;
-            filter:
-                drop-shadow(
-                    0 0 8px rgba(255, 236, 146, 0.45)
-                );
-        }
-
-        .roomOwlStanding {
-            position: absolute;
-            width: 72px;
-            height: 72px;
-            left: 118px;
-            bottom: 74px;
-            object-fit: contain;
-            animation:
-                owlBob 3.2s ease-in-out infinite;
-            filter:
-                drop-shadow(
-                    0 8px 12px rgba(0, 0, 0, 0.35)
-                );
-            z-index: 3;
-        }
-
-        .roomOwlFlying {
-            position: absolute;
-            width: 68px;
-            height: 68px;
-            left: -90px;
-            top: 62px;
-            object-fit: contain;
-            animation:
-                owlFly 12s linear infinite;
-            filter:
-                drop-shadow(
-                    0 8px 12px rgba(0, 0, 0, 0.3)
-                );
-            z-index: 4;
-        }
-
-        .roomSpeech {
-            position: absolute;
-            left: 210px;
-            bottom: 105px;
-            padding: 10px 14px;
-            border-radius: 12px;
-            background: rgba(16, 31, 59, 0.92);
-            border: 1px solid #29466f;
-            color: #dbe6ff;
-            font-size: 13px;
-            font-weight: 700;
-            z-index: 5;
-        }
-
-        .roomTitle {
-            position: absolute;
-            left: 28px;
-            top: 24px;
-            z-index: 5;
-            max-width: 360px;
-        }
-
-        .roomTitle h1 {
-            margin: 0;
-            font-size: 29px;
-        }
-
-        .roomTitle p {
-            margin: 8px 0 0;
-            color: #8fa4cc;
-            line-height: 1.5;
-        }
-
-        @keyframes owlFly {
-            0% {
-                transform:
-                    translateX(0)
-                    translateY(0)
-                    rotate(-2deg);
-            }
-
-            25% {
-                transform:
-                    translateX(28vw)
-                    translateY(-18px)
-                    rotate(2deg);
-            }
-
-            50% {
-                transform:
-                    translateX(54vw)
-                    translateY(5px)
-                    rotate(-2deg);
-            }
-
-            75% {
-                transform:
-                    translateX(78vw)
-                    translateY(-14px)
-                    rotate(2deg);
-            }
-
-            100% {
-                transform:
-                    translateX(110vw)
-                    translateY(0)
-                    rotate(-2deg);
-            }
-        }
-
-        @keyframes owlBob {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-4px);
-            }
-        }
-
-        /* =========================
-           STUDY MODAL
-        ========================= */
-
-        #studyModal {
-            position: fixed;
-            inset: 0;
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            background: rgba(3, 8, 18, 0.74);
-            backdrop-filter: blur(7px);
-        }
-
-        #studyModal.open {
-            display: flex;
-            animation: modalFade 0.18s ease-out;
-        }
-
-        .studyModalCard {
-            width: min(760px, 100%);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid #2b4d7f;
-            border-radius: 22px;
-            background:
-                radial-gradient(
-                    circle at 12% 0%,
-                    rgba(74, 139, 255, 0.16),
-                    transparent 32%
-                ),
-                linear-gradient(
-                    180deg,
-                    #101f3b 0%,
-                    #0d1931 100%
-                );
-            box-shadow:
-                0 25px 80px rgba(0, 0, 0, 0.48);
-        }
-
-        .studyModalTop {
-            padding: 26px 28px 8px;
-        }
-
-        .studyModalTop h2 {
-            margin: 0;
-            font-size: 28px;
-        }
-
-        .studyModalTop p {
-            margin: 7px 0 0;
-            color: #8fa4cc;
-        }
-
-        .studyModalClose {
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            width: 38px;
-            height: 38px;
-            margin: 0;
-            padding: 0;
-            border-radius: 50%;
-            background: #142542;
-            color: #a9b9d6;
-            font-size: 20px;
-        }
-
-        .studyModalClose:hover {
-            background: #1c3153;
-            color: white;
-            transform: none;
-        }
-
-        .studyRoomMini {
-            height: 125px;
-            margin: 12px 28px 20px;
-            position: relative;
-            overflow: hidden;
-            border-radius: 14px;
-            border: 1px solid #27456f;
-            background:
-                linear-gradient(
-                    180deg,
-                    #132747,
-                    #0d182d
-                );
-        }
-
-        .studyRoomMini img {
-            position: absolute;
-            width: 62px;
-            height: 62px;
-            object-fit: contain;
-            left: 34px;
-            bottom: 19px;
-            animation:
-                owlBob 2.8s ease-in-out infinite;
-        }
-
-        .studyRoomMini:before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 35px;
-            background: #0a1223;
-            border-top: 1px solid #203a63;
-        }
-
-        .studyModeGrid {
-            display: grid;
-            grid-template-columns:
-                repeat(3, 1fr);
-            gap: 13px;
-        }
-
-        .studyModeGrid.modalModes {
-            padding: 0 28px 8px;
-        }
-
-        .modalModeButton {
-            margin: 0;
-            min-height: 130px;
-            text-align: left;
-            padding: 18px;
-            border-radius: 15px;
-            background: #132443;
-            border: 1px solid #28466f;
-        }
-
-        .modalModeButton:hover {
-            transform: translateY(-3px);
-            border-color: #5d9aff;
-            background: #172b4d;
-        }
-
-        .modalModeIcon {
-            display: block;
-            font-size: 25px;
-            margin-bottom: 11px;
-        }
-
-        .modalModeTitle {
-            display: block;
-            font-size: 17px;
-            font-weight: 800;
-            color: #f1f5ff;
-        }
-
-        .modalModeDescription {
-            display: block;
-            margin-top: 6px;
-            font-size: 12px;
-            line-height: 1.45;
-            color: #8195bd;
-        }
-
-        .studyModalSettings {
-            margin: 10px 28px 26px;
-            padding: 14px 16px;
-            border-radius: 14px;
-            background: #0f1e38;
-            border: 1px solid #213d66;
-        }
-
-        .studyModalSettings .toggleRow {
-            margin: 0;
-            padding: 0;
-            background: transparent;
-            border: none;
-        }
-
-        @keyframes modalFade {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* =========================
-           SETTINGS PAGE
-        ========================= */
-
-        #settingsArea {
-            display: none;
-        }
-
-        .settingsGrid {
-            display: grid;
-            gap: 14px;
-        }
-
-        .settingsGroup {
-            padding: 20px;
-            border: 1px solid #203a63;
-            border-radius: 14px;
-            background: #101f3b;
-        }
-
-        .settingsGroup h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-
-        .settingsGroup p {
-            margin: 7px 0 16px;
-        }
-
-        .settingSelect {
-            width: 100%;
-            max-width: 420px;
-            padding: 11px 12px;
-            border: 1px solid #29446f;
-            border-radius: 9px;
-            background: #152849;
-            color: #f1f5ff;
-            font-size: 14px;
-        }
-
-        .dangerButton {
-            background: #4a2730;
-            border: 1px solid #6b3642;
-        }
-
-        .settingsSaved {
-            display: inline-block;
-            margin-left: 8px;
-            color: #65d68b;
-            font-size: 13px;
-            opacity: 0;
-            transition: 0.2s;
-        }
-
-        .settingsSaved.show {
-            opacity: 1;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 1050px) {
-            #page {
-                grid-template-columns:
-                    200px minmax(0, 1fr);
-            }
-
-            #rightRail {
-                display: none;
-            }
-        }
-
-        @media (max-width: 760px) {
-
-            #topbar {
-                gap: 12px;
-                padding: 0 14px;
-            }
-
-            #logo {
-                width: 125px;
-            }
-
-            #nav {
-                gap: 12px;
-                overflow-x: auto;
-            }
-
-            .navButton {
-                font-size: 13px;
-            }
-
-            #page {
-                display: block;
-                padding: 0;
-            }
-
-            #sidebar {
-                position: static;
-                height: auto;
-                min-height: 0;
-                margin-bottom: 0;
-                border-bottom: 1px solid #203a63;
-            }
-
-            #mainContent {
-                padding: 16px;
-            }
-
-            input {
-                width: 100%;
-                margin-left: 0;
-                margin-right: 0;
-            }
-
-            #flashcard {
-                width: 100%;
-                font-size: 27px;
-            }
-
-            .practiceQuestion {
-                width: 100%;
-                font-size: 24px;
-                padding: 25px;
-            }
-
-            #practiceChoices {
-                width: 100%;
-                grid-template-columns: 1fr;
-            }
-
-            .setsHeader {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .homeSetsGrid {
-                grid-template-columns: 1fr;
-            }
-
-            .homeHeader {
-                text-align: center;
-            }
-
-            .studyModeGrid.modalModes {
-                grid-template-columns: 1fr;
-            }
-
-            .studyModalTop {
-                margin-left: 18px;
-                margin-right: 18px;
-                padding-left: 0;
-                padding-right: 0;
-            }
-
-            .studyModalSettings {
-                margin-left: 18px;
-                margin-right: 18px;
-                padding-left: 0;
-                padding-right: 0;
-            }
-
-            .studyModeGrid.modalModes {
-                padding-left: 18px;
-                padding-right: 18px;
-            }
-
-            .studyRoomMini {
-                margin-left: 18px;
-                margin-right: 18px;
-            }
-
-            .roomWindow {
-                right: 18px;
-                width: 95px;
-                height: 82px;
-            }
-
-            .roomDesk {
-                left: 22px;
-                width: 205px;
-            }
-
-            .roomOwlStanding {
-                left: 93px;
-            }
-
-            .roomSpeech {
-                left: 165px;
-                bottom: 102px;
-            }
-
-            .roomTitle {
-                max-width: 270px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owly - Study Smarter</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #07101f;
+    --bg2: #0a1529;
+    --panel: #0e1b32;
+    --panel2: #12233f;
+    --panel3: #162a4b;
+    --border: #233e68;
+    --border2: #315384;
+    --text: #f3f7ff;
+    --muted: #91a5ca;
+    --muted2: #6f84ab;
+    --blue: #3d8bff;
+    --blue2: #67a9ff;
+    --green: #53d789;
+    --red: #ff6878;
+    --yellow: #ffd76a;
+    --purple: #a985ff;
+    --shadow: 0 14px 35px rgba(0,0,0,.25);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% -10%, rgba(61,139,255,.12), transparent 30%),
+        radial-gradient(circle at 90% 10%, rgba(169,133,255,.08), transparent 25%),
+        linear-gradient(180deg, var(--bg) 0%, #081222 100%);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   SCROLLBAR
+========================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #081323;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #28466f;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #386293;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+
+#topbar {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 0 24px;
+    background: rgba(8,20,40,.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(49,83,132,.55);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+#logo {
+    width: 145px;
+    height: 50px;
+    object-fit: contain;
+    object-position: left center;
+    flex-shrink: 0;
+}
+
+#nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 100%;
+    overflow-x: auto;
+}
+
+.navButton {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 12px 15px;
+    margin: 0;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .18s ease;
+    white-space: nowrap;
+}
+
+.navButton:hover {
+    color: white;
+    background: rgba(61,139,255,.08);
+    transform: none;
+}
+
+.navButton.active {
+    color: #fff;
+    background: rgba(61,139,255,.13);
+    box-shadow: inset 0 0 0 1px rgba(61,139,255,.18);
+}
+
+/* =========================
+   PAGE LAYOUT
+========================= */
+
+#page {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 235px minmax(0,1fr) 245px;
+    min-height: calc(100vh - 72px);
+}
+
+.panel {
+    background:
+        linear-gradient(180deg, rgba(18,35,63,.96), rgba(12,26,47,.98));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+#sidebar {
+    padding: 24px 17px;
+    position: sticky;
+    top: 72px;
+    height: calc(100vh - 72px);
+    border-radius: 0;
+    border-left: 0;
+    border-top: 0;
+    border-bottom: 0;
+    box-shadow: inset -1px 0 0 rgba(49,83,132,.3);
+}
+
+.sidebarBrand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 10px 18px;
+    margin-bottom: 5px;
+}
+
+.sidebarOwl {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+}
+
+#sidebar h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.sideButton {
+    width: 100%;
+    margin: 5px 0;
+    padding: 12px 13px;
+    text-align: left;
+    background: #112341;
+    border: 1px solid #29466f;
+    color: #dce7ff;
+}
+
+.sideButton:hover {
+    background: #172d50;
+    border-color: #3b6ca5;
+    opacity: 1;
+}
+
+.sideButton.primary {
+    background: linear-gradient(135deg,#3f8cff,#286fdd);
+    border-color: transparent;
+    box-shadow: 0 8px 20px rgba(40,124,255,.18);
+}
+
+.sidebarSectionTitle {
+    margin: 24px 8px 8px;
+    color: var(--muted2);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sideHint {
+    margin: 15px 7px 0;
+    color: var(--muted2);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+#mainContent {
+    min-width: 0;
+    padding: 26px 25px 45px;
+}
+
+.hero {
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    margin: 0;
+    font-size: 31px;
+    letter-spacing: -.5px;
+}
+
+.hero p {
+    margin: 7px 0 0;
+    color: var(--muted);
+}
+
+/* =========================
+   GENERAL CARDS
+========================= */
+
+.card,
+.homeHeader,
+.settingsGroup,
+.rightCard,
+.inlineChooser,
+.activityCard {
+    background:
+        linear-gradient(180deg, rgba(17,33,59,.96), rgba(13,27,48,.98));
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    box-shadow: var(--shadow);
+}
+
+.card {
+    padding: 27px;
+    margin: 16px 0;
+}
+
+.card h2 {
+    margin-top: 0;
+    font-size: 23px;
+}
+
+/* =========================
+   HOME
+========================= */
+
+#homePage {
+    display: none;
+}
+
+.homeRoom {
+    position: relative;
+    min-height: 340px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 22px;
+    border: 1px solid var(--border2);
+    background:
+        radial-gradient(circle at 15% 20%, rgba(73,146,255,.18), transparent 27%),
+        radial-gradient(circle at 82% 17%, rgba(163,132,255,.14), transparent 25%),
+        linear-gradient(180deg,#112342 0%,#0c1a32 64%,#091426 100%);
+    box-shadow:
+        0 20px 55px rgba(0,0,0,.28),
+        inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+.roomStars {
+    position: absolute;
+    inset: 0 0 40% 0;
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 2px),
+        radial-gradient(circle, rgba(255,255,255,.36) 1px, transparent 2px);
+    background-size: 85px 73px, 129px 95px;
+    opacity: .55;
+}
+
+.roomMoon {
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    right: 190px;
+    top: 30px;
+    border-radius: 50%;
+    background: #dbe8ff;
+    box-shadow: 0 0 32px rgba(187,211,255,.18);
+    opacity: .9;
+}
+
+.roomWindow {
+    position: absolute;
+    right: 34px;
+    top: 27px;
+    width: 128px;
+    height: 104px;
+    border: 7px solid #223d65;
+    border-radius: 12px;
+    background: linear-gradient(180deg,#19345e,#0e1e37);
+    box-shadow: inset 0 0 28px rgba(94,145,255,.12);
+}
+
+.roomWindow:before,
+.roomWindow:after {
+    content: "";
+    position: absolute;
+    background: #223d65;
+}
+
+.roomWindow:before {
+    width: 5px;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.roomWindow:after {
+    width: 100%;
+    height: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.roomFloor {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 105px;
+    background: linear-gradient(180deg,#101d35,#081020);
+    border-top: 1px solid #1e3557;
+}
+
+.roomDesk {
+    position: absolute;
+    left: 45px;
+    bottom: 57px;
+    width: 270px;
+    height: 17px;
+    border-radius: 8px;
+    background: linear-gradient(180deg,#203e68,#173150);
+    box-shadow: 0 9px 0 #07101e;
+}
+
+.roomDesk:before {
+    content: "";
+    position: absolute;
+    left: 21px;
+    top: 14px;
+    width: 13px;
+    height: 74px;
+    background: #17304f;
+    box-shadow: 220px 0 0 #17304f;
+}
+
+.roomDesk:after {
+    content: "";
+    position: absolute;
+    left: 89px;
+    top: -28px;
+    width: 88px;
+    height: 15px;
+    border-radius: 6px;
+    background: #0a1221;
+}
+
+.deskLamp {
+    position: absolute;
+    left: 100px;
+    bottom: 76px;
+    width: 55px;
+    height: 48px;
+}
+
+.deskLamp:before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 0;
+    width: 4px;
+    height: 31px;
+    background: #7892bd;
+}
+
+.deskLamp:after {
+    content: "💡";
+    position: absolute;
+    left: 5px;
+    top: -17px;
+    font-size: 24px;
+    filter: drop-shadow(0 0 9px rgba(255,229,120,.5));
+}
+
+.roomOwlStanding {
+    position: absolute;
+    width: 77px;
+    height: 77px;
+    left: 126px;
+    bottom: 84px;
+    object-fit: contain;
+    z-index: 4;
+    animation: owlBob 3.2s ease-in-out infinite;
+    filter: drop-shadow(0 10px 12px rgba(0,0,0,.38));
+}
+
+.roomOwlFlying {
+    position: absolute;
+    width: 69px;
+    height: 69px;
+    left: -95px;
+    top: 72px;
+    object-fit: contain;
+    z-index: 5;
+    animation: owlFly 13s linear infinite;
+    filter: drop-shadow(0 8px 12px rgba(0,0,0,.3));
+}
+
+.roomSpeech {
+    position: absolute;
+    left: 215px;
+    bottom: 119px;
+    padding: 11px 15px;
+    border-radius: 13px;
+    background: rgba(14,28,50,.94);
+    border: 1px solid #31517e;
+    color: #e0eaff;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 6;
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
+}
+
+.roomSpeech:after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    bottom: -7px;
+    width: 12px;
+    height: 12px;
+    background: #0e1c32;
+    border-right: 1px solid #31517e;
+    border-bottom: 1px solid #31517e;
+    transform: rotate(45deg);
+}
+
+.roomTitle {
+    position: absolute;
+    left: 28px;
+    top: 30px;
+    z-index: 7;
+    max-width: 430px;
+}
+
+.roomTitle h1 {
+    margin: 0;
+    font-size: 31px;
+}
+
+.roomTitle p {
+    margin: 9px 0 0;
+    max-width: 380px;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.roomBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 12px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(61,139,255,.1);
+    border: 1px solid rgba(61,139,255,.2);
+    color: #9dc4ff;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+@keyframes owlFly {
+    0% {
+        transform: translateX(0) translateY(0) rotate(-2deg);
+    }
+    25% {
+        transform: translateX(28vw) translateY(-18px) rotate(2deg);
+    }
+    50% {
+        transform: translateX(55vw) translateY(5px) rotate(-2deg);
+    }
+    75% {
+        transform: translateX(79vw) translateY(-14px) rotate(2deg);
+    }
+    100% {
+        transform: translateX(112vw) translateY(0) rotate(-2deg);
+    }
+}
+
+@keyframes owlBob {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* =========================
+   HOME STATS
+========================= */
+
+.dashboardStats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 13px;
+    margin-bottom: 20px;
+}
+
+.statCard {
+    padding: 17px;
+    border-radius: 15px;
+    border: 1px solid var(--border);
+    background: rgba(14,29,52,.85);
+}
+
+.statTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.statIcon {
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    background: rgba(61,139,255,.11);
+}
+
+.statNumber {
+    margin-top: 8px;
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.statDescription {
+    margin-top: 3px;
+    color: var(--muted2);
+    font-size: 11px;
+}
+
+/* =========================
+   HOME SETS
+========================= */
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 22px 0 13px;
+}
+
+.sectionHeader h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.sectionHeader span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.homeSetsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    gap: 14px;
+}
+
+.homeSetCard {
+    background: linear-gradient(180deg,#112542,#0d1d35);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 19px;
+    cursor: pointer;
+    min-height: 180px;
+    position: relative;
+    transition: .2s ease;
+    overflow: hidden;
+}
+
+.homeSetCard:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg,#3d8bff,#8c6dff);
+    opacity: .75;
+}
+
+.homeSetCard:hover {
+    transform: translateY(-4px);
+    border-color: #477bb8;
+    box-shadow: 0 14px 30px rgba(0,0,0,.28);
+}
+
+.homeSetIcon,
+.setIcon {
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: rgba(61,139,255,.1);
+    font-size: 23px;
+    margin-bottom: 14px;
+}
+
+.homeSetName {
+    font-size: 18px;
+    font-weight: 800;
+    word-break: break-word;
+}
+
+.homeSetInfo {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.homeSetProgress {
+    margin-top: 15px;
+}
+
+.progressTrack {
+    width: 100%;
+    height: 7px;
+    background: #243957;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progressTrack span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg,#3d8bff,#68b3ff);
+    border-radius: inherit;
+    transition: width .3s ease;
+}
+
+.progressText {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted2);
+    font-size: 11px;
+    margin-top: 6px;
+}
+
+.homeStudyButton {
+    width: 100%;
+    margin: 13px 0 0;
+    background: linear-gradient(135deg,#347fff,#286ad5);
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.emptyHome {
+    grid-column: 1 / -1;
+    padding: 45px 25px;
+    border-radius: 16px;
+    background: rgba(16,31,55,.8);
+    border: 1px dashed #31527d;
+    text-align: center;
+    color: var(--muted);
+}
+
+.emptyHome h2 {
+    color: white;
+    margin: 0 0 8px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+select {
+    font: inherit;
+}
+
+input {
+    width: 80%;
+    max-width: 620px;
+    padding: 13px 14px;
+    margin: 7px;
+    border: 1px solid #2a4875;
+    border-radius: 9px;
+    background: #122541;
+    color: white;
+    outline: none;
+    font-size: 15px;
+    transition: .15s;
+}
+
+input:focus {
+    border-color: #5197ff;
+    box-shadow: 0 0 0 3px rgba(61,139,255,.09);
+}
+
+input::placeholder {
+    color: #8295b5;
+}
+
+button {
+    padding: 11px 18px;
+    margin: 7px 5px;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    background: #243b63;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    transition: .17s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    opacity: .95;
+}
+
+button:disabled {
+    cursor: default;
+    transform: none;
+}
+
+.primaryButton {
+    background: linear-gradient(135deg,#3d8bff,#286edc);
+    box-shadow: 0 7px 18px rgba(40,110,220,.16);
+}
+
+.secondaryButton {
+    background: #1b3153;
+}
+
+.dangerButton {
+    background: #4b2932;
+    border: 1px solid #71424c;
+}
+
+/* =========================
+   SELECTED SET
+========================= */
+
+#selectedSetBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: linear-gradient(135deg,#142a4b,#10223e);
+    border: 1px solid #2d4e7d;
+    border-radius: 12px;
+    padding: 13px 15px;
+    margin-bottom: 20px;
+}
+
+#selectedSetName {
+    margin-top: 2px;
+    color: #73afff;
+    font-weight: 800;
+}
+
+#selectedSetCount {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+/* =========================
+   CARD LIST
+========================= */
+
+#cardCount {
+    color: var(--muted);
+}
+
+#cardList {
+    text-align: left;
+    margin-top: 18px;
+    max-height: 310px;
+    overflow-y: auto;
+}
+
+#cardList p {
+    background: #122541;
+    border: 1px solid #264467;
+    padding: 12px 13px;
+    border-radius: 9px;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+#cardList button {
+    float: right;
+    margin: -4px 0 0 8px;
+    padding: 7px 10px;
+    font-size: 11px;
+    background: #472831;
+}
+
+/* =========================
+   SETS
+========================= */
+
+#setsArea {
+    display: none;
+}
+
+.setsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.setsHeader h2 {
+    margin: 0;
+}
+
+.searchBox {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 0 17px;
+}
+
+#setGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+    gap: 14px;
+}
+
+.setCard {
+    position: relative;
+    min-height: 170px;
+    padding: 18px;
+    background: linear-gradient(180deg,#132846,#0f213c);
+    border: 1px solid #29496f;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.setCard:hover {
+    transform: translateY(-3px);
+    border-color: #4c80ba;
+}
+
+.setCard.selected {
+    border-color: #4d91ff;
+    box-shadow: 0 0 0 2px rgba(77,145,255,.12);
+}
+
+.setName {
+    font-size: 18px;
+    font-weight: 800;
+    padding-right: 34px;
+    word-break: break-word;
+}
+
+.setInfo {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.deleteSet {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    margin: 0;
+    padding: 5px 7px;
+    background: transparent;
+    color: #7186a8;
+    font-size: 14px;
+}
+
+.deleteSet:hover {
+    color: var(--red);
+    transform: none;
+}
+
+/* =========================
+   STUDY
+========================= */
+
+#studyArea,
+#practiceArea {
+    display: none;
+    text-align: center;
+}
+
+.studyTopLine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.studyModeBadge {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: #132b4e;
+    border: 1px solid #2e4e7c;
+    color: #8ebcff;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+#progress,
+#practiceProgress {
+    color: var(--muted);
+}
+
+#progressBar,
+#practiceProgressBar {
+    width: 82%;
+    height: 9px;
+    background: #243654;
+    border-radius: 20px;
+    margin: 15px auto;
+    overflow: hidden;
+}
+
+#progressFill,
+#practiceProgressFill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg,#3d8bff,#74b5ff);
+    border-radius: inherit;
+    transition: width .3s;
+}
+
+#flashcard {
+    width: 92%;
+    min-height: 330px;
+    margin: 25px auto;
+    cursor: pointer;
+    perspective: 1100px;
+}
+
+.flashcard-inner {
+    width: 100%;
+    height: 330px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform .45s ease;
+}
+
+.flashcard-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    width: 100%;
+    height: 330px;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at 30% 10%,rgba(61,139,255,.09),transparent 25%),
+        linear-gradient(180deg,#172b4a,#12243e);
+    border: 2px solid #2b456c;
+    box-shadow: 0 18px 38px rgba(0,0,0,.32);
+    backface-visibility: hidden;
+    overflow-wrap: anywhere;
+    font-size: 33px;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+}
+
+.flipHint {
+    color: var(--muted2);
+    font-size: 12px;
+    margin-top: -8px;
+    margin-bottom: 13px;
+}
+
+/* =========================
+   KNOW CONTROLS
+========================= */
+
+#knowButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3px;
+}
+
+#knowButtons button {
+    min-width: 120px;
+}
+
+.knowButton {
+    background: linear-gradient(135deg,#237b52,#1b6744);
+}
+
+.dontKnowButton {
+    background: linear-gradient(135deg,#63313d,#512832);
+}
+
+/* =========================
+   PRACTICE
+========================= */
+
+.practiceQuestion {
+    width: 92%;
+    min-height: 230px;
+    margin: 25px auto;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 19px;
+    background:
+        radial-gradient(circle at 20% 20%,rgba(169,133,255,.09),transparent 25%),
+        linear-gradient(180deg,#182b4a,#13243f);
+    border: 2px solid #2c466c;
+    box-shadow: 0 16px 35px rgba(0,0,0,.28);
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+#practiceChoices {
+    width: 92%;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.practiceChoice {
+    width: 100%;
+    margin: 0;
+    min-height: 66px;
+    padding: 15px;
+    text-align: left;
+    background: #132744;
+    border: 1px solid #2d4b74;
+}
+
+.practiceChoice:hover {
+    background: #193354;
+    border-color: #4b8eff;
+}
+
+.practiceChoice.correct {
+    background: #174c35;
+    border-color: var(--green);
+}
+
+.practiceChoice.wrong {
+    background: #522932;
+    border-color: var(--red);
+}
+
+#practiceFeedback {
+    min-height: 30px;
+    font-weight: 800;
+    margin: 15px;
+    font-size: 16px;
+}
+
+.practiceCorrect {
+    color: var(--green);
+}
+
+.practiceWrong {
+    color: #ff7c89;
+}
+
+/* =========================
+   COMPLETE
+========================= */
+
+#studyComplete,
+#practiceComplete {
+    display: none;
+    margin: 30px auto;
+    padding: 42px;
+    border-radius: 20px;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(61,139,255,.12),transparent 32%),
+        linear-gradient(180deg,#11223d,#0d1b31);
+    border: 1px solid #2a4b77;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.completeIcon {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    background: rgba(61,139,255,.12);
+    font-size: 36px;
+}
+
+#studyComplete h2,
+#practiceComplete h2 {
+    font-size: 31px;
+    margin: 0 0 10px;
+}
+
+#scoreText,
+#practiceScoreText {
+    font-size: 20px;
+    margin: 15px 0;
+}
+
+#reviewText,
+#practiceReviewText {
+    font-size: 15px;
+    margin: 10px 0 25px;
+    color: #a9bce0;
+}
+
+/* =========================
+   RIGHT RAIL
+========================= */
+
+#rightRail {
+    padding: 25px 16px 25px 0;
+}
+
+.rightCard {
+    padding: 18px;
+    margin-bottom: 13px;
+}
+
+.rightCard h3 {
+    margin: 0 0 10px;
+    font-size: 15px;
+}
+
+.statValue {
+    font-size: 28px;
+    font-weight: 800;
+    color: #6eacff;
+}
+
+.rightText {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.miniProgress {
+    margin-top: 11px;
+}
+
+.miniProgressLabel {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted2);
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+.tipCard {
+    background:
+        radial-gradient(circle at 0 0,rgba(169,133,255,.1),transparent 38%),
+        linear-gradient(180deg,#162342,#10213a);
+}
+
+/* =========================
+   TOGGLE
+========================= */
+
+.toggleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 14px;
+    background: #132744;
+    border: 1px solid #2a4770;
+    border-radius: 11px;
+}
+
+.toggleText strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.toggleText span {
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.switch {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+}
+
+.slider {
+    position: absolute;
+    inset: 0;
+    background: #273b5b;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.slider:before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 3px;
+    top: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.switch input:checked + .slider {
+    background: #347fff;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+#settingsArea {
+    display: none;
+}
+
+.settingsGrid {
+    display: grid;
+    gap: 15px;
+}
+
+.settingsGroup {
+    padding: 21px;
+}
+
+.settingsGroup h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.settingsGroup p {
+    margin: 7px 0 16px;
+}
+
+.settingSelect {
+    width: 100%;
+    max-width: 430px;
+    padding: 11px 12px;
+    border: 1px solid #2a4875;
+    border-radius: 9px;
+    background: #15294a;
+    color: white;
+}
+
+.settingsSaved {
+    display: inline-block;
+    margin-left: 8px;
+    color: var(--green);
+    opacity: 0;
+    transition: .2s;
+    font-size: 13px;
+}
+
+.settingsSaved.show {
+    opacity: 1;
+}
+
+/* =========================
+   INLINE CHOOSER
+========================= */
+
+.inlineChooser {
+    padding: 19px;
+    margin: 16px 0;
+}
+
+.chooserHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.chooserHeader h3 {
+    margin: 0 0 5px;
+}
+
+.closeChooser {
+    margin: 0;
+    padding: 4px 8px;
+    background: transparent;
+    color: var(--muted2);
+    font-size: 18px;
+}
+
+.closeChooser:hover {
+    color: white;
+}
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.activityGrid {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.activityCard {
+    padding: 20px;
+}
+
+.activityCard h3 {
+    margin: 0 0 13px;
+}
+
+.activityItem {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(49,83,132,.25);
+}
+
+.activityItem:last-child {
+    border-bottom: none;
+}
+
+.activityMain {
+    font-size: 13px;
+}
+
+.activitySub {
+    margin-top: 3px;
+    color: var(--muted2);
+    font-size: 11px;
+}
+
+.activityScore {
+    font-weight: 800;
+    color: #75b1ff;
+}
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+.achievements {
+    display: grid;
+    gap: 9px;
+}
+
+.achievement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background: #122541;
+    border: 1px solid #274667;
+}
+
+.achievement.locked {
+    opacity: .45;
+}
+
+.achievementIcon {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: rgba(255,215,106,.08);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid #172d4d;
+    padding: 33px 16px 40px;
+    text-align: center;
+    color: var(--muted2);
+}
+
+footer strong {
+    color: #70abff;
+}
+
+/* =========================
+   STUDY MODAL
+========================= */
+
+#studyModal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(3,8,18,.76);
+    backdrop-filter: blur(8px);
+}
+
+#studyModal.open {
+    display: flex;
+    animation: modalFade .18s ease-out;
+}
+
+.studyModalCard {
+    width: min(790px,100%);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #31527f;
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 10% 0%,rgba(61,139,255,.14),transparent 32%),
+        linear-gradient(180deg,#11223d,#0d1b30);
+    box-shadow: 0 30px 90px rgba(0,0,0,.5);
+}
+
+.studyModalTop {
+    padding: 27px 28px 9px;
+}
+
+.studyModalTop h2 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.studyModalTop p {
+    margin: 7px 0 0;
+    color: var(--muted);
+}
+
+.studyModalClose {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: #162943;
+    color: #a7b9d7;
+}
+
+.studyModalClose:hover {
+    color: white;
+    transform: none;
+}
+
+.studyRoomMini {
+    height: 125px;
+    margin: 13px 28px 19px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px;
+    border: 1px solid #2b4d79;
+    background:
+        radial-gradient(circle at 70% 25%,rgba(61,139,255,.1),transparent 25%),
+        linear-gradient(180deg,#142949,#0c1a2e);
+}
+
+.studyRoomMini img {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    left: 36px;
+    bottom: 18px;
+    object-fit: contain;
+    animation: owlBob 2.7s ease-in-out infinite;
+}
+
+.studyRoomMini:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 34px;
+    background: #091323;
+    border-top: 1px solid #213c62;
+}
+
+.studyRoomMini:after {
+    content: "🦉";
+    position: absolute;
+    right: 42px;
+    top: 28px;
+    font-size: 24px;
+    opacity: .16;
+}
+
+.studyModeGrid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 13px;
+}
+
+.modalModes {
+    padding: 0 28px 8px;
+}
+
+.modalModeButton {
+    margin: 0;
+    min-height: 135px;
+    text-align: left;
+    padding: 18px;
+    border-radius: 15px;
+    background: #132744;
+    border: 1px solid #2d4c75;
+}
+
+.modalModeButton:hover {
+    transform: translateY(-3px);
+    border-color: #5e9bff;
+    background: #172e50;
+}
+
+.modalModeIcon {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.modalModeTitle {
+    display: block;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.modalModeDescription {
+    display: block;
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.45;
+}
+
+.studyModalSettings {
+    margin: 11px 28px 27px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: #0f1e37;
+    border: 1px solid #223d64;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.searchWrap {
+    position: relative;
+}
+
+.searchWrap input {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding-left: 39px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted2);
+    pointer-events: none;
+}
+
+/* =========================
+   PROGRESS PAGE
+========================= */
+
+#progressArea {
+    display: none;
+}
+
+.progressOverview {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.progressBigCard {
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: linear-gradient(180deg,#132642,#102038);
+}
+
+.progressBigLabel {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.progressBigNumber {
+    font-size: 31px;
+    font-weight: 800;
+    margin-top: 7px;
+}
+
+.setProgressRow {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(49,83,132,.25);
+}
+
+.setProgressRow:last-child {
+    border-bottom: 0;
+}
+
+.setProgressTop {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.setProgressName {
+    font-weight: 800;
+}
+
+.setProgressPercent {
+    color: #75b1ff;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+/* =========================
+   UTILITIES
+========================= */
+
+.hidden {
+    display: none !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1120px) {
+    #page {
+        grid-template-columns: 215px minmax(0,1fr);
+    }
+
+    #rightRail {
+        display: none;
+    }
+
+    .dashboardStats {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media (max-width: 780px) {
+    #topbar {
+        gap: 12px;
+        padding: 0 13px;
+    }
+
+    #logo {
+        width: 120px;
+    }
+
+    #nav {
+        gap: 3px;
+    }
+
+    .navButton {
+        padding: 10px 9px;
+        font-size: 12px;
+    }
+
+    #page {
+        display: block;
+    }
+
+    #sidebar {
+        position: static;
+        height: auto;
+        min-height: 0;
+        border-right: 0;
+        border-bottom: 1px solid rgba(49,83,132,.4);
+    }
+
+    #mainContent {
+        padding: 18px 14px 35px;
+    }
+
+    .dashboardStats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .homeRoom {
+        min-height: 340px;
+    }
+
+    .roomWindow {
+        right: 16px;
+        width: 95px;
+        height: 80px;
+    }
+
+    .roomDesk {
+        left: 18px;
+        width: 205px;
+    }
+
+    .roomOwlStanding {
+        left: 85px;
+    }
+
+    .roomSpeech {
+        left: 155px;
+        bottom: 111px;
+    }
+
+    .roomTitle {
+        left: 20px;
+        max-width: 270px;
+    }
+
+    .roomTitle h1 {
+        font-size: 25px;
+    }
+
+    .activityGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .progressOverview {
+        grid-template-columns: 1fr;
+    }
+
+    .studyModeGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .modalModes {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .studyModalTop {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .studyModalSettings {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+    .studyRoomMini {
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+
+    input {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #flashcard {
+        width: 100%;
+    }
+
+    .flashcard-front,
+    .flashcard-back {
+        font-size: 26px;
+        padding: 25px;
+    }
+
+    .practiceQuestion,
+    #practiceChoices {
+        width: 100%;
+    }
+
+    #practiceChoices {
+        grid-template-columns: 1fr;
+    }
+
+    .setsHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 520px) {
+    .dashboardStats {
+        grid-template-columns: 1fr;
+    }
+
+    .homeSetsGrid,
+    #setGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .roomOwlFlying {
+        display: none;
+    }
+
+    #knowButtons {
+        flex-direction: column;
+    }
+
+    #knowButtons button {
+        width: 100%;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    #studyComplete,
+    #practiceComplete {
+        padding: 30px 20px;
+    }
+}
+
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: scale(.985);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+</style>
 </head>
 
 <body>
@@ -1535,43 +1933,23 @@
 
     <nav id="nav" aria-label="Main navigation">
 
-        <button
-            class="navButton active"
-            id="homeNav"
-            onclick="showHome()"
-        >
+        <button class="navButton active" id="homeNav" onclick="showHome()">
             Home
         </button>
 
-        <button
-            class="navButton"
-            id="flashcardsNav"
-            onclick="showFlashcards()"
-        >
+        <button class="navButton" id="flashcardsNav" onclick="showFlashcards()">
             Flashcards
         </button>
 
-        <button
-            class="navButton"
-            id="setsNav"
-            onclick="showSets()"
-        >
+        <button class="navButton" id="setsNav" onclick="showSets()">
             Sets
         </button>
 
-        <button
-            class="navButton"
-            id="progressNav"
-            onclick="showProgress()"
-        >
+        <button class="navButton" id="progressNav" onclick="showProgress()">
             Progress
         </button>
 
-        <button
-            class="navButton"
-            id="settingsNav"
-            onclick="showSettings()"
-        >
+        <button class="navButton" id="settingsNav" onclick="showSettings()">
             Settings
         </button>
 
@@ -1585,7 +1963,19 @@
 
     <aside id="sidebar" class="panel">
 
-        <h3>📚 Flashcards</h3>
+        <div class="sidebarBrand">
+
+            <img
+                class="sidebarOwl"
+                src="./owly-logo.png"
+                alt=""
+            >
+
+            <div>
+                <h3>Study Tools</h3>
+            </div>
+
+        </div>
 
         <button
             class="sideButton primary"
@@ -1605,12 +1995,29 @@
             class="sideButton"
             onclick="showSets()"
         >
-            🗂️ Sets
+            🗂️ My Sets
+        </button>
+
+        <div class="sidebarSectionTitle">
+            Study
+        </div>
+
+        <button
+            class="sideButton"
+            onclick="quickStudy()"
+        >
+            📚 Quick Study
+        </button>
+
+        <button
+            class="sideButton"
+            onclick="showProgress()"
+        >
+            📊 My Progress
         </button>
 
         <p class="sideHint">
-            Organize your cards into sets and study exactly
-            what you need.
+            Keep your cards organized, practice often, and let Owly keep track of your progress. 🦉
         </p>
 
     </aside>
@@ -1626,6 +2033,7 @@
             <div class="homeRoom">
 
                 <div class="roomStars"></div>
+                <div class="roomMoon"></div>
                 <div class="roomWindow"></div>
                 <div class="roomFloor"></div>
                 <div class="roomDesk"></div>
@@ -1633,13 +2041,17 @@
 
                 <div class="roomTitle">
 
+                    <div class="roomBadge">
+                        🦉 OWLY STUDY SPACE
+                    </div>
+
                     <h1>
-                        Your Study Room 🦉
+                        Your Study Room
                     </h1>
 
                     <p>
-                        Pick a set below and let Owly help you
-                        turn a few minutes into real progress.
+                        A calm little place to review your cards,
+                        practice questions, and make progress.
                     </p>
 
                 </div>
@@ -1653,7 +2065,7 @@
                 <img
                     class="roomOwlStanding"
                     src="./owly-logo.png"
-                    alt="Owly standing at the desk"
+                    alt="Owly at the desk"
                 >
 
                 <div class="roomSpeech">
@@ -1662,10 +2074,82 @@
 
             </div>
 
+            <div class="dashboardStats">
+
+                <div class="statCard">
+                    <div class="statTop">
+                        <span>Flashcards</span>
+                        <span class="statIcon">📚</span>
+                    </div>
+                    <div class="statNumber" id="homeCardCount">0</div>
+                    <div class="statDescription">cards in your library</div>
+                </div>
+
+                <div class="statCard">
+                    <div class="statTop">
+                        <span>Known</span>
+                        <span class="statIcon">✅</span>
+                    </div>
+                    <div class="statNumber" id="homeKnownCount">0</div>
+                    <div class="statDescription">cards you've mastered</div>
+                </div>
+
+                <div class="statCard">
+                    <div class="statTop">
+                        <span>Sets</span>
+                        <span class="statIcon">🗂️</span>
+                    </div>
+                    <div class="statNumber" id="homeSetCount">0</div>
+                    <div class="statDescription">organized study sets</div>
+                </div>
+
+                <div class="statCard">
+                    <div class="statTop">
+                        <span>Streak</span>
+                        <span class="statIcon">🔥</span>
+                    </div>
+                    <div class="statNumber" id="homeStreak">0</div>
+                    <div class="statDescription">days of study</div>
+                </div>
+
+            </div>
+
+            <div class="sectionHeader">
+                <h2>Your Sets</h2>
+                <span id="homeSetSubtitle">0 sets</span>
+            </div>
+
             <div
                 id="homeSetsGrid"
                 class="homeSetsGrid"
             ></div>
+
+            <div class="activityGrid">
+
+                <div class="activityCard">
+
+                    <h3>📈 Recent Practice</h3>
+
+                    <div id="recentActivity">
+                        <div class="muted">
+                            Start studying to see your activity here.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="activityCard">
+
+                    <h3>🏆 Achievements</h3>
+
+                    <div
+                        class="achievements"
+                        id="achievementsList"
+                    ></div>
+
+                </div>
+
+            </div>
 
         </section>
 
@@ -1674,18 +2158,9 @@
         <section id="flashcardsPage">
 
             <div class="hero">
-
-                <h1>
-                    Flashcards
-                </h1>
-
-                <p>
-                    Study smarter, one card at a time. 🦉
-                </p>
-
+                <h1>Flashcards</h1>
+                <p>Study smarter, one card at a time. 🦉</p>
             </div>
-
-            <!-- CREATE -->
 
             <div
                 class="card"
@@ -1695,15 +2170,13 @@
                 <div id="selectedSetBar">
 
                     <div>
-
-                        <div>
+                        <div class="muted">
                             📁 Current Set
                         </div>
 
                         <div id="selectedSetName">
                             General
                         </div>
-
                     </div>
 
                     <div id="selectedSetCount">
@@ -1754,16 +2227,27 @@
 
             </div>
 
-            <!-- STUDY -->
+            <!-- STUDY AREA -->
 
             <div
                 class="card"
                 id="studyArea"
             >
 
-                <h2 id="studyTitle">
-                    📚 Study Mode
-                </h2>
+                <div class="studyTopLine">
+
+                    <h2 id="studyTitle">
+                        📚 Normal Study
+                    </h2>
+
+                    <div
+                        class="studyModeBadge"
+                        id="studyModeBadge"
+                    >
+                        NORMAL
+                    </div>
+
+                </div>
 
                 <p id="progress">
                     Card 0 of 0
@@ -1799,17 +2283,19 @@
 
                 </div>
 
+                <div class="flipHint">
+                    💡 Click the card to reveal the answer
+                </div>
+
                 <div id="knowButtons">
 
-                    <button
-                        onclick="previousCard()"
-                    >
+                    <button onclick="previousCard()">
                         ⬅ Previous
                     </button>
 
                     <button
                         id="knowButton"
-                        class="primaryButton"
+                        class="knowButton"
                         onclick="knowCard()"
                     >
                         ✅ Know
@@ -1817,14 +2303,13 @@
 
                     <button
                         id="dontKnowButton"
+                        class="dontKnowButton"
                         onclick="dontKnowCard()"
                     >
                         ❌ Don't Know
                     </button>
 
-                    <button
-                        onclick="nextCard()"
-                    >
+                    <button onclick="nextCard()">
                         Next ➡
                     </button>
 
@@ -1857,9 +2342,7 @@
                 </p>
 
                 <div id="practiceProgressBar">
-
                     <div id="practiceProgressFill"></div>
-
                 </div>
 
                 <div
@@ -1897,8 +2380,12 @@
 
             <div id="studyComplete">
 
+                <div class="completeIcon">
+                    🎉
+                </div>
+
                 <h2>
-                    🎉 Study Complete!
+                    Study Complete!
                 </h2>
 
                 <p id="scoreText"></p>
@@ -1920,9 +2407,7 @@
                     📚 Study Again
                 </button>
 
-                <button
-                    onclick="backToCreate()"
-                >
+                <button onclick="backToCreate()">
                     Back to Create
                 </button>
 
@@ -1932,8 +2417,12 @@
 
             <div id="practiceComplete">
 
+                <div class="completeIcon">
+                    🏆
+                </div>
+
                 <h2>
-                    🎉 Practice Complete!
+                    Practice Complete!
                 </h2>
 
                 <p id="practiceScoreText"></p>
@@ -1947,9 +2436,7 @@
                     ✏️ Practice Again
                 </button>
 
-                <button
-                    onclick="backToCreate()"
-                >
+                <button onclick="backToCreate()">
                     Back to Create
                 </button>
 
@@ -1962,16 +2449,8 @@
         <section id="setsArea">
 
             <div class="hero">
-
-                <h1>
-                    Your Sets
-                </h1>
-
-                <p>
-                    Keep your subjects organized and ready to
-                    study. 🗂️
-                </p>
-
+                <h1>Your Sets</h1>
+                <p>Keep your subjects organized and ready to study. 🗂️</p>
             </div>
 
             <div class="card">
@@ -1979,16 +2458,11 @@
                 <div class="setsHeader">
 
                     <div>
-
-                        <h2>
-                            📚 Flashcard Sets
-                        </h2>
+                        <h2>📚 Flashcard Sets</h2>
 
                         <p class="rightText">
-                            Create a set for each subject,
-                            unit, or topic.
+                            Create a set for each subject, unit, or topic.
                         </p>
-
                     </div>
 
                     <button
@@ -2000,7 +2474,79 @@
 
                 </div>
 
+                <div class="searchWrap searchBox">
+                    <span class="searchIcon">🔎</span>
+
+                    <input
+                        id="setSearch"
+                        type="text"
+                        placeholder="Search your sets..."
+                    >
+                </div>
+
                 <div id="setGrid"></div>
+
+            </div>
+
+        </section>
+
+        <!-- PROGRESS -->
+
+        <section id="progressArea">
+
+            <div class="hero">
+                <h1>Progress</h1>
+                <p>See how much you've learned. 📊</p>
+            </div>
+
+            <div class="progressOverview">
+
+                <div class="progressBigCard">
+                    <div class="progressBigLabel">
+                        Overall mastery
+                    </div>
+
+                    <div
+                        class="progressBigNumber"
+                        id="overallMastery"
+                    >
+                        0%
+                    </div>
+                </div>
+
+                <div class="progressBigCard">
+                    <div class="progressBigLabel">
+                        Cards mastered
+                    </div>
+
+                    <div
+                        class="progressBigNumber"
+                        id="overallKnown"
+                    >
+                        0
+                    </div>
+                </div>
+
+                <div class="progressBigCard">
+                    <div class="progressBigLabel">
+                        Cards to review
+                    </div>
+
+                    <div
+                        class="progressBigNumber"
+                        id="overallReview"
+                    >
+                        0
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card">
+
+                <h2>🗂️ Set Progress</h2>
+
+                <div id="setProgressList"></div>
 
             </div>
 
@@ -2011,43 +2557,29 @@
         <section id="settingsArea">
 
             <div class="hero">
-
-                <h1>
-                    Settings
-                </h1>
-
-                <p>
-                    Make Owly feel the way you like to study. ⚙️
-                </p>
-
+                <h1>Settings</h1>
+                <p>Make Owly feel the way you like to study. ⚙️</p>
             </div>
 
             <div class="settingsGrid">
 
                 <div class="settingsGroup">
 
-                    <h3>
-                        Study preferences
-                    </h3>
+                    <h3>Study Preferences</h3>
 
                     <p class="rightText">
-                        Choose how you want your study controls
-                        to work.
+                        Choose how you want your study controls to work.
                     </p>
 
                     <div class="toggleRow">
 
                         <div class="toggleText">
-
-                            <strong>
-                                Know / Don't Know
-                            </strong>
+                            <strong>Know / Don't Know</strong>
 
                             <span>
-                                Show buttons for tracking cards
-                                you know or need to review.
+                                Show buttons for tracking cards you know
+                                or need to review.
                             </span>
-
                         </div>
 
                         <label class="switch">
@@ -2068,7 +2600,7 @@
                         for="defaultStudyMode"
                         style="
                             display:block;
-                            margin:16px 0 8px;
+                            margin:17px 0 8px;
                             font-weight:700;
                         "
                     >
@@ -2098,28 +2630,20 @@
 
                 <div class="settingsGroup">
 
-                    <h3>
-                        Owly room
-                    </h3>
+                    <h3>Owly Room</h3>
 
                     <p class="rightText">
-                        Turn the Home page Owly animations on
-                        or off.
+                        Control the little Owly animations on the Home page.
                     </p>
 
                     <div class="toggleRow">
 
                         <div class="toggleText">
-
-                            <strong>
-                                Animated Owly
-                            </strong>
+                            <strong>Animated Owly</strong>
 
                             <span>
-                                Keep Owly flying around the room
-                                and bobbing at the desk.
+                                Keep Owly flying around and bobbing at the desk.
                             </span>
-
                         </div>
 
                         <label class="switch">
@@ -2140,13 +2664,33 @@
 
                 <div class="settingsGroup">
 
-                    <h3>
-                        Data
-                    </h3>
+                    <h3>Daily Goal</h3>
 
                     <p class="rightText">
-                        Everything is stored in your browser
-                        using local storage.
+                        Set a small target to keep your study sessions consistent.
+                    </p>
+
+                    <input
+                        id="dailyGoalInput"
+                        type="number"
+                        min="1"
+                        max="100"
+                        placeholder="10"
+                    >
+
+                    <span class="rightText">
+                        cards per day
+                    </span>
+
+                </div>
+
+                <div class="settingsGroup">
+
+                    <h3>Data</h3>
+
+                    <p class="rightText">
+                        Your flashcards, sets, progress, and settings are stored
+                        locally in your browser.
                     </p>
 
                     <button
@@ -2169,7 +2713,7 @@
                         onclick="resetOwlyData()"
                         class="dangerButton"
                     >
-                        Reset Flashcards & Sets
+                        Reset Owly Data
                     </button>
 
                 </div>
@@ -2186,9 +2730,7 @@
 
         <div class="panel rightCard">
 
-            <h3>
-                Your Progress
-            </h3>
+            <h3>Your Progress</h3>
 
             <div
                 class="statValue"
@@ -2205,9 +2747,7 @@
 
         <div class="panel rightCard">
 
-            <h3>
-                Current Set
-            </h3>
+            <h3>Current Set</h3>
 
             <div
                 class="statValue"
@@ -2223,13 +2763,77 @@
                 General
             </div>
 
+            <div class="miniProgress">
+
+                <div class="miniProgressLabel">
+                    <span>Mastery</span>
+                    <span id="rightSetPercent">0%</span>
+                </div>
+
+                <div class="progressTrack">
+                    <span id="rightSetProgress"></span>
+                </div>
+
+            </div>
+
         </div>
 
         <div class="panel rightCard">
 
-            <h3>
-                Quick Study
-            </h3>
+            <h3>🔥 Study Streak</h3>
+
+            <div
+                class="statValue"
+                id="rightStreak"
+            >
+                0
+            </div>
+
+            <div class="rightText">
+                consecutive study days
+            </div>
+
+        </div>
+
+        <div class="panel rightCard">
+
+            <h3>🎯 Daily Goal</h3>
+
+            <div
+                class="statValue"
+                id="rightDailyGoal"
+            >
+                0%
+            </div>
+
+            <div class="rightText">
+                of today's target
+            </div>
+
+            <div class="miniProgress">
+
+                <div class="progressTrack">
+                    <span id="dailyGoalProgress"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="panel rightCard tipCard">
+
+            <h3>💡 Study Tip</h3>
+
+            <div class="rightText" id="studyTip">
+                Active recall works best when you try to answer
+                before revealing the card.
+            </div>
+
+        </div>
+
+        <div class="panel rightCard">
+
+            <h3>Quick Study</h3>
 
             <div class="rightText">
                 Ready to review your current set?
@@ -2237,23 +2841,10 @@
 
             <button
                 class="primaryButton"
-                onclick="openStudyPopup()"
+                onclick="quickStudy()"
             >
                 📚 Start Studying
             </button>
-
-        </div>
-
-        <div class="panel rightCard">
-
-            <h3>
-                Study Tips
-            </h3>
-
-            <div class="rightText">
-                Tap a card to flip it, then mark whether you know
-                it. Missed cards can be reviewed again at the end.
-            </div>
 
         </div>
 
@@ -2273,13 +2864,18 @@
         Owly helps you learn, one question at a time.
     </div>
 
-    <div style="margin-top:22px;font-size:12px;">
+    <div
+        style="
+            margin-top:22px;
+            font-size:12px;
+        "
+    >
         © 2026 Owly. Study Smarter.
     </div>
 
 </footer>
 
-<!-- STUDY MODE MODAL -->
+<!-- STUDY MODAL -->
 
 <div
     id="studyModal"
@@ -2290,7 +2886,6 @@
         class="studyModalCard"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="studyModalTitle"
     >
 
         <button
@@ -2303,7 +2898,7 @@
 
         <div class="studyModalTop">
 
-            <h2 id="studyModalTitle">
+            <h2>
                 How do you want to study?
             </h2>
 
@@ -2338,8 +2933,7 @@
                 </span>
 
                 <span class="modalModeDescription">
-                    Go through every card in order and flip
-                    each one.
+                    Go through every card in order and flip each one.
                 </span>
 
             </button>
@@ -2358,8 +2952,7 @@
                 </span>
 
                 <span class="modalModeDescription">
-                    Mix the cards so your brain cannot rely
-                    on the same order.
+                    Mix your cards into a random order.
                 </span>
 
             </button>
@@ -2378,8 +2971,7 @@
                 </span>
 
                 <span class="modalModeDescription">
-                    Answer the question using multiple-choice
-                    answers.
+                    Test yourself with multiple-choice questions.
                 </span>
 
             </button>
@@ -2422,7 +3014,7 @@
 
 </div>
 
-<!-- SIMPLE SET CREATOR -->
+<!-- SET CREATOR -->
 
 <div
     id="setCreator"
@@ -2476,9 +3068,7 @@
 ===================================================== */
 
 function loadJSON(key, fallback) {
-
     try {
-
         const value = localStorage.getItem(key);
 
         if (!value) {
@@ -2490,48 +3080,20 @@ function loadJSON(key, fallback) {
         return parsed;
 
     } catch (error) {
-
-        console.warn(
-            "Could not load localStorage item:",
-            key,
-            error
-        );
-
+        console.warn("Storage load failed:", key, error);
         return fallback;
     }
 }
-
 
 /* =====================================================
    DATA
 ===================================================== */
 
 let cards = loadJSON("owlyCards", []);
-
 let sets = loadJSON("owlySets", []);
 
 let selectedSetId =
     localStorage.getItem("owlySelectedSet");
-
-
-/* =====================================================
-   ID GENERATOR
-===================================================== */
-
-function createId() {
-
-    return (
-        Date.now().toString() +
-        Math.random()
-            .toString(36)
-            .substring(2)
-    );
-}
-
-
-/* =====================================================
-   DATA CLEANUP / MIGRATION
-===================================================== */
 
 if (!Array.isArray(cards)) {
     cards = [];
@@ -2541,25 +3103,29 @@ if (!Array.isArray(sets)) {
     sets = [];
 }
 
-if (sets.length === 0) {
+function createId() {
+    return (
+        Date.now().toString() +
+        Math.random().toString(36).substring(2)
+    );
+}
 
+/* =====================================================
+   SETUP / MIGRATION
+===================================================== */
+
+if (sets.length === 0) {
     sets.push({
         id: createId(),
         name: "General"
     });
-
 }
 
 if (
     !selectedSetId ||
-    !sets.some(
-        set => set.id === selectedSetId
-    )
+    !sets.some(set => set.id === selectedSetId)
 ) {
-
-    selectedSetId =
-        sets[0].id;
-
+    selectedSetId = sets[0].id;
 }
 
 let changedCards = false;
@@ -2567,64 +3133,39 @@ let changedCards = false;
 cards.forEach(card => {
 
     if (!card.id) {
-
         card.id = createId();
-
         changedCards = true;
-
     }
 
     if (!card.setId) {
-
-        card.setId =
-            sets[0].id;
-
+        card.setId = sets[0].id;
         changedCards = true;
-
     }
 
     if (typeof card.question !== "string") {
-
-        card.question =
-            String(card.question || "");
-
+        card.question = String(card.question || "");
         changedCards = true;
-
     }
 
     if (typeof card.answer !== "string") {
-
-        card.answer =
-            String(card.answer || "");
-
+        card.answer = String(card.answer || "");
         changedCards = true;
-
     }
 
     if (typeof card.known !== "boolean") {
-
         card.known = false;
-
         changedCards = true;
-
     }
 
     if (typeof card.practiceCorrect !== "number") {
-
         card.practiceCorrect = 0;
-
         changedCards = true;
-
     }
 
     if (typeof card.practiceAttempts !== "number") {
-
         card.practiceAttempts = 0;
-
         changedCards = true;
-
     }
-
 });
 
 if (changedCards) {
@@ -2633,61 +3174,42 @@ if (changedCards) {
 
 saveSets();
 
-
 /* =====================================================
    STUDY VARIABLES
 ===================================================== */
 
 let currentCard = 0;
-
 let correctCards = 0;
-
 let reviewCards = [];
-
 let shuffleCards = false;
-
 let shuffleOrder = [];
-
 let showingAnswer = false;
-
 let studyMode = "normal";
-
 let useKnowDontKnow = true;
-
 let reviewMode = false;
-
 let answeredStudyCards = new Set();
-
 
 /* =====================================================
    PRACTICE VARIABLES
 ===================================================== */
 
 let practiceCards = [];
-
 let practiceCardIndex = 0;
-
 let practiceCorrect = 0;
-
 let practiceAnswered = false;
-
 
 /* =====================================================
    STORAGE
 ===================================================== */
 
 function saveCards() {
-
     localStorage.setItem(
         "owlyCards",
         JSON.stringify(cards)
     );
-
 }
 
-
 function saveSets() {
-
     localStorage.setItem(
         "owlySets",
         JSON.stringify(sets)
@@ -2697,226 +3219,153 @@ function saveSets() {
         "owlySelectedSet",
         selectedSetId
     );
-
 }
-
 
 /* =====================================================
    CURRENT SET
 ===================================================== */
 
 function getCurrentSet() {
-
     return sets.find(
-        set =>
-            set.id === selectedSetId
+        set => set.id === selectedSetId
     );
-
 }
-
 
 function getCurrentCards() {
-
     return cards.filter(
-        card =>
-            card.setId === selectedSetId
+        card => card.setId === selectedSetId
     );
-
 }
 
-
 /* =====================================================
-   NAVIGATION
+   PAGE NAVIGATION
 ===================================================== */
 
 function hideAllPages() {
 
-    document.getElementById("homePage")
-        .style.display = "none";
-
-    document.getElementById("flashcardsPage")
-        .style.display = "none";
-
-    document.getElementById("setsArea")
-        .style.display = "none";
-
-    document.getElementById("settingsArea")
-        .style.display = "none";
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("flashcardsPage").style.display = "none";
+    document.getElementById("setsArea").style.display = "none";
+    document.getElementById("progressArea").style.display = "none";
+    document.getElementById("settingsArea").style.display = "none";
 
 }
-
 
 function clearNavActive() {
 
-    document.getElementById("homeNav")
-        .classList.remove("active");
-
-    document.getElementById("flashcardsNav")
-        .classList.remove("active");
-
-    document.getElementById("setsNav")
-        .classList.remove("active");
-
-    document.getElementById("progressNav")
-        .classList.remove("active");
-
-    document.getElementById("settingsNav")
-        .classList.remove("active");
+    document.querySelectorAll(".navButton")
+        .forEach(button => button.classList.remove("active"));
 
 }
-
 
 function showHome() {
 
     hideAllPages();
 
-    document.getElementById("homePage")
-        .style.display = "block";
+    document.getElementById("homePage").style.display = "block";
 
     clearNavActive();
-
-    document.getElementById("homeNav")
-        .classList.add("active");
+    document.getElementById("homeNav").classList.add("active");
 
     closeStudyPopup();
 
     renderHomeSets();
+    renderHomeStats();
+    renderActivity();
+    renderAchievements();
+    updateRightRail();
 
     applyOwlyAnimationSetting();
-
 }
-
 
 function showFlashcards() {
 
     hideAllPages();
 
-    document.getElementById("flashcardsPage")
-        .style.display = "block";
+    document.getElementById("flashcardsPage").style.display = "block";
 
     clearNavActive();
-
-    document.getElementById("flashcardsNav")
-        .classList.add("active");
+    document.getElementById("flashcardsNav").classList.add("active");
 
     closeStudyPopup();
 
     backToCreate(false);
 
-}
+    updateEverything();
 
+}
 
 function showSets() {
 
     hideAllPages();
 
-    document.getElementById("setsArea")
-        .style.display = "block";
+    document.getElementById("setsArea").style.display = "block";
 
     clearNavActive();
-
-    document.getElementById("setsNav")
-        .classList.add("active");
+    document.getElementById("setsNav").classList.add("active");
 
     closeStudyPopup();
 
     renderSets();
-
     closeSetPopup();
 
 }
-
 
 function showProgress() {
 
     hideAllPages();
 
-    document.getElementById("flashcardsPage")
-        .style.display = "block";
+    document.getElementById("progressArea").style.display = "block";
 
     clearNavActive();
-
-    document.getElementById("progressNav")
-        .classList.add("active");
+    document.getElementById("progressNav").classList.add("active");
 
     closeStudyPopup();
 
-    backToCreate(false);
-
-    const currentCards = getCurrentCards();
-
-    const total = currentCards.length;
-
-    const known =
-        currentCards.filter(
-            card => card.known
-        ).length;
-
-    const needsReview =
-        total - known;
-
-    const percent =
-        total === 0
-            ? 0
-            : Math.round(
-                (known / total) * 100
-            );
-
-    const set =
-        getCurrentSet();
-
-    alert(
-        "📊 Owly Progress\n\n" +
-        "Current Set: " +
-        (set ? set.name : "General") +
-        "\n\n" +
-        "Cards: " +
-        total +
-        "\n" +
-        "Known: " +
-        known +
-        "\n" +
-        "Needs Review: " +
-        needsReview +
-        "\n\n" +
-        "Progress: " +
-        percent +
-        "%"
-    );
+    renderProgressPage();
 
 }
-
 
 function showSettings() {
 
     hideAllPages();
 
-    document.getElementById("settingsArea")
-        .style.display = "block";
+    document.getElementById("settingsArea").style.display = "block";
 
     clearNavActive();
-
-    document.getElementById("settingsNav")
-        .classList.add("active");
+    document.getElementById("settingsNav").classList.add("active");
 
     closeStudyPopup();
-
-    document.getElementById("studyArea")
-        .style.display = "none";
-
-    document.getElementById("practiceArea")
-        .style.display = "none";
-
-    document.getElementById("studyComplete")
-        .style.display = "none";
-
-    document.getElementById("practiceComplete")
-        .style.display = "none";
 
     loadSettings();
 
 }
 
+/* =====================================================
+   HOME STATS
+===================================================== */
+
+function renderHomeStats() {
+
+    const known = cards.filter(card => card.known).length;
+
+    document.getElementById("homeCardCount").textContent =
+        cards.length;
+
+    document.getElementById("homeKnownCount").textContent =
+        known;
+
+    document.getElementById("homeSetCount").textContent =
+        sets.length;
+
+    document.getElementById("homeStreak").textContent =
+        getStudyStreak();
+
+    document.getElementById("homeSetSubtitle").textContent =
+        sets.length +
+        (sets.length === 1 ? " set" : " sets");
+
+}
 
 /* =====================================================
    HOME SETS
@@ -2925,33 +3374,22 @@ function showSettings() {
 function renderHomeSets() {
 
     const grid =
-        document.getElementById(
-            "homeSetsGrid"
-        );
+        document.getElementById("homeSetsGrid");
 
     grid.innerHTML = "";
 
     if (sets.length === 0) {
 
         grid.innerHTML = `
-
             <div class="emptyHome">
-
-                <h2>
-                    No sets yet 🦉
-                </h2>
-
-                <p>
-                    Create your first set to start studying.
-                </p>
-
+                <h2>No sets yet 🦉</h2>
+                <p>Create your first set to start studying.</p>
                 <button
                     class="primaryButton"
                     onclick="openSetPopup()"
                 >
                     ＋ Create a Set
                 </button>
-
             </div>
         `;
 
@@ -2960,43 +3398,50 @@ function renderHomeSets() {
 
     sets.forEach(set => {
 
-        const cardAmount =
-            cards.filter(
-                card =>
-                    card.setId === set.id
-            ).length;
+        const setCards =
+            cards.filter(card => card.setId === set.id);
+
+        const total = setCards.length;
+
+        const known =
+            setCards.filter(card => card.known).length;
+
+        const percent =
+            total === 0
+                ? 0
+                : Math.round((known / total) * 100);
 
         const div =
             document.createElement("div");
 
-        div.className =
-            "homeSetCard";
+        div.className = "homeSetCard";
 
-        div.onclick = function() {
-
+        div.onclick = () => {
             studySetFromHome(set.id);
-
         };
 
         div.innerHTML = `
-
-            <div class="homeSetIcon">
-                📚
-            </div>
+            <div class="homeSetIcon">📚</div>
 
             <div class="homeSetName">
                 ${escapeHTML(set.name)}
             </div>
 
             <div class="homeSetInfo">
+                ${total}
+                ${total === 1 ? "flashcard" : "flashcards"}
+            </div>
 
-                ${cardAmount}
+            <div class="homeSetProgress">
 
-                ${
-                    cardAmount === 1
-                        ? "flashcard"
-                        : "flashcards"
-                }
+                <div class="progressTrack">
+                    <span style="width:${percent}%"></span>
+                </div>
+
+                <div class="progressText">
+                    <span>Mastery</span>
+                    <span>${percent}%</span>
+                </div>
 
             </div>
 
@@ -3006,22 +3451,18 @@ function renderHomeSets() {
             >
                 Study →
             </button>
-
         `;
 
-        const studyButton =
-            div.querySelector(
-                ".homeStudyButton"
-            );
+        const button =
+            div.querySelector(".homeStudyButton");
 
-        studyButton.onclick =
-            function(event) {
+        button.onclick = event => {
 
-                event.stopPropagation();
+            event.stopPropagation();
 
-                studySetFromHome(set.id);
+            studySetFromHome(set.id);
 
-            };
+        };
 
         grid.appendChild(div);
 
@@ -3029,6 +3470,169 @@ function renderHomeSets() {
 
 }
 
+/* =====================================================
+   HOME ACTIVITY
+===================================================== */
+
+function getStudyHistory() {
+    return loadJSON("owlyStudyHistory", []);
+}
+
+function saveStudyHistory(history) {
+
+    localStorage.setItem(
+        "owlyStudyHistory",
+        JSON.stringify(history.slice(-30))
+    );
+
+}
+
+function addStudyHistory(type, score, total, setName) {
+
+    const history = getStudyHistory();
+
+    history.push({
+        type: type,
+        score: score,
+        total: total,
+        setName: setName,
+        date: new Date().toISOString()
+    });
+
+    saveStudyHistory(history);
+
+    updateStudyDay();
+
+}
+
+function renderActivity() {
+
+    const container =
+        document.getElementById("recentActivity");
+
+    const history =
+        getStudyHistory().slice(-5).reverse();
+
+    if (history.length === 0) {
+
+        container.innerHTML = `
+            <div class="muted">
+                Start studying to see your activity here.
+            </div>
+        `;
+
+        return;
+
+    }
+
+    container.innerHTML = "";
+
+    history.forEach(item => {
+
+        const row =
+            document.createElement("div");
+
+        row.className = "activityItem";
+
+        const date =
+            new Date(item.date);
+
+        row.innerHTML = `
+            <div>
+                <div class="activityMain">
+                    ${escapeHTML(item.type)}
+                    • ${escapeHTML(item.setName)}
+                </div>
+
+                <div class="activitySub">
+                    ${date.toLocaleDateString()}
+                </div>
+            </div>
+
+            <div class="activityScore">
+                ${item.score}/${item.total}
+            </div>
+        `;
+
+        container.appendChild(row);
+
+    });
+
+}
+
+/* =====================================================
+   ACHIEVEMENTS
+===================================================== */
+
+function renderAchievements() {
+
+    const container =
+        document.getElementById("achievementsList");
+
+    const totalCards = cards.length;
+    const knownCards = cards.filter(card => card.known).length;
+    const streak = getStudyStreak();
+
+    const achievements = [
+
+        {
+            icon: "🌱",
+            title: "First Card",
+            unlocked: totalCards >= 1
+        },
+
+        {
+            icon: "📚",
+            title: "10 Flashcards",
+            unlocked: totalCards >= 10
+        },
+
+        {
+            icon: "🧠",
+            title: "10 Known",
+            unlocked: knownCards >= 10
+        },
+
+        {
+            icon: "🔥",
+            title: "3 Day Streak",
+            unlocked: streak >= 3
+        }
+
+    ];
+
+    container.innerHTML = "";
+
+    achievements.forEach(item => {
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "achievement" +
+            (item.unlocked ? "" : " locked");
+
+        div.innerHTML = `
+            <div class="achievementIcon">
+                ${item.icon}
+            </div>
+
+            <div>
+                <strong>
+                    ${item.title}
+                </strong>
+
+                <div class="activitySub">
+                    ${item.unlocked ? "Unlocked!" : "Locked"}
+                </div>
+            </div>
+        `;
+
+        container.appendChild(div);
+
+    });
+
+}
 
 /* =====================================================
    STUDY SET FROM HOME
@@ -3037,10 +3641,7 @@ function renderHomeSets() {
 function studySetFromHome(setId) {
 
     if (
-        !sets.some(
-            set =>
-                set.id === setId
-        )
+        !sets.some(set => set.id === setId)
     ) {
         return;
     }
@@ -3049,8 +3650,7 @@ function studySetFromHome(setId) {
 
     saveSets();
 
-    const currentCards =
-        getCurrentCards();
+    const currentCards = getCurrentCards();
 
     if (currentCards.length === 0) {
 
@@ -3066,15 +3666,40 @@ function studySetFromHome(setId) {
 
     showFlashcards();
 
-    setTimeout(
-        () => {
-            openStudyPopup();
-        },
-        50
-    );
+    setTimeout(() => {
+        openStudyPopup();
+    },50);
 
 }
 
+/* =====================================================
+   QUICK STUDY
+===================================================== */
+
+function quickStudy() {
+
+    const currentCards =
+        getCurrentCards();
+
+    if (currentCards.length === 0) {
+
+        showFlashcards();
+
+        alert(
+            "Add some flashcards to your current set first!"
+        );
+
+        return;
+
+    }
+
+    showFlashcards();
+
+    setTimeout(() => {
+        openStudyPopup();
+    },50);
+
+}
 
 /* =====================================================
    SET CREATION
@@ -3083,9 +3708,7 @@ function studySetFromHome(setId) {
 function openSetPopup() {
 
     const creator =
-        document.getElementById(
-            "setCreator"
-        );
+        document.getElementById("setCreator");
 
     creator.style.display = "block";
 
@@ -3094,56 +3717,44 @@ function openSetPopup() {
         block: "nearest"
     });
 
-    setTimeout(
-        () => {
+    setTimeout(() => {
 
-            document
-                .getElementById("setNameInput")
-                .focus();
+        document
+            .getElementById("setNameInput")
+            .focus();
 
-        },
-        50
-    );
+    },50);
 
 }
-
 
 function closeSetPopup() {
 
-    document.getElementById(
-        "setCreator"
-    ).style.display = "none";
+    document.getElementById("setCreator")
+        .style.display = "none";
 
 }
-
 
 function createSet() {
 
     const input =
-        document.getElementById(
-            "setNameInput"
-        );
+        document.getElementById("setNameInput");
 
     const name =
         input.value.trim();
 
-    if (name === "") {
+    if (!name) {
 
-        alert(
-            "Please enter a set name!"
-        );
+        alert("Please enter a set name!");
 
         return;
 
     }
 
     const alreadyExists =
-        sets.some(
-            set =>
-                String(set.name)
-                    .trim()
-                    .toLowerCase() ===
-                name.toLowerCase()
+        sets.some(set =>
+            String(set.name)
+                .trim()
+                .toLowerCase() === name.toLowerCase()
         );
 
     if (alreadyExists) {
@@ -3157,17 +3768,13 @@ function createSet() {
     }
 
     const newSet = {
-
         id: createId(),
-
         name: name
-
     };
 
     sets.push(newSet);
 
-    selectedSetId =
-        newSet.id;
+    selectedSetId = newSet.id;
 
     saveSets();
 
@@ -3181,12 +3788,11 @@ function createSet() {
 
 }
 
-
 /* =====================================================
    DELETE SET
 ===================================================== */
 
-function deleteSet(id, event) {
+function deleteSet(id,event) {
 
     if (event) {
         event.stopPropagation();
@@ -3203,37 +3809,23 @@ function deleteSet(id, event) {
     }
 
     const set =
-        sets.find(
-            s =>
-                s.id === id
-        );
+        sets.find(s => s.id === id);
 
     if (!set) {
         return;
     }
 
     const cardAmount =
-        cards.filter(
-            card =>
-                card.setId === id
-        ).length;
+        cards.filter(card => card.setId === id).length;
 
     let message =
-        'Delete the set "' +
-        set.name +
-        '"?';
+        `Delete the set "${set.name}"?`;
 
     if (cardAmount > 0) {
 
         message +=
-            "\n\nThis will also delete " +
-            cardAmount +
-            " flashcard" +
-            (
-                cardAmount === 1
-                    ? ""
-                    : "s"
-            ) +
+            `\n\nThis will also delete ${cardAmount} flashcard` +
+            (cardAmount === 1 ? "" : "s") +
             " inside it.";
 
     }
@@ -3243,38 +3835,26 @@ function deleteSet(id, event) {
     }
 
     sets =
-        sets.filter(
-            set =>
-                set.id !== id
-        );
+        sets.filter(set => set.id !== id);
 
     cards =
-        cards.filter(
-            card =>
-                card.setId !== id
-        );
+        cards.filter(card => card.setId !== id);
 
     if (
         selectedSetId === id ||
-        !sets.some(
-            set =>
-                set.id === selectedSetId
-        )
+        !sets.some(set => set.id === selectedSetId)
     ) {
 
-        selectedSetId =
-            sets[0].id;
+        selectedSetId = sets[0].id;
 
     }
 
     saveCards();
-
     saveSets();
 
     updateEverything();
 
 }
-
 
 /* =====================================================
    SELECT SET
@@ -3283,10 +3863,7 @@ function deleteSet(id, event) {
 function selectSet(id) {
 
     if (
-        !sets.some(
-            set =>
-                set.id === id
-        )
+        !sets.some(set => set.id === id)
     ) {
         return;
     }
@@ -3301,7 +3878,6 @@ function selectSet(id) {
 
 }
 
-
 /* =====================================================
    RENDER SETS
 ===================================================== */
@@ -3309,19 +3885,52 @@ function selectSet(id) {
 function renderSets() {
 
     const grid =
-        document.getElementById(
-            "setGrid"
-        );
+        document.getElementById("setGrid");
+
+    const query =
+        (
+            document
+                .getElementById("setSearch")
+                ?.value ||
+            ""
+        )
+        .trim()
+        .toLowerCase();
 
     grid.innerHTML = "";
 
-    sets.forEach(set => {
+    const visibleSets =
+        sets.filter(set =>
+            set.name.toLowerCase().includes(query)
+        );
+
+    if (visibleSets.length === 0) {
+
+        grid.innerHTML = `
+            <div class="emptyHome">
+                <h2>No matching sets</h2>
+                <p>Try a different search.</p>
+            </div>
+        `;
+
+        return;
+
+    }
+
+    visibleSets.forEach(set => {
 
         const cardAmount =
-            cards.filter(
-                card =>
-                    card.setId === set.id
-            ).length;
+            cards.filter(card => card.setId === set.id);
+
+        const known =
+            cardAmount.filter(card => card.known).length;
+
+        const percent =
+            cardAmount.length === 0
+                ? 0
+                : Math.round(
+                    known / cardAmount.length * 100
+                );
 
         const div =
             document.createElement("div");
@@ -3356,37 +3965,36 @@ function renderSets() {
             </div>
 
             <div class="setInfo">
-
-                ${cardAmount}
-
-                ${
-                    cardAmount === 1
-                        ? "flashcard"
-                        : "flashcards"
-                }
-
+                ${cardAmount.length}
+                ${cardAmount.length === 1 ? "flashcard" : "flashcards"}
             </div>
 
+            <div class="homeSetProgress">
+
+                <div class="progressTrack">
+                    <span style="width:${percent}%"></span>
+                </div>
+
+                <div class="progressText">
+                    <span>Mastery</span>
+                    <span>${percent}%</span>
+                </div>
+
+            </div>
         `;
 
         const deleteButton =
-            div.querySelector(
-                ".deleteSet"
-            );
+            div.querySelector(".deleteSet");
 
         deleteButton.onclick =
             event =>
-                deleteSet(
-                    set.id,
-                    event
-                );
+                deleteSet(set.id,event);
 
         grid.appendChild(div);
 
     });
 
 }
-
 
 /* =====================================================
    ESCAPE HTML
@@ -3404,7 +4012,6 @@ function escapeHTML(text) {
 
 }
 
-
 /* =====================================================
    UPDATE COUNTS
 ===================================================== */
@@ -3417,59 +4024,69 @@ function updateCount() {
     const total =
         cards.length;
 
-    document.getElementById(
-        "cardCount"
-    ).textContent =
-        currentCards.length +
-        (
-            currentCards.length === 1
-                ? " flashcard"
-                : " flashcards"
-        ) +
-        " in this set";
+    document.getElementById("cardCount")
+        .textContent =
+            currentCards.length +
+            (
+                currentCards.length === 1
+                    ? " flashcard"
+                    : " flashcards"
+            ) +
+            " in this set";
 
-    document.getElementById(
-        "rightCardCount"
-    ).textContent =
-        total;
+    document.getElementById("rightCardCount")
+        .textContent =
+            total;
 
-    document.getElementById(
-        "rightSetCount"
-    ).textContent =
-        currentCards.length;
+    document.getElementById("rightSetCount")
+        .textContent =
+            currentCards.length;
 
     const set =
         getCurrentSet();
 
     const setName =
-        set
-            ? set.name
-            : "General";
+        set ? set.name : "General";
 
-    document.getElementById(
-        "rightSetName"
-    ).textContent =
-        setName;
+    document.getElementById("rightSetName")
+        .textContent =
+            setName;
 
-    document.getElementById(
-        "selectedSetName"
-    ).textContent =
-        setName;
+    document.getElementById("selectedSetName")
+        .textContent =
+            setName;
 
-    document.getElementById(
-        "selectedSetCount"
-    ).textContent =
-        currentCards.length +
-        (
-            currentCards.length === 1
-                ? " card"
-                : " cards"
-        );
+    document.getElementById("selectedSetCount")
+        .textContent =
+            currentCards.length +
+            (
+                currentCards.length === 1
+                    ? " card"
+                    : " cards"
+            );
+
+    const known =
+        currentCards.filter(card => card.known).length;
+
+    const percent =
+        currentCards.length === 0
+            ? 0
+            : Math.round(
+                known / currentCards.length * 100
+            );
+
+    document.getElementById("rightSetPercent")
+        .textContent =
+            percent + "%";
+
+    document.getElementById("rightSetProgress")
+        .style.width =
+            percent + "%";
 
     showCardList();
+    updateRightRail();
 
 }
-
 
 /* =====================================================
    ADD CARD
@@ -3478,23 +4095,16 @@ function updateCount() {
 function addCard() {
 
     const question =
-        document.getElementById(
-            "question"
-        )
-        .value
-        .trim();
+        document.getElementById("question")
+            .value
+            .trim();
 
     const answer =
-        document.getElementById(
-            "answer"
-        )
-        .value
-        .trim();
+        document.getElementById("answer")
+            .value
+            .trim();
 
-    if (
-        question === "" ||
-        answer === ""
-    ) {
+    if (!question || !answer) {
 
         alert(
             "Please enter both a question and an answer!"
@@ -3524,22 +4134,14 @@ function addCard() {
 
     saveCards();
 
-    document.getElementById(
-        "question"
-    ).value = "";
-
-    document.getElementById(
-        "answer"
-    ).value = "";
+    document.getElementById("question").value = "";
+    document.getElementById("answer").value = "";
 
     updateEverything();
 
-    document.getElementById(
-        "question"
-    ).focus();
+    document.getElementById("question").focus();
 
 }
-
 
 /* =====================================================
    FOCUS QUESTION
@@ -3549,19 +4151,15 @@ function focusQuestion() {
 
     showFlashcards();
 
-    setTimeout(
-        () => {
+    setTimeout(() => {
 
-            document
-                .getElementById("question")
-                .focus();
+        document
+            .getElementById("question")
+            .focus();
 
-        },
-        50
-    );
+    },50);
 
 }
-
 
 /* =====================================================
    CARD LIST
@@ -3570,9 +4168,7 @@ function focusQuestion() {
 function showCardList() {
 
     const list =
-        document.getElementById(
-            "cardList"
-        );
+        document.getElementById("cardList");
 
     list.innerHTML = "";
 
@@ -3582,18 +4178,14 @@ function showCardList() {
     if (currentCards.length === 0) {
 
         list.innerHTML = `
-
             <p style="
                 text-align:center;
                 color:#8195bd;
                 padding:20px;
             ">
-
                 No flashcards in this set yet.
                 Create your first one above! 🦉
-
             </p>
-
         `;
 
         return;
@@ -3604,9 +4196,6 @@ function showCardList() {
 
         const originalIndex =
             cards.indexOf(card);
-
-        const cardDiv =
-            document.createElement("div");
 
         const paragraph =
             document.createElement("p");
@@ -3623,43 +4212,26 @@ function showCardList() {
         deleteButton.textContent =
             "Delete";
 
-        deleteButton.type =
-            "button";
+        deleteButton.type = "button";
 
         deleteButton.onclick =
-            function() {
-
-                deleteCard(
-                    originalIndex
-                );
-
-            };
+            () => deleteCard(originalIndex);
 
         paragraph.appendChild(strong);
 
         paragraph.appendChild(
             document.createTextNode(
-                " → " +
-                card.answer
+                " → " + card.answer
             )
         );
 
-        paragraph.appendChild(
-            deleteButton
-        );
+        paragraph.appendChild(deleteButton);
 
-        cardDiv.appendChild(
-            paragraph
-        );
-
-        list.appendChild(
-            cardDiv
-        );
+        list.appendChild(paragraph);
 
     });
 
 }
-
 
 /* =====================================================
    DELETE CARD
@@ -3674,10 +4246,7 @@ function deleteCard(index) {
         return;
     }
 
-    cards.splice(
-        index,
-        1
-    );
+    cards.splice(index,1);
 
     saveCards();
 
@@ -3686,7 +4255,6 @@ function deleteCard(index) {
     updateEverything();
 
 }
-
 
 /* =====================================================
    STUDY POPUP
@@ -3711,34 +4279,21 @@ function openStudyPopup() {
         getCurrentSet();
 
     const modal =
-        document.getElementById(
-            "studyModal"
-        );
+        document.getElementById("studyModal");
 
-    document.getElementById(
-        "studyChooserDescription"
-    ).textContent =
-        'Studying "' +
-        (set ? set.name : "General") +
-        '" • " +
-        currentCards.length +
-        (
-            currentCards.length === 1
-                ? " card"
-                : " cards"
-        );
+    document.getElementById("studyChooserDescription")
+        .textContent =
+            `Studying "${set ? set.name : "General"}" • ${currentCards.length} ` +
+            `${currentCards.length === 1 ? "card" : "cards"}`;
 
     const savedKnow =
-        localStorage.getItem(
-            "owlyKnowDontKnow"
-        );
+        localStorage.getItem("owlyKnowDontKnow");
 
-    document.getElementById(
-        "knowDontKnowToggle"
-    ).checked =
-        savedKnow === null
-            ? true
-            : savedKnow === "true";
+    document.getElementById("knowDontKnowToggle")
+        .checked =
+            savedKnow === null
+                ? true
+                : savedKnow === "true";
 
     modal.classList.add("open");
 
@@ -3749,13 +4304,10 @@ function openStudyPopup() {
 
 }
 
-
 function closeStudyPopup() {
 
     const modal =
-        document.getElementById(
-            "studyModal"
-        );
+        document.getElementById("studyModal");
 
     if (!modal) {
         return;
@@ -3770,7 +4322,6 @@ function closeStudyPopup() {
 
 }
 
-
 /* =====================================================
    STUDY MODES
 ===================================================== */
@@ -3784,16 +4335,15 @@ function Normal() {
     studyMode = "normal";
 
     useKnowDontKnow =
-        document.getElementById(
-            "knowDontKnowToggle"
-        ).checked;
+        document
+            .getElementById("knowDontKnowToggle")
+            .checked;
 
     saveStudyPreference();
 
     startStudying();
 
 }
-
 
 function shuffle() {
 
@@ -3804,16 +4354,15 @@ function shuffle() {
     studyMode = "shuffle";
 
     useKnowDontKnow =
-        document.getElementById(
-            "knowDontKnowToggle"
-        ).checked;
+        document
+            .getElementById("knowDontKnowToggle")
+            .checked;
 
     saveStudyPreference();
 
     startStudying();
 
 }
-
 
 function saveStudyPreference() {
 
@@ -3824,7 +4373,6 @@ function saveStudyPreference() {
 
 }
 
-
 /* =====================================================
    RESET STUDY STATE
 ===================================================== */
@@ -3832,22 +4380,16 @@ function saveStudyPreference() {
 function resetStudyState() {
 
     currentCard = 0;
-
     correctCards = 0;
-
     reviewCards = [];
-
     shuffleOrder = [];
-
     showingAnswer = false;
-
     reviewMode = false;
 
     answeredStudyCards =
         new Set();
 
 }
-
 
 /* =====================================================
    START STUDYING
@@ -3869,37 +4411,27 @@ function startStudying() {
     }
 
     reviewMode = false;
-
-    answeredStudyCards =
-        new Set();
+    answeredStudyCards = new Set();
 
     currentCard = 0;
-
     correctCards = 0;
-
     reviewCards = [];
-
     showingAnswer = false;
 
-    document.getElementById(
-        "studyComplete"
-    ).style.display = "none";
+    document.getElementById("studyComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceComplete"
-    ).style.display = "none";
+    document.getElementById("practiceComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "createArea"
-    ).style.display = "none";
+    document.getElementById("createArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceArea"
-    ).style.display = "none";
+    document.getElementById("practiceArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyArea"
-    ).style.display = "block";
+    document.getElementById("studyArea")
+        .style.display = "block";
 
     if (shuffleCards) {
 
@@ -3933,49 +4465,49 @@ function startStudying() {
 
     }
 
-    document.getElementById(
-        "studyTitle"
-    ).textContent =
-        shuffleCards
-            ? "🔀 Shuffle Study"
-            : "📚 Normal Study";
+    document.getElementById("studyTitle")
+        .textContent =
+            shuffleCards
+                ? "🔀 Shuffle Study"
+                : "📚 Normal Study";
+
+    document.getElementById("studyModeBadge")
+        .textContent =
+            shuffleCards ? "SHUFFLE" : "NORMAL";
 
     updateKnowControls();
 
-    document.getElementById(
-        "mainContent"
-    ).scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    document.getElementById("mainContent")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
 
     showCard();
 
+    updateStudyDay();
+
 }
 
-
 /* =====================================================
-   KNOW CONTROL VISIBILITY
+   KNOW CONTROLS
 ===================================================== */
 
 function updateKnowControls() {
 
-    document.getElementById(
-        "knowButton"
-    ).style.display =
-        useKnowDontKnow
-            ? "inline-block"
-            : "none";
+    document.getElementById("knowButton")
+        .style.display =
+            useKnowDontKnow
+                ? "inline-block"
+                : "none";
 
-    document.getElementById(
-        "dontKnowButton"
-    ).style.display =
-        useKnowDontKnow
-            ? "inline-block"
-            : "none";
+    document.getElementById("dontKnowButton")
+        .style.display =
+            useKnowDontKnow
+                ? "inline-block"
+                : "none";
 
 }
-
 
 /* =====================================================
    SHOW CARD
@@ -4024,31 +4556,22 @@ function showCard() {
 
     }
 
-    document.getElementById(
-        "flashcardFront"
-    ).textContent =
-        card.question;
+    document.getElementById("flashcardFront")
+        .textContent =
+            card.question;
 
-    document.getElementById(
-        "flashcardBack"
-    ).textContent =
-        card.answer;
+    document.getElementById("flashcardBack")
+        .textContent =
+            card.answer;
 
-    document.querySelector(
-        ".flashcard-inner"
-    ).classList.remove(
-        "flipped"
-    );
+    document.querySelector(".flashcard-inner")
+        .classList.remove("flipped");
 
     showingAnswer = false;
 
-    document.getElementById(
-        "progress"
-    ).textContent =
-        "Card " +
-        (currentCard + 1) +
-        " of " +
-        currentCards.length;
+    document.getElementById("progress")
+        .textContent =
+            `Card ${currentCard + 1} of ${currentCards.length}`;
 
     const progressPercent =
         currentCards.length === 0
@@ -4058,13 +4581,11 @@ function showCard() {
                 currentCards.length
             ) * 100;
 
-    document.getElementById(
-        "progressFill"
-    ).style.width =
-        progressPercent + "%";
+    document.getElementById("progressFill")
+        .style.width =
+            progressPercent + "%";
 
 }
-
 
 /* =====================================================
    FLIP
@@ -4073,37 +4594,28 @@ function showCard() {
 function flipCard() {
 
     const inner =
-        document.querySelector(
-            ".flashcard-inner"
-        );
+        document.querySelector(".flashcard-inner");
 
     if (!inner) {
         return;
     }
 
-    inner.classList.toggle(
-        "flipped"
-    );
+    inner.classList.toggle("flipped");
 
     showingAnswer =
-        inner.classList.contains(
-            "flipped"
-        );
+        inner.classList.contains("flipped");
 
 }
 
-
 /* =====================================================
-   GET CURRENT STUDY CARD
+   CURRENT STUDY CARD
 ===================================================== */
 
 function getCurrentStudyCard() {
 
     if (reviewMode) {
 
-        return reviewCards[
-            currentCard
-        ];
+        return reviewCards[currentCard];
 
     }
 
@@ -4115,7 +4627,6 @@ function getCurrentStudyCard() {
         : currentCards[currentCard];
 
 }
-
 
 /* =====================================================
    KNOW
@@ -4131,9 +4642,7 @@ function knowCard() {
     }
 
     if (
-        answeredStudyCards.has(
-            card.id
-        )
+        answeredStudyCards.has(card.id)
     ) {
 
         nextCard();
@@ -4142,9 +4651,7 @@ function knowCard() {
 
     }
 
-    answeredStudyCards.add(
-        card.id
-    );
+    answeredStudyCards.add(card.id);
 
     card.known = true;
 
@@ -4176,7 +4683,6 @@ function knowCard() {
 
 }
 
-
 /* =====================================================
    DON'T KNOW
 ===================================================== */
@@ -4191,9 +4697,7 @@ function dontKnowCard() {
     }
 
     if (
-        answeredStudyCards.has(
-            card.id
-        )
+        answeredStudyCards.has(card.id)
     ) {
 
         nextCard();
@@ -4202,9 +4706,7 @@ function dontKnowCard() {
 
     }
 
-    answeredStudyCards.add(
-        card.id
-    );
+    answeredStudyCards.add(card.id);
 
     card.known = false;
 
@@ -4232,8 +4734,7 @@ function dontKnowCard() {
 
     if (
         !reviewCards.some(
-            missed =>
-                missed.id === card.id
+            missed => missed.id === card.id
         )
     ) {
 
@@ -4244,7 +4745,6 @@ function dontKnowCard() {
     nextCard();
 
 }
-
 
 /* =====================================================
    NEXT
@@ -4300,7 +4800,6 @@ function nextCard() {
 
 }
 
-
 /* =====================================================
    PREVIOUS
 ===================================================== */
@@ -4327,7 +4826,6 @@ function previousCard() {
 
 }
 
-
 /* =====================================================
    STUDY COMPLETE
 ===================================================== */
@@ -4340,50 +4838,35 @@ function showStudyComplete() {
     const total =
         currentCards.length;
 
-    document.getElementById(
-        "studyArea"
-    ).style.display = "none";
+    document.getElementById("studyArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceArea"
-    ).style.display = "none";
+    document.getElementById("practiceArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceComplete"
-    ).style.display = "none";
+    document.getElementById("practiceComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyComplete"
-    ).style.display = "block";
+    document.getElementById("studyComplete")
+        .style.display = "block";
 
     const percent =
         total === 0
             ? 0
             : Math.round(
-                (correctCards / total) * 100
+                correctCards / total * 100
             );
 
-    document.getElementById(
-        "scoreText"
-    ).textContent =
-        "You knew " +
-        correctCards +
-        " out of " +
-        total +
-        " cards!";
+    document.getElementById("scoreText")
+        .textContent =
+            `You knew ${correctCards} out of ${total} cards!`;
 
-    document.getElementById(
-        "reviewText"
-    ).textContent =
-        (
-            100 - percent
-        ) +
-        "% remaining to review.";
+    document.getElementById("reviewText")
+        .textContent =
+            `${percent}% mastered this session.`;
 
     const missedButton =
-        document.getElementById(
-            "missedStudyButton"
-        );
+        document.getElementById("missedStudyButton");
 
     if (reviewCards.length > 0) {
 
@@ -4391,9 +4874,7 @@ function showStudyComplete() {
             "inline-block";
 
         missedButton.textContent =
-            "🔁 Study " +
-            reviewCards.length +
-            " Missed Card" +
+            `🔁 Study ${reviewCards.length} Missed Card` +
             (
                 reviewCards.length === 1
                     ? ""
@@ -4407,11 +4888,22 @@ function showStudyComplete() {
 
     }
 
+    const set =
+        getCurrentSet();
+
+    addStudyHistory(
+        shuffleCards ? "Shuffle Study" : "Normal Study",
+        correctCards,
+        total,
+        set ? set.name : "General"
+    );
+
+    updateEverything();
+
 }
 
-
 /* =====================================================
-   STUDY MISSED CARDS
+   STUDY MISSED
 ===================================================== */
 
 function studyMissedCards() {
@@ -4420,16 +4912,12 @@ function studyMissedCards() {
         return;
     }
 
-    // Make a copy so the original missed-card list
-    // is not accidentally mutated during review.
     reviewCards =
         reviewCards
-            .map(
-                card =>
-                    cards.find(
-                        item =>
-                            item.id === card.id
-                    )
+            .map(card =>
+                cards.find(
+                    item => item.id === card.id
+                )
             )
             .filter(Boolean);
 
@@ -4447,44 +4935,37 @@ function studyMissedCards() {
         new Set();
 
     currentCard = 0;
-
     correctCards = 0;
-
     shuffleCards = false;
 
-    useKnowDontKnow = true;
+    document.getElementById("studyComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyComplete"
-    ).style.display = "none";
+    document.getElementById("practiceComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceComplete"
-    ).style.display = "none";
+    document.getElementById("createArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "createArea"
-    ).style.display = "none";
+    document.getElementById("practiceArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceArea"
-    ).style.display = "none";
+    document.getElementById("studyArea")
+        .style.display = "block";
 
-    document.getElementById(
-        "studyArea"
-    ).style.display = "block";
+    document.getElementById("studyTitle")
+        .textContent =
+            "🔁 Review Missed Cards";
 
-    document.getElementById(
-        "studyTitle"
-    ).textContent =
-        "🔁 Review Missed Cards";
+    document.getElementById("studyModeBadge")
+        .textContent =
+            "REVIEW";
 
     updateKnowControls();
 
     showReviewCard();
 
 }
-
 
 /* =====================================================
    SHOW REVIEW CARD
@@ -4525,48 +5006,33 @@ function showReviewCard() {
 
     }
 
-    document.getElementById(
-        "flashcardFront"
-    ).textContent =
-        card.question;
+    document.getElementById("flashcardFront")
+        .textContent =
+            card.question;
 
-    document.getElementById(
-        "flashcardBack"
-    ).textContent =
-        card.answer;
+    document.getElementById("flashcardBack")
+        .textContent =
+            card.answer;
 
-    document.querySelector(
-        ".flashcard-inner"
-    ).classList.remove(
-        "flipped"
-    );
+    document.querySelector(".flashcard-inner")
+        .classList.remove("flipped");
 
     showingAnswer = false;
 
-    document.getElementById(
-        "progress"
-    ).textContent =
-        "Review Card " +
-        (currentCard + 1) +
-        " of " +
-        reviewCards.length;
+    document.getElementById("progress")
+        .textContent =
+            `Review Card ${currentCard + 1} of ${reviewCards.length}`;
 
-    const percent =
-        (
-            currentCard /
-            reviewCards.length
-        ) * 100;
-
-    document.getElementById(
-        "progressFill"
-    ).style.width =
-        percent + "%";
+    document.getElementById("progressFill")
+        .style.width =
+            (
+                currentCard / reviewCards.length
+            ) * 100 + "%";
 
 }
 
-
 /* =====================================================
-   FINISH MISSED REVIEW
+   FINISH REVIEW
 ===================================================== */
 
 function finishMissedReview() {
@@ -4581,21 +5047,21 @@ function finishMissedReview() {
 
     reviewCards = [];
 
-    alert(
-        "Nice! You finished reviewing " +
-        count +
-        " missed card" +
-        (count === 1 ? "" : "s") +
-        ". 🦉"
-    );
-
     backToCreate();
+
+    setTimeout(() => {
+
+        alert(
+            `Nice! You finished reviewing ${count} missed ` +
+            `card${count === 1 ? "" : "s"}. 🦉`
+        );
+
+    },100);
 
 }
 
-
 /* =====================================================
-   PRACTICE MODE
+   PRACTICE
 ===================================================== */
 
 function startPracticeMode() {
@@ -4617,15 +5083,14 @@ function startPracticeMode() {
 
     hideAllPages();
 
-    document.getElementById(
-        "flashcardsPage"
-    ).style.display = "block";
+    document.getElementById("flashcardsPage")
+        .style.display =
+            "block";
 
     clearNavActive();
 
-    document.getElementById(
-        "flashcardsNav"
-    ).classList.add("active");
+    document.getElementById("flashcardsNav")
+        .classList.add("active");
 
     reviewMode = false;
 
@@ -4633,9 +5098,7 @@ function startPracticeMode() {
         currentCards.slice();
 
     practiceCardIndex = 0;
-
     practiceCorrect = 0;
-
     practiceAnswered = false;
 
     for (
@@ -4659,71 +5122,53 @@ function startPracticeMode() {
 
     }
 
-    document.getElementById(
-        "createArea"
-    ).style.display = "none";
+    document.getElementById("createArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyArea"
-    ).style.display = "none";
+    document.getElementById("studyArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyComplete"
-    ).style.display = "none";
+    document.getElementById("studyComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceComplete"
-    ).style.display = "none";
+    document.getElementById("practiceComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceArea"
-    ).style.display = "block";
+    document.getElementById("practiceArea")
+        .style.display = "block";
 
-    document.getElementById(
-        "mainContent"
-    ).scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
+    document.getElementById("mainContent")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
 
     showPracticeQuestion();
 
 }
 
-
 /* =====================================================
-   CREATE MULTIPLE CHOICE
+   PRACTICE CHOICES
 ===================================================== */
 
-function createPracticeChoices(
-    correctCard
-) {
+function createPracticeChoices(correctCard) {
 
     const correctAnswer =
-        String(
-            correctCard.answer
-        ).trim();
+        String(correctCard.answer).trim();
 
     const otherAnswers =
         cards
-            .filter(
-                card =>
-                    card.setId === selectedSetId &&
-                    card.id !== correctCard.id &&
-                    String(card.answer).trim() !==
-                        correctAnswer
+            .filter(card =>
+                card.setId === selectedSetId &&
+                card.id !== correctCard.id &&
+                String(card.answer).trim() !== correctAnswer
             )
-            .map(
-                card =>
-                    String(card.answer).trim()
+            .map(card =>
+                String(card.answer).trim()
             );
 
     const uniqueOthers =
-        [
-            ...new Set(
-                otherAnswers
-            )
-        ];
+        [...new Set(otherAnswers)];
 
     for (
         let i = uniqueOthers.length - 1;
@@ -4746,10 +5191,10 @@ function createPracticeChoices(
 
     }
 
-    const choices =
+    let choices =
         [
             correctAnswer,
-            ...uniqueOthers.slice(0, 3)
+            ...uniqueOthers.slice(0,3)
         ];
 
     const fallbacks = [
@@ -4758,17 +5203,13 @@ function createPracticeChoices(
         "No additional answer"
     ];
 
-    for (
-        const fallback of fallbacks
-    ) {
+    for (const fallback of fallbacks) {
 
         if (choices.length >= 4) {
             break;
         }
 
-        if (!choices.includes(fallback)) {
-            choices.push(fallback);
-        }
+        choices.push(fallback);
 
     }
 
@@ -4797,9 +5238,8 @@ function createPracticeChoices(
 
 }
 
-
 /* =====================================================
-   SHOW PRACTICE QUESTION
+   PRACTICE QUESTION
 ===================================================== */
 
 function showPracticeQuestion() {
@@ -4818,103 +5258,71 @@ function showPracticeQuestion() {
     practiceAnswered = false;
 
     const card =
-        practiceCards[
-            practiceCardIndex
-        ];
+        practiceCards[practiceCardIndex];
 
-    document.getElementById(
-        "practiceProgress"
-    ).textContent =
-        "Question " +
-        (practiceCardIndex + 1) +
-        " of " +
-        practiceCards.length;
+    document.getElementById("practiceProgress")
+        .textContent =
+            `Question ${practiceCardIndex + 1} of ${practiceCards.length}`;
 
-    const percent =
-        practiceCards.length === 0
-            ? 0
-            : (
+    document.getElementById("practiceProgressFill")
+        .style.width =
+            (
                 practiceCardIndex /
                 practiceCards.length
-            ) * 100;
+            ) * 100 + "%";
 
-    document.getElementById(
-        "practiceProgressFill"
-    ).style.width =
-        percent + "%";
+    document.getElementById("practiceQuestion")
+        .textContent =
+            card.question;
 
-    document.getElementById(
-        "practiceQuestion"
-    ).textContent =
-        card.question;
+    document.getElementById("practiceFeedback")
+        .textContent = "";
 
-    document.getElementById(
-        "practiceFeedback"
-    ).textContent = "";
+    document.getElementById("practiceFeedback")
+        .className = "";
 
-    document.getElementById(
-        "practiceFeedback"
-    ).className = "";
-
-    document.getElementById(
-        "nextPracticeButton"
-    ).style.display = "none";
+    document.getElementById("nextPracticeButton")
+        .style.display = "none";
 
     const choicesContainer =
-        document.getElementById(
-            "practiceChoices"
-        );
+        document.getElementById("practiceChoices");
 
     choicesContainer.innerHTML = "";
 
     const choices =
-        createPracticeChoices(
-            card
+        createPracticeChoices(card);
+
+    choices.forEach(choice => {
+
+        const button =
+            document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+            "practiceChoice";
+
+        button.textContent =
+            choice;
+
+        button.addEventListener(
+            "click",
+            () =>
+                selectPracticeAnswer(
+                    choice,
+                    card.answer,
+                    button
+                )
         );
 
-    choices.forEach(
-        choice => {
+        choicesContainer.appendChild(button);
 
-            const button =
-                document.createElement(
-                    "button"
-                );
-
-            button.type = "button";
-
-            button.className =
-                "practiceChoice";
-
-            button.textContent =
-                choice;
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    selectPracticeAnswer(
-                        choice,
-                        String(
-                            card.answer
-                        ).trim(),
-                        button
-                    );
-
-                }
-            );
-
-            choicesContainer.appendChild(
-                button
-            );
-
-        }
-    );
+    });
 
 }
 
-
 /* =====================================================
-   SELECT PRACTICE ANSWER
+   SELECT PRACTICE
 ===================================================== */
 
 function selectPracticeAnswer(
@@ -4930,19 +5338,13 @@ function selectPracticeAnswer(
     practiceAnswered = true;
 
     const card =
-        practiceCards[
-            practiceCardIndex
-        ];
+        practiceCards[practiceCardIndex];
 
     const selected =
-        String(
-            selectedAnswer
-        ).trim();
+        String(selectedAnswer).trim();
 
     const correct =
-        String(
-            correctAnswer
-        ).trim();
+        String(correctAnswer).trim();
 
     const isCorrect =
         selected === correct;
@@ -4955,25 +5357,24 @@ function selectPracticeAnswer(
             "#practiceChoices .practiceChoice"
         );
 
-    buttons.forEach(
-        button => {
+    buttons.forEach(button => {
 
-            button.disabled = true;
+        button.disabled = true;
 
-            if (
-                String(
-                    button.textContent
-                ).trim() === correct
-            ) {
+        if (
+            button.textContent.trim() === correct
+        ) {
 
-                button.classList.add(
-                    "correct"
-                );
-
-            }
+            button.classList.add("correct");
 
         }
-    );
+
+    });
+
+    const feedback =
+        document.getElementById(
+            "practiceFeedback"
+        );
 
     if (isCorrect) {
 
@@ -4984,14 +5385,7 @@ function selectPracticeAnswer(
 
         card.known = true;
 
-        selectedButton.classList.add(
-            "correct"
-        );
-
-        const feedback =
-            document.getElementById(
-                "practiceFeedback"
-            );
+        selectedButton.classList.add("correct");
 
         feedback.textContent =
             "✅ Correct! Nice job!";
@@ -5003,14 +5397,7 @@ function selectPracticeAnswer(
 
         card.known = false;
 
-        selectedButton.classList.add(
-            "wrong"
-        );
-
-        const feedback =
-            document.getElementById(
-                "practiceFeedback"
-            );
+        selectedButton.classList.add("wrong");
 
         feedback.textContent =
             "❌ Not quite. The correct answer is: " +
@@ -5023,13 +5410,13 @@ function selectPracticeAnswer(
 
     saveCards();
 
-    document.getElementById(
-        "nextPracticeButton"
-    ).style.display =
-        "inline-block";
+    document.getElementById("nextPracticeButton")
+        .style.display =
+            "inline-block";
+
+    updateEverything();
 
 }
-
 
 /* =====================================================
    NEXT PRACTICE
@@ -5047,28 +5434,23 @@ function nextPracticeCard() {
 
 }
 
-
 /* =====================================================
    PRACTICE COMPLETE
 ===================================================== */
 
 function showPracticeComplete() {
 
-    document.getElementById(
-        "practiceArea"
-    ).style.display = "none";
+    document.getElementById("practiceArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyArea"
-    ).style.display = "none";
+    document.getElementById("studyArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyComplete"
-    ).style.display = "none";
+    document.getElementById("studyComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceComplete"
-    ).style.display = "block";
+    document.getElementById("practiceComplete")
+        .style.display = "block";
 
     const total =
         practiceCards.length;
@@ -5077,29 +5459,32 @@ function showPracticeComplete() {
         total === 0
             ? 0
             : Math.round(
-                (
-                    practiceCorrect /
-                    total
-                ) * 100
+                practiceCorrect /
+                total *
+                100
             );
 
-    document.getElementById(
-        "practiceScoreText"
-    ).textContent =
-        "You got " +
-        practiceCorrect +
-        " out of " +
-        total +
-        " questions correct!";
+    document.getElementById("practiceScoreText")
+        .textContent =
+            `You got ${practiceCorrect} out of ${total} questions correct!`;
 
-    document.getElementById(
-        "practiceReviewText"
-    ).textContent =
-        percent +
-        "% correct. Keep practicing! 🦉";
+    document.getElementById("practiceReviewText")
+        .textContent =
+            `${percent}% correct. Keep practicing! 🦉`;
+
+    const set =
+        getCurrentSet();
+
+    addStudyHistory(
+        "Practice",
+        practiceCorrect,
+        total,
+        set ? set.name : "General"
+    );
+
+    updateEverything();
 
 }
-
 
 /* =====================================================
    STUDY AGAIN
@@ -5111,13 +5496,11 @@ function startStudyingAgain() {
         loadKnowDontKnowPreference();
 
     shuffleCards = false;
-
     studyMode = "normal";
 
     startStudying();
 
 }
-
 
 /* =====================================================
    BACK TO CREATE
@@ -5129,32 +5512,26 @@ function backToCreate(
 
     reviewMode = false;
 
-    document.getElementById(
-        "studyComplete"
-    ).style.display = "none";
+    document.getElementById("studyComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceComplete"
-    ).style.display = "none";
+    document.getElementById("practiceComplete")
+        .style.display = "none";
 
-    document.getElementById(
-        "studyArea"
-    ).style.display = "none";
+    document.getElementById("studyArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "practiceArea"
-    ).style.display = "none";
+    document.getElementById("practiceArea")
+        .style.display = "none";
 
-    document.getElementById(
-        "createArea"
-    ).style.display = "block";
+    document.getElementById("createArea")
+        .style.display = "block";
 
     if (updateEverythingNow) {
         updateEverything();
     }
 
 }
-
 
 /* =====================================================
    UPDATE EVERYTHING
@@ -5168,8 +5545,254 @@ function updateEverything() {
 
     renderHomeSets();
 
+    renderHomeStats();
+
+    renderActivity();
+
+    renderAchievements();
+
+    updateRightRail();
+
 }
 
+/* =====================================================
+   PROGRESS PAGE
+===================================================== */
+
+function renderProgressPage() {
+
+    const known =
+        cards.filter(card => card.known).length;
+
+    const review =
+        cards.length - known;
+
+    const mastery =
+        cards.length === 0
+            ? 0
+            : Math.round(
+                known / cards.length * 100
+            );
+
+    document.getElementById("overallMastery")
+        .textContent =
+            mastery + "%";
+
+    document.getElementById("overallKnown")
+        .textContent =
+            known;
+
+    document.getElementById("overallReview")
+        .textContent =
+            review;
+
+    const container =
+        document.getElementById("setProgressList");
+
+    container.innerHTML = "";
+
+    sets.forEach(set => {
+
+        const setCards =
+            cards.filter(card => card.setId === set.id);
+
+        const setKnown =
+            setCards.filter(card => card.known).length;
+
+        const percent =
+            setCards.length === 0
+                ? 0
+                : Math.round(
+                    setKnown / setCards.length * 100
+                );
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "setProgressRow";
+
+        row.innerHTML = `
+            <div class="setProgressTop">
+
+                <div class="setProgressName">
+                    ${escapeHTML(set.name)}
+                </div>
+
+                <div class="setProgressPercent">
+                    ${percent}%
+                </div>
+
+            </div>
+
+            <div
+                class="rightText"
+                style="margin:5px 0 8px;"
+            >
+                ${setKnown} of ${setCards.length} cards mastered
+            </div>
+
+            <div class="progressTrack">
+                <span style="width:${percent}%"></span>
+            </div>
+        `;
+
+        container.appendChild(row);
+
+    });
+
+    if (sets.length === 0) {
+
+        container.innerHTML = `
+            <div class="muted">
+                Create a set to start tracking progress.
+            </div>
+        `;
+
+    }
+
+}
+
+/* =====================================================
+   STUDY STREAK
+===================================================== */
+
+function getStudyDates() {
+
+    const history =
+        getStudyHistory();
+
+    return [
+        ...new Set(
+            history.map(item =>
+                new Date(item.date)
+                    .toISOString()
+                    .slice(0,10)
+            )
+        )
+    ].sort();
+
+}
+
+function getStudyStreak() {
+
+    const dates =
+        getStudyDates();
+
+    if (dates.length === 0) {
+        return 0;
+    }
+
+    const today =
+        new Date();
+
+    const todayString =
+        today.toISOString().slice(0,10);
+
+    let streak = 0;
+
+    let cursor =
+        new Date(todayString);
+
+    const dateSet =
+        new Set(dates);
+
+    while (true) {
+
+        const key =
+            cursor.toISOString().slice(0,10);
+
+        if (!dateSet.has(key)) {
+            break;
+        }
+
+        streak++;
+
+        cursor.setUTCDate(
+            cursor.getUTCDate() - 1
+        );
+
+    }
+
+    return streak;
+
+}
+
+function updateStudyDay() {
+
+    localStorage.setItem(
+        "owlyLastStudyDate",
+        new Date().toISOString().slice(0,10)
+    );
+
+}
+
+/* =====================================================
+   DAILY GOAL
+===================================================== */
+
+function getDailyGoal() {
+
+    return Number(
+        localStorage.getItem(
+            "owlyDailyGoal"
+        ) || 10
+    );
+
+}
+
+function getTodayProgress() {
+
+    const history =
+        getStudyHistory();
+
+    const today =
+        new Date()
+            .toISOString()
+            .slice(0,10);
+
+    return history
+        .filter(item =>
+            String(item.date).slice(0,10) === today
+        )
+        .reduce(
+            (sum,item) =>
+                sum + Number(item.total || 0),
+            0
+        );
+
+}
+
+function updateRightRail() {
+
+    const streak =
+        getStudyStreak();
+
+    document.getElementById("rightStreak")
+        .textContent =
+            streak;
+
+    const goal =
+        getDailyGoal();
+
+    const done =
+        getTodayProgress();
+
+    const percent =
+        Math.min(
+            100,
+            Math.round(done / goal * 100)
+        );
+
+    document.getElementById("rightDailyGoal")
+        .textContent =
+            percent + "%";
+
+    document.getElementById("dailyGoalProgress")
+        .style.width =
+            percent + "%";
+
+}
 
 /* =====================================================
    SETTINGS
@@ -5188,7 +5811,6 @@ function loadKnowDontKnowPreference() {
 
 }
 
-
 function loadSettings() {
 
     const know =
@@ -5206,39 +5828,41 @@ function loadSettings() {
             "owlyAnimatedOwly"
         );
 
-    document.getElementById(
-        "settingsKnowToggle"
-    ).checked =
-        know === null
-            ? true
-            : know === "true";
+    const goal =
+        getDailyGoal();
 
-    document.getElementById(
-        "defaultStudyMode"
-    ).value =
-        ["normal", "shuffle", "practice"]
-            .includes(mode)
-            ? mode
-            : "normal";
+    document.getElementById("settingsKnowToggle")
+        .checked =
+            know === null
+                ? true
+                : know === "true";
 
-    document.getElementById(
-        "animatedOwlyToggle"
-    ).checked =
-        animated === null
-            ? true
-            : animated === "true";
+    document.getElementById("defaultStudyMode")
+        .value =
+            ["normal","shuffle","practice"]
+                .includes(mode)
+                ? mode
+                : "normal";
 
-    document.getElementById(
-        "knowDontKnowToggle"
-    ).checked =
-        know === null
-            ? true
-            : know === "true";
+    document.getElementById("animatedOwlyToggle")
+        .checked =
+            animated === null
+                ? true
+                : animated === "true";
+
+    document.getElementById("knowDontKnowToggle")
+        .checked =
+            know === null
+                ? true
+                : know === "true";
+
+    document.getElementById("dailyGoalInput")
+        .value =
+            goal;
 
     applyOwlyAnimationSetting();
 
 }
-
 
 function saveSettings() {
 
@@ -5257,6 +5881,21 @@ function saveSettings() {
             "animatedOwlyToggle"
         ).checked;
 
+    let goal =
+        Number(
+            document.getElementById(
+                "dailyGoalInput"
+            ).value
+        );
+
+    if (!goal || goal < 1) {
+        goal = 10;
+    }
+
+    if (goal > 100) {
+        goal = 100;
+    }
+
     localStorage.setItem(
         "owlyKnowDontKnow",
         String(know)
@@ -5272,9 +5911,15 @@ function saveSettings() {
         String(animated)
     );
 
+    localStorage.setItem(
+        "owlyDailyGoal",
+        String(goal)
+    );
+
     document.getElementById(
         "knowDontKnowToggle"
-    ).checked = know;
+    ).checked =
+        know;
 
     applyOwlyAnimationSetting();
 
@@ -5285,15 +5930,13 @@ function saveSettings() {
 
     saved.classList.add("show");
 
-    setTimeout(
-        () => {
-            saved.classList.remove("show");
-        },
-        1600
-    );
+    setTimeout(() => {
+        saved.classList.remove("show");
+    },1600);
+
+    updateRightRail();
 
 }
-
 
 function applyOwlyAnimationSetting() {
 
@@ -5309,72 +5952,50 @@ function applyOwlyAnimationSetting() {
     const enabled =
         toggle.checked;
 
-    document
-        .querySelectorAll(
-            ".roomOwlFlying, .roomOwlStanding, .studyRoomMini img"
-        )
-        .forEach(
-            owl => {
+    document.querySelectorAll(
+        ".roomOwlFlying, .roomOwlStanding, .studyRoomMini img"
+    ).forEach(owl => {
 
-                owl.style.animationPlayState =
-                    enabled
-                        ? "running"
-                        : "paused";
+        owl.style.animationPlayState =
+            enabled
+                ? "running"
+                : "paused";
 
-            }
-        );
+    });
 
 }
-
 
 function resetOwlyData() {
 
     const ok =
         confirm(
-            "Reset all Owly flashcards and sets? This cannot be undone."
+            "Reset all Owly flashcards, sets, progress, and settings? This cannot be undone."
         );
 
     if (!ok) {
         return;
     }
 
-    localStorage.removeItem(
-        "owlyCards"
-    );
-
-    localStorage.removeItem(
-        "owlySets"
-    );
-
-    localStorage.removeItem(
-        "owlySelectedSet"
-    );
-
-    localStorage.removeItem(
-        "owlyKnowDontKnow"
-    );
-
-    localStorage.removeItem(
-        "owlyDefaultStudyMode"
-    );
-
-    localStorage.removeItem(
-        "owlyAnimatedOwly"
-    );
+    localStorage.removeItem("owlyCards");
+    localStorage.removeItem("owlySets");
+    localStorage.removeItem("owlySelectedSet");
+    localStorage.removeItem("owlyKnowDontKnow");
+    localStorage.removeItem("owlyDefaultStudyMode");
+    localStorage.removeItem("owlyAnimatedOwly");
+    localStorage.removeItem("owlyStudyHistory");
+    localStorage.removeItem("owlyDailyGoal");
+    localStorage.removeItem("owlyLastStudyDate");
 
     location.reload();
 
 }
 
-
 /* =====================================================
-   SETTINGS EVENT LISTENERS
+   SETTINGS EVENTS
 ===================================================== */
 
 document
-    .getElementById(
-        "animatedOwlyToggle"
-    )
+    .getElementById("animatedOwlyToggle")
     .addEventListener(
         "change",
         function() {
@@ -5389,11 +6010,8 @@ document
         }
     );
 
-
 document
-    .getElementById(
-        "settingsKnowToggle"
-    )
+    .getElementById("settingsKnowToggle")
     .addEventListener(
         "change",
         function() {
@@ -5417,11 +6035,8 @@ document
         }
     );
 
-
 document
-    .getElementById(
-        "knowDontKnowToggle"
-    )
+    .getElementById("knowDontKnowToggle")
     .addEventListener(
         "change",
         function() {
@@ -5445,11 +6060,8 @@ document
         }
     );
 
-
 document
-    .getElementById(
-        "defaultStudyMode"
-    )
+    .getElementById("defaultStudyMode")
     .addEventListener(
         "change",
         function() {
@@ -5462,24 +6074,59 @@ document
         }
     );
 
+document
+    .getElementById("dailyGoalInput")
+    .addEventListener(
+        "change",
+        function() {
+
+            let value =
+                Number(this.value);
+
+            if (!value || value < 1) {
+                value = 10;
+            }
+
+            if (value > 100) {
+                value = 100;
+            }
+
+            this.value = value;
+
+            localStorage.setItem(
+                "owlyDailyGoal",
+                String(value)
+            );
+
+            updateRightRail();
+
+        }
+    );
 
 /* =====================================================
-   STUDY MODAL EVENTS
+   SEARCH
+===================================================== */
+
+document
+    .getElementById("setSearch")
+    .addEventListener(
+        "input",
+        renderSets
+    );
+
+/* =====================================================
+   MODAL
 ===================================================== */
 
 const studyModal =
-    document.getElementById(
-        "studyModal"
-    );
-
+    document.getElementById("studyModal");
 
 studyModal.addEventListener(
     "click",
-    function(event) {
+    event => {
 
         if (
-            event.target ===
-            studyModal
+            event.target === studyModal
         ) {
 
             closeStudyPopup();
@@ -5489,14 +6136,13 @@ studyModal.addEventListener(
     }
 );
 
-
 /* =====================================================
-   KEYBOARD SUPPORT
+   KEYBOARD
 ===================================================== */
 
 document.addEventListener(
     "keydown",
-    function(event) {
+    event => {
 
         if (
             event.key === "Escape"
@@ -5506,23 +6152,51 @@ document.addEventListener(
 
         }
 
+        if (
+            document.getElementById("studyArea")
+                .style.display === "block"
+        ) {
+
+            if (event.code === "Space") {
+
+                event.preventDefault();
+
+                flipCard();
+
+            }
+
+            if (event.key === "ArrowRight") {
+                nextCard();
+            }
+
+            if (event.key === "ArrowLeft") {
+                previousCard();
+            }
+
+            if (event.key.toLowerCase() === "k") {
+                knowCard();
+            }
+
+            if (event.key.toLowerCase() === "d") {
+                dontKnowCard();
+            }
+
+        }
+
     }
 );
 
-
 /* =====================================================
-   ENTER KEY SUPPORT
+   ENTER SUPPORT
 ===================================================== */
 
 document
     .getElementById("question")
     .addEventListener(
         "keydown",
-        function(event) {
+        event => {
 
-            if (
-                event.key === "Enter"
-            ) {
+            if (event.key === "Enter") {
 
                 event.preventDefault();
 
@@ -5535,16 +6209,13 @@ document
         }
     );
 
-
 document
     .getElementById("answer")
     .addEventListener(
         "keydown",
-        function(event) {
+        event => {
 
-            if (
-                event.key === "Enter"
-            ) {
+            if (event.key === "Enter") {
 
                 event.preventDefault();
 
@@ -5555,16 +6226,13 @@ document
         }
     );
 
-
 document
     .getElementById("setNameInput")
     .addEventListener(
         "keydown",
-        function(event) {
+        event => {
 
-            if (
-                event.key === "Enter"
-            ) {
+            if (event.key === "Enter") {
 
                 event.preventDefault();
 
@@ -5575,9 +6243,8 @@ document
         }
     );
 
-
 /* =====================================================
-   INITIALIZE
+   INIT
 ===================================================== */
 
 useKnowDontKnow =
@@ -5593,4 +6260,3 @@ showHome();
 
 </body>
 </html>
-```
