@@ -7,6 +7,116 @@
     <title>Owly - Study Smarter</title>
 
     <style>
+            /* =========================
+       AI FLASHCARD GENERATOR
+    ========================= */
+    
+    .aiGenerator {
+        margin-top: 25px;
+        padding: 22px;
+        background: #132443;
+        border: 1px solid #29466f;
+        border-radius: 12px;
+    }
+    
+    .aiGenerator h3 {
+        margin: 0 0 7px;
+        font-size: 20px;
+    }
+    
+    .aiGenerator p {
+        color: #8195bd;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    #aiNotes {
+        width: 100%;
+        min-height: 170px;
+        resize: vertical;
+        margin: 10px 0;
+        padding: 13px 14px;
+        border: 1px solid #29446f;
+        border-radius: 8px;
+        background: #152849;
+        color: white;
+        outline: none;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+    }
+    
+    #aiNotes:focus {
+        border-color: #4d91ff;
+    }
+    
+    #aiNotes::placeholder {
+        color: #8d9bb8;
+    }
+    
+    .aiControls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 10px 0;
+    }
+    
+    .aiControls label {
+        color: #a9bce0;
+        font-size: 14px;
+    }
+    
+    #aiCardCount {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #29446f;
+        background: #152849;
+        color: white;
+        font-size: 14px;
+    }
+    
+    #aiStatus {
+        margin-top: 12px;
+        min-height: 20px;
+        color: #8fa4cc;
+        font-size: 13px;
+    }
+    
+    .aiPreview {
+        margin-top: 18px;
+    }
+    
+    .aiPreviewCard {
+        background: #101f3b;
+        border: 1px solid #29466f;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+    }
+    
+    .aiPreviewCard strong {
+        display: block;
+        margin-bottom: 7px;
+        color: #72aaff;
+    }
+    
+    .aiPreviewCard textarea {
+        width: 100%;
+        min-height: 70px;
+        resize: vertical;
+        padding: 10px;
+        border: 1px solid #29446f;
+        border-radius: 7px;
+        background: #152849;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin-bottom: 10px;
+    }
+    
+    .aiSaveButton {
+        width: 100%;
+        margin-top: 10px;
+    }
         * {
             box-sizing: border-box;
         }
@@ -1167,6 +1277,74 @@
 
 
                 <div id="cardList"></div>
+
+                <!-- =========================
+     AI FLASHCARD GENERATOR
+========================= -->
+
+<div class="aiGenerator">
+
+    <h3>
+        🤖 Generate with Owly AI
+    </h3>
+
+    <p>
+        Paste your notes below and Owly will turn them into
+        flashcards automatically.
+    </p>
+
+    <textarea
+        id="aiNotes"
+        placeholder="Paste your notes here...
+
+Example:
+Photosynthesis is the process plants use to convert light energy into chemical energy. It takes place mainly in the chloroplasts. Chlorophyll absorbs light energy."></textarea>
+
+    <div class="aiControls">
+
+        <label for="aiCardCount">
+            Number of cards:
+        </label>
+
+        <select id="aiCardCount">
+
+            <option value="5">
+                5
+            </option>
+
+            <option value="10" selected>
+                10
+            </option>
+
+            <option value="15">
+                15
+            </option>
+
+            <option value="20">
+                20
+            </option>
+
+        </select>
+
+    </div>
+
+    <button
+        class="primaryButton"
+        id="generateAIButton"
+        onclick="generateAICards()">
+
+        🤖 Generate Flashcards
+
+    </button>
+
+    <div id="aiStatus"></div>
+
+    <div
+        id="aiPreview"
+        class="aiPreview">
+    </div>
+
+</div>
 
             </div>
 
@@ -4233,7 +4411,490 @@ document.getElementById("quickSetName")
         }
     );
 
+/* =====================================================
+   OWLY AI FLASHCARD GENERATOR
+===================================================== */
 
+/*
+    IMPORTANT:
+    Replace this with your Cloudflare Worker URL.
+
+    Example:
+    https://owly-ai.yourname.workers.dev
+*/
+
+const OWLY_AI_URL =
+    "https://YOUR-WORKER-NAME.YOUR-SUBDOMAIN.workers.dev";
+
+
+let aiGeneratedCards = [];
+
+
+/* =====================================================
+   GENERATE AI FLASHCARDS
+===================================================== */
+
+async function generateAICards() {
+
+    const notes =
+        document.getElementById("aiNotes")
+            .value
+            .trim();
+
+
+    const cardCount =
+        Number(
+            document.getElementById("aiCardCount")
+                .value
+        );
+
+
+    const status =
+        document.getElementById("aiStatus");
+
+
+    const button =
+        document.getElementById("generateAIButton");
+
+
+    const preview =
+        document.getElementById("aiPreview");
+
+
+    if (notes.length < 20) {
+
+        status.textContent =
+            "Please paste some notes first.";
+
+        return;
+
+    }
+
+
+    if (!OWLY_AI_URL ||
+        OWLY_AI_URL.includes("YOUR-WORKER")) {
+
+        status.textContent =
+            "Owly AI is not connected yet. Add your Worker URL in the code.";
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "🤖 Generating...";
+
+
+    status.textContent =
+        "Owly is turning your notes into flashcards...";
+
+
+    preview.innerHTML = "";
+
+
+    try {
+
+        const response =
+            await fetch(
+                OWLY_AI_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        notes: notes,
+
+                        count: cardCount
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "The AI server returned an error."
+            );
+
+        }
+
+
+        if (
+            !data.flashcards ||
+            !Array.isArray(data.flashcards)
+        ) {
+
+            throw new Error(
+                "The AI returned an invalid response."
+            );
+
+        }
+
+
+        aiGeneratedCards =
+            data.flashcards
+                .filter(card =>
+                    card &&
+                    typeof card.question === "string" &&
+                    typeof card.answer === "string"
+                )
+                .map(card => ({
+
+                    question:
+                        card.question.trim(),
+
+                    answer:
+                        card.answer.trim()
+
+                }))
+                .filter(card =>
+                    card.question &&
+                    card.answer
+                );
+
+
+        if (aiGeneratedCards.length === 0) {
+
+            throw new Error(
+                "No usable flashcards were generated."
+            );
+
+        }
+
+
+        renderAIPreview();
+
+
+        status.textContent =
+            "✨ Generated " +
+            aiGeneratedCards.length +
+            " flashcards! Review them below before adding them to your set.";
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        status.textContent =
+            "❌ " +
+            (
+                error.message ||
+                "Something went wrong."
+            );
+
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "🤖 Generate Flashcards";
+
+    }
+
+}
+
+
+/* =====================================================
+   AI PREVIEW
+===================================================== */
+
+function renderAIPreview() {
+
+    const preview =
+        document.getElementById("aiPreview");
+
+
+    preview.innerHTML = "";
+
+
+    if (aiGeneratedCards.length === 0) {
+
+        return;
+
+    }
+
+
+    const heading =
+        document.createElement("h3");
+
+
+    heading.textContent =
+        "📝 Review Your Cards";
+
+
+    preview.appendChild(heading);
+
+
+    aiGeneratedCards.forEach(
+        (card, index) => {
+
+            const wrapper =
+                document.createElement("div");
+
+
+            wrapper.className =
+                "aiPreviewCard";
+
+
+            const title =
+                document.createElement("strong");
+
+
+            title.textContent =
+                "Card " +
+                (index + 1);
+
+
+            wrapper.appendChild(title);
+
+
+            const questionLabel =
+                document.createElement("div");
+
+
+            questionLabel.textContent =
+                "Question";
+
+
+            questionLabel.style.color =
+                "#8195bd";
+
+
+            questionLabel.style.fontSize =
+                "12px";
+
+
+            questionLabel.style.marginBottom =
+                "4px";
+
+
+            wrapper.appendChild(
+                questionLabel
+            );
+
+
+            const question =
+                document.createElement("textarea");
+
+
+            question.value =
+                card.question;
+
+
+            question.dataset.type =
+                "question";
+
+
+            wrapper.appendChild(
+                question
+            );
+
+
+            const answerLabel =
+                document.createElement("div");
+
+
+            answerLabel.textContent =
+                "Answer";
+
+
+            answerLabel.style.color =
+                "#8195bd";
+
+
+            answerLabel.style.fontSize =
+                "12px";
+
+
+            answerLabel.style.marginBottom =
+                "4px";
+
+
+            wrapper.appendChild(
+                answerLabel
+            );
+
+
+            const answer =
+                document.createElement("textarea");
+
+
+            answer.value =
+                card.answer;
+
+
+            answer.dataset.type =
+                "answer";
+
+
+            wrapper.appendChild(
+                answer
+            );
+
+
+            preview.appendChild(
+                wrapper
+            );
+
+        }
+    );
+
+
+    const saveButton =
+        document.createElement("button");
+
+
+    saveButton.className =
+        "primaryButton aiSaveButton";
+
+
+    saveButton.textContent =
+        "💾 Add All Cards to Current Set";
+
+
+    saveButton.onclick =
+        saveAIGeneratedCards;
+
+
+    preview.appendChild(
+        saveButton
+    );
+
+}
+
+
+/* =====================================================
+   SAVE AI CARDS
+===================================================== */
+
+function saveAIGeneratedCards() {
+
+    const previewCards =
+        document.querySelectorAll(
+            ".aiPreviewCard"
+        );
+
+
+    let added =
+        0;
+
+
+    previewCards.forEach(cardElement => {
+
+        const question =
+            cardElement
+                .querySelector(
+                    'textarea[data-type="question"]'
+                )
+                .value
+                .trim();
+
+
+        const answer =
+            cardElement
+                .querySelector(
+                    'textarea[data-type="answer"]'
+                )
+                .value
+                .trim();
+
+
+        if (
+            question === "" ||
+            answer === ""
+        ) {
+
+            return;
+
+        }
+
+
+        cards.push({
+
+            id:
+                createId(),
+
+            question:
+                question,
+
+            answer:
+                answer,
+
+            setId:
+                selectedSetId,
+
+            known:
+                false,
+
+            practiceCorrect:
+                0,
+
+            practiceAttempts:
+                0
+
+        });
+
+
+        added++;
+
+    });
+
+
+    if (added === 0) {
+
+        alert(
+            "There are no complete flashcards to add."
+        );
+
+        return;
+
+    }
+
+
+    saveCards();
+
+
+    document.getElementById("aiNotes")
+        .value = "";
+
+
+    document.getElementById("aiPreview")
+        .innerHTML = "";
+
+
+    document.getElementById("aiStatus")
+        .textContent =
+            "✅ Added " +
+            added +
+            " flashcards to " +
+            getCurrentSet().name +
+            "!";
+
+
+    aiGeneratedCards =
+        [];
+
+
+    updateEverything();
+
+}
 /* =====================================================
    INITIALIZE
 ===================================================== */
