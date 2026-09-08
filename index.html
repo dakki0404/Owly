@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -487,11 +488,13 @@
             display: none;
         }
 
-        #progress {
+        #progress,
+        #practiceProgress {
             color: #8fa4cc;
         }
 
-        #progressBar {
+        #progressBar,
+        #practiceProgressBar {
             width: 80%;
             height: 10px;
             background: #263858;
@@ -500,7 +503,8 @@
             overflow: hidden;
         }
 
-        #progressFill {
+        #progressFill,
+        #practiceProgressFill {
             width: 0%;
             height: 100%;
             background: #6c8cff;
@@ -556,7 +560,98 @@
         }
 
         /* =========================
-           STUDY COMPLETE
+           KNOW / DON'T KNOW
+        ========================= */
+
+        #knowButtons {
+            display: block;
+        }
+
+        #knowButtons button {
+            min-width: 130px;
+        }
+
+        /* =========================
+           PRACTICE MODE
+        ========================= */
+
+        #practiceArea {
+            display: none;
+            text-align: center;
+        }
+
+        .practiceQuestion {
+            width: 92%;
+            min-height: 220px;
+            margin: 25px auto;
+            padding: 40px;
+            background: #162442;
+            border: 2px solid #263858;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        #practiceChoices {
+            width: 92%;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .practiceChoice {
+            width: 100%;
+            margin: 0;
+            min-height: 62px;
+            padding: 15px;
+            text-align: left;
+            background: #132443;
+            border: 1px solid #28466f;
+            font-size: 16px;
+        }
+
+        .practiceChoice:hover {
+            background: #19315a;
+            border-color: #4b8fff;
+        }
+
+        .practiceChoice.correct {
+            background: #164c32;
+            border-color: #42c77b;
+        }
+
+        .practiceChoice.wrong {
+            background: #532530;
+            border-color: #ef6473;
+        }
+
+        .practiceChoice:disabled {
+            cursor: default;
+            opacity: 1;
+        }
+
+        #practiceFeedback {
+            min-height: 30px;
+            font-weight: bold;
+            margin: 15px;
+            font-size: 17px;
+        }
+
+        .practiceCorrect {
+            color: #65d68b;
+        }
+
+        .practiceWrong {
+            color: #ff7b87;
+        }
+
+        /* =========================
+           COMPLETE
         ========================= */
 
         #studyComplete {
@@ -585,6 +680,41 @@
             margin: 10px 0 25px;
             font-weight: bold;
             color: #a9c0e9;
+        }
+
+        #missedStudyButton {
+            display: none;
+        }
+
+        /* =========================
+           PRACTICE COMPLETE
+        ========================= */
+
+        #practiceComplete {
+            display: none;
+            background: #101f3b;
+            border: 1px solid #203a63;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+            text-align: center;
+        }
+
+        #practiceComplete h2 {
+            font-size: 34px;
+            margin-top: 0;
+        }
+
+        #practiceScoreText {
+            font-size: 21px;
+            margin: 15px 0;
+        }
+
+        #practiceReviewText {
+            font-size: 18px;
+            color: #a9c0e9;
+            margin-bottom: 25px;
         }
 
         /* =========================
@@ -618,6 +748,76 @@
         }
 
         /* =========================
+           TOGGLE
+        ========================= */
+
+        .toggleRow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 14px;
+            background: #132443;
+            border: 1px solid #28466f;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .toggleText strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .toggleText span {
+            color: #8195bd;
+            font-size: 12px;
+        }
+
+        .switch {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            margin: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: #263858;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            left: 3px;
+            top: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+
+        .switch input:checked + .slider {
+            background: #287cff;
+        }
+
+        .switch input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        /* =========================
            POPUPS
         ========================= */
 
@@ -638,7 +838,7 @@
         #studyPopupBox,
         #setPopupBox {
             position: relative;
-            width: min(420px, 90vw);
+            width: min(460px, 90vw);
             background: #101f3b;
             border: 1px solid #28466f;
             padding: 30px;
@@ -661,6 +861,20 @@
         #setNameInput {
             width: 100%;
             margin: 10px 0;
+        }
+
+        .studyModeButton {
+            width: 100%;
+            margin: 7px 0;
+            padding: 14px;
+        }
+
+        .modeDescription {
+            display: block;
+            color: #8195bd;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: 4px;
         }
 
         /* =========================
@@ -694,6 +908,7 @@
         }
 
         @media (max-width: 760px) {
+
             #topbar {
                 gap: 12px;
                 padding: 0 14px;
@@ -733,6 +948,17 @@
                 font-size: 27px;
             }
 
+            .practiceQuestion {
+                width: 100%;
+                font-size: 24px;
+                padding: 25px;
+            }
+
+            #practiceChoices {
+                width: 100%;
+                grid-template-columns: 1fr;
+            }
+
             #newSetBox input {
                 width: 100%;
                 margin-bottom: 8px;
@@ -758,22 +984,31 @@
 
 <header id="topbar">
 
-    <!-- Your Owly logo is embedded directly in the page -->
     <img
         id="logo"
         src="./owly-logo.png"
         alt="Owly Logo">
 
     <nav id="nav" aria-label="Main navigation">
-        <button class="navButton active" id="homeNav" onclick="showHome()">
+
+        <button
+            class="navButton active"
+            id="homeNav"
+            onclick="showHome()">
             Home
         </button>
 
-        <button class="navButton" id="flashcardsNav" onclick="showFlashcards()">
+        <button
+            class="navButton"
+            id="flashcardsNav"
+            onclick="showFlashcards()">
             Flashcards
         </button>
 
-        <button class="navButton" id="setsNav" onclick="showSets()">
+        <button
+            class="navButton"
+            id="setsNav"
+            onclick="showSets()">
             Sets
         </button>
 
@@ -784,6 +1019,7 @@
         <button class="navButton">
             Settings
         </button>
+
     </nav>
 
 </header>
@@ -792,19 +1028,26 @@
 <div id="page">
 
     <!-- SIDEBAR -->
+
     <aside id="sidebar" class="panel">
 
         <h3>📚 Flashcards</h3>
 
-        <button class="sideButton primary" onclick="focusQuestion()">
+        <button
+            class="sideButton primary"
+            onclick="focusQuestion()">
             ＋ New Flashcard
         </button>
 
-        <button class="sideButton" onclick="showFlashcards()">
+        <button
+            class="sideButton"
+            onclick="showFlashcards()">
             ▣ All Flashcards
         </button>
 
-        <button class="sideButton" onclick="showSets()">
+        <button
+            class="sideButton"
+            onclick="showSets()">
             🗂️ Sets
         </button>
 
@@ -816,11 +1059,10 @@
 
 
     <!-- MAIN -->
+
     <main id="mainContent">
 
-        <!-- =========================
-             HOME PAGE
-        ========================= -->
+        <!-- HOME -->
 
         <section id="homePage">
 
@@ -834,14 +1076,15 @@
 
             </div>
 
-            <div id="homeSetsGrid" class="homeSetsGrid"></div>
+            <div
+                id="homeSetsGrid"
+                class="homeSetsGrid">
+            </div>
 
         </section>
 
 
-        <!-- =========================
-             FLASHCARDS PAGE
-        ========================= -->
+        <!-- FLASHCARDS -->
 
         <section id="flashcardsPage">
 
@@ -857,13 +1100,18 @@
 
 
             <!-- CREATE -->
-            <div class="card" id="createArea">
+
+            <div
+                class="card"
+                id="createArea">
 
                 <div id="selectedSetBar">
 
                     <div>
 
-                        <div>📁 Current Set</div>
+                        <div>
+                            📁 Current Set
+                        </div>
 
                         <div id="selectedSetName">
                             General
@@ -878,7 +1126,10 @@
                 </div>
 
 
-                <h2>Create a Flashcard</h2>
+                <h2>
+                    Create a Flashcard
+                </h2>
+
 
                 <input
                     id="question"
@@ -887,6 +1138,7 @@
 
                 <br>
 
+
                 <input
                     id="answer"
                     type="text"
@@ -894,11 +1146,13 @@
 
                 <br>
 
+
                 <button
                     class="primaryButton"
                     onclick="addCard()">
                     Add Flashcard
                 </button>
+
 
                 <button
                     class="secondaryButton"
@@ -906,23 +1160,32 @@
                     📚 Study
                 </button>
 
+
                 <p id="cardCount">
                     0 flashcards
                 </p>
+
 
                 <div id="cardList"></div>
 
             </div>
 
 
-            <!-- STUDY -->
-            <div class="card" id="studyArea">
+            <!-- NORMAL / SHUFFLE -->
 
-                <h2>📚 Study Mode</h2>
+            <div
+                class="card"
+                id="studyArea">
+
+                <h2 id="studyTitle">
+                    📚 Study Mode
+                </h2>
+
 
                 <p id="progress">
                     Card 0 of 0
                 </p>
+
 
                 <div id="progressBar">
 
@@ -954,25 +1217,31 @@
                 </div>
 
 
-                <button onclick="previousCard()">
-                    ⬅ Previous
-                </button>
+                <div id="knowButtons">
 
-                <button
-                    class="primaryButton"
-                    onclick="knowCard()">
-                    ✅ Know
-                </button>
+                    <button onclick="previousCard()">
+                        ⬅ Previous
+                    </button>
 
-                <button onclick="dontKnowCard()">
-                    ❌ Don't Know
-                </button>
+                    <button
+                        class="primaryButton"
+                        onclick="knowCard()">
+                        ✅ Know
+                    </button>
 
-                <button onclick="nextCard()">
-                    Next ➡
-                </button>
+                    <button onclick="dontKnowCard()">
+                        ❌ Don't Know
+                    </button>
+
+                    <button onclick="nextCard()">
+                        Next ➡
+                    </button>
+
+                </div>
+
 
                 <br>
+
 
                 <button
                     class="secondaryButton"
@@ -983,22 +1252,125 @@
             </div>
 
 
-            <!-- COMPLETE -->
-            <div id="studyComplete">
+            <!-- PRACTICE MODE -->
 
-                <h2>🎉 Study Complete!</h2>
+            <div
+                class="card"
+                id="practiceArea">
 
-                <p id="scoreText"></p>
+                <h2>
+                    ✏️ Practice Mode
+                </h2>
 
-                <p id="reviewText"></p>
+
+                <p id="practiceProgress">
+                    Question 0 of 0
+                </p>
+
+
+                <div id="practiceProgressBar">
+
+                    <div id="practiceProgressFill"></div>
+
+                </div>
+
+
+                <div
+                    class="practiceQuestion"
+                    id="practiceQuestion">
+                    Practice question
+                </div>
+
+
+                <div id="practiceChoices"></div>
+
+
+                <div id="practiceFeedback"></div>
+
 
                 <button
                     class="primaryButton"
-                    onclick="startStudying()">
-                    Study Again
+                    id="nextPracticeButton"
+                    onclick="nextPracticeCard()"
+                    style="display:none;">
+                    Next ➡
                 </button>
 
-                <button onclick="backToCreate()">
+
+                <br>
+
+
+                <button
+                    class="secondaryButton"
+                    onclick="backToCreate()">
+                    Back to Create
+                </button>
+
+            </div>
+
+
+            <!-- STUDY COMPLETE -->
+
+            <div id="studyComplete">
+
+                <h2>
+                    🎉 Study Complete!
+                </h2>
+
+
+                <p id="scoreText"></p>
+
+
+                <p id="reviewText"></p>
+
+
+                <button
+                    class="primaryButton"
+                    id="missedStudyButton"
+                    onclick="studyMissedCards()">
+                    🔁 Study Missed Cards
+                </button>
+
+
+                <button
+                    class="primaryButton"
+                    onclick="startStudyingAgain()">
+                    📚 Study Again
+                </button>
+
+
+                <button
+                    onclick="backToCreate()">
+                    Back to Create
+                </button>
+
+            </div>
+
+
+            <!-- PRACTICE COMPLETE -->
+
+            <div id="practiceComplete">
+
+                <h2>
+                    🎉 Practice Complete!
+                </h2>
+
+
+                <p id="practiceScoreText"></p>
+
+
+                <p id="practiceReviewText"></p>
+
+
+                <button
+                    class="primaryButton"
+                    onclick="startPracticeMode()">
+                    ✏️ Practice Again
+                </button>
+
+
+                <button
+                    onclick="backToCreate()">
                     Back to Create
                 </button>
 
@@ -1007,15 +1379,15 @@
         </section>
 
 
-        <!-- =========================
-             SETS PAGE
-        ========================= -->
+        <!-- SETS -->
 
         <section id="setsArea">
 
             <div class="hero">
 
-                <h1>Your Sets</h1>
+                <h1>
+                    Your Sets
+                </h1>
 
                 <p>
                     Keep your subjects organized and ready to study. 🗂️
@@ -1040,6 +1412,7 @@
 
                     </div>
 
+
                     <button
                         class="primaryButton"
                         onclick="openSetPopup()">
@@ -1055,6 +1428,7 @@
                         id="quickSetName"
                         type="text"
                         placeholder="Example: Biology Unit 1">
+
 
                     <button
                         class="primaryButton"
@@ -1075,17 +1449,22 @@
 
 
     <!-- RIGHT RAIL -->
+
     <aside id="rightRail">
 
         <div class="panel rightCard">
 
-            <h3>Your Progress</h3>
+            <h3>
+                Your Progress
+            </h3>
+
 
             <div
                 class="statValue"
                 id="rightCardCount">
                 0
             </div>
+
 
             <div class="rightText">
                 flashcards in your library
@@ -1096,13 +1475,17 @@
 
         <div class="panel rightCard">
 
-            <h3>Current Set</h3>
+            <h3>
+                Current Set
+            </h3>
+
 
             <div
                 class="statValue"
                 id="rightSetCount">
                 0
             </div>
+
 
             <div
                 class="rightText"
@@ -1115,11 +1498,15 @@
 
         <div class="panel rightCard">
 
-            <h3>Quick Study</h3>
+            <h3>
+                Quick Study
+            </h3>
+
 
             <div class="rightText">
                 Ready to review your current set?
             </div>
+
 
             <button
                 class="primaryButton"
@@ -1132,10 +1519,14 @@
 
         <div class="panel rightCard">
 
-            <h3>Study Tips</h3>
+            <h3>
+                Study Tips
+            </h3>
+
 
             <div class="rightText">
                 Tap a card to flip it, then mark whether you know it.
+                Missed cards can be reviewed again at the end.
             </div>
 
         </div>
@@ -1150,11 +1541,14 @@
     <strong>
         Small steps. Big progress.
     </strong>
+
     🦉
+
 
     <div style="margin-top:8px;">
         Owly helps you learn, one question at a time.
     </div>
+
 
     <div style="margin-top:22px;font-size:12px;">
         © 2026 Owly. Study Smarter.
@@ -1177,9 +1571,11 @@
             ✕
         </button>
 
+
         <h2>
             📚 How do you want to study?
         </h2>
+
 
         <p
             class="rightText"
@@ -1187,16 +1583,73 @@
             Study your current set.
         </p>
 
-        <button
-            class="primaryButton"
-            onclick="closeStudyPopup(); Normal()">
-            Normal
-        </button>
 
         <button
-            onclick="closeStudyPopup(); shuffle()">
-            🔀 Shuffle
+            class="primaryButton studyModeButton"
+            onclick="closeStudyPopup(); Normal()">
+
+            📖 Normal
+
+            <span class="modeDescription">
+                Go through cards in order
+            </span>
+
         </button>
+
+
+        <button
+            class="studyModeButton"
+            onclick="closeStudyPopup(); shuffle()">
+
+            🔀 Shuffle
+
+            <span class="modeDescription">
+                Study cards in a random order
+            </span>
+
+        </button>
+
+
+        <button
+            class="studyModeButton"
+            onclick="closeStudyPopup(); startPracticeMode()">
+
+            ✏️ Practice
+
+            <span class="modeDescription">
+                Answer each question with multiple choice
+            </span>
+
+        </button>
+
+
+        <div class="toggleRow">
+
+            <div class="toggleText">
+
+                <strong>
+                    Use Know / Don't Know
+                </strong>
+
+                <span>
+                    Track cards you know and cards you miss.
+                </span>
+
+            </div>
+
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="knowDontKnowToggle"
+                    checked>
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
 
     </div>
 
@@ -1217,13 +1670,16 @@
             ✕
         </button>
 
+
         <h2>
             🗂️ Create a Set
         </h2>
 
+
         <p class="rightText">
             Give your new flashcard set a name.
         </p>
+
 
         <input
             id="setNameInput"
@@ -1231,6 +1687,7 @@
             placeholder="Example: Chemistry">
 
         <br>
+
 
         <button
             class="primaryButton"
@@ -1252,8 +1709,10 @@
 let cards =
     JSON.parse(localStorage.getItem("owlyCards")) || [];
 
+
 let sets =
     JSON.parse(localStorage.getItem("owlySets")) || [];
+
 
 let selectedSetId =
     localStorage.getItem("owlySelectedSet");
@@ -1280,27 +1739,63 @@ function createId() {
 if (sets.length === 0) {
 
     sets.push({
+
         id: createId(),
+
         name: "General"
+
     });
 
 }
 
-if (!selectedSetId ||
-    !sets.some(set => set.id === selectedSetId)) {
 
-    selectedSetId = sets[0].id;
+if (
+    !selectedSetId ||
+    !sets.some(set => set.id === selectedSetId)
+) {
+
+    selectedSetId =
+        sets[0].id;
 
 }
 
 
 let changedCards = false;
 
+
 cards.forEach(card => {
 
     if (!card.setId) {
 
-        card.setId = sets[0].id;
+        card.setId =
+            sets[0].id;
+
+        changedCards = true;
+
+    }
+
+
+    if (typeof card.known !== "boolean") {
+
+        card.known = false;
+
+        changedCards = true;
+
+    }
+
+
+    if (typeof card.practiceCorrect !== "number") {
+
+        card.practiceCorrect = 0;
+
+        changedCards = true;
+
+    }
+
+
+    if (typeof card.practiceAttempts !== "number") {
+
+        card.practiceAttempts = 0;
 
         changedCards = true;
 
@@ -1317,6 +1812,7 @@ if (changedCards) {
     );
 
 }
+
 
 saveSets();
 
@@ -1336,6 +1832,23 @@ let shuffleCards = false;
 let shuffleOrder = [];
 
 let showingAnswer = false;
+
+let studyMode = "normal";
+
+let useKnowDontKnow = true;
+
+
+/* =====================================================
+   PRACTICE VARIABLES
+===================================================== */
+
+let practiceCards = [];
+
+let practiceCardIndex = 0;
+
+let practiceCorrect = 0;
+
+let practiceAnswered = false;
 
 
 /* =====================================================
@@ -1359,6 +1872,7 @@ function saveSets() {
         JSON.stringify(sets)
     );
 
+
     localStorage.setItem(
         "owlySelectedSet",
         selectedSetId
@@ -1374,7 +1888,8 @@ function saveSets() {
 function getCurrentSet() {
 
     return sets.find(
-        set => set.id === selectedSetId
+        set =>
+            set.id === selectedSetId
     );
 
 }
@@ -1383,7 +1898,8 @@ function getCurrentSet() {
 function getCurrentCards() {
 
     return cards.filter(
-        card => card.setId === selectedSetId
+        card =>
+            card.setId === selectedSetId
     );
 
 }
@@ -1483,6 +1999,7 @@ function renderHomeSets() {
     const grid =
         document.getElementById("homeSetsGrid");
 
+
     grid.innerHTML = "";
 
 
@@ -1519,14 +2036,17 @@ function renderHomeSets() {
 
         const cardAmount =
             cards.filter(
-                card => card.setId === set.id
+                card =>
+                    card.setId === set.id
             ).length;
 
 
         const div =
             document.createElement("div");
 
-        div.className = "homeSetCard";
+
+        div.className =
+            "homeSetCard";
 
 
         div.onclick = function() {
@@ -1549,6 +2069,7 @@ function renderHomeSets() {
             <div class="homeSetInfo">
 
                 ${cardAmount}
+
                 ${cardAmount === 1
                     ? "flashcard"
                     : "flashcards"}
@@ -1582,9 +2103,12 @@ function renderHomeSets() {
 
 function studySetFromHome(setId) {
 
-    selectedSetId = setId;
+    selectedSetId =
+        setId;
+
 
     saveSets();
+
 
     const currentCards =
         getCurrentCards();
@@ -1594,9 +2118,11 @@ function studySetFromHome(setId) {
 
         showFlashcards();
 
+
         alert(
             "This set has no flashcards yet. Add some first!"
         );
+
 
         return;
 
@@ -1648,6 +2174,7 @@ function createSet() {
     const input =
         document.getElementById("setNameInput");
 
+
     const name =
         input.value.trim();
 
@@ -1693,17 +2220,22 @@ function createSet() {
 
     sets.push(newSet);
 
+
     selectedSetId =
         newSet.id;
 
 
     saveSets();
 
+
     input.value = "";
+
 
     closeSetPopup();
 
+
     updateEverything();
+
 
     showSets();
 
@@ -1718,6 +2250,7 @@ function createSetFromQuickBox() {
 
     const input =
         document.getElementById("quickSetName");
+
 
     const name =
         input.value.trim();
@@ -1760,13 +2293,16 @@ function createSetFromQuickBox() {
 
     sets.push(newSet);
 
+
     selectedSetId =
         newSet.id;
 
 
     saveSets();
 
+
     input.value = "";
+
 
     updateEverything();
 
@@ -1795,7 +2331,8 @@ function deleteSet(id, event) {
 
     const set =
         sets.find(
-            s => s.id === id
+            s =>
+                s.id === id
         );
 
 
@@ -1804,7 +2341,8 @@ function deleteSet(id, event) {
 
     const cardAmount =
         cards.filter(
-            card => card.setId === id
+            card =>
+                card.setId === id
         ).length;
 
 
@@ -1820,9 +2358,11 @@ function deleteSet(id, event) {
             "\n\nThis will also delete " +
             cardAmount +
             " flashcard" +
-            (cardAmount === 1
-                ? ""
-                : "s") +
+            (
+                cardAmount === 1
+                    ? ""
+                    : "s"
+            ) +
             " inside it.";
 
     }
@@ -1837,13 +2377,15 @@ function deleteSet(id, event) {
 
     sets =
         sets.filter(
-            set => set.id !== id
+            set =>
+                set.id !== id
         );
 
 
     cards =
         cards.filter(
-            card => card.setId !== id
+            card =>
+                card.setId !== id
         );
 
 
@@ -1857,7 +2399,9 @@ function deleteSet(id, event) {
 
     saveCards();
 
+
     saveSets();
+
 
     updateEverything();
 
@@ -1870,11 +2414,15 @@ function deleteSet(id, event) {
 
 function selectSet(id) {
 
-    selectedSetId = id;
+    selectedSetId =
+        id;
+
 
     saveSets();
 
+
     showFlashcards();
+
 
     updateEverything();
 
@@ -1889,6 +2437,7 @@ function renderSets() {
 
     const grid =
         document.getElementById("setGrid");
+
 
     grid.innerHTML = "";
 
@@ -1947,6 +2496,7 @@ function renderSets() {
             <div class="setInfo">
 
                 ${cardAmount}
+
                 ${cardAmount === 1
                     ? "flashcard"
                     : "flashcards"}
@@ -1972,7 +2522,10 @@ function escapeHTML(text) {
     const div =
         document.createElement("div");
 
-    div.textContent = text;
+
+    div.textContent =
+        text;
+
 
     return div.innerHTML;
 
@@ -1987,6 +2540,7 @@ function updateCount() {
 
     const currentCards =
         getCurrentCards();
+
 
     const total =
         cards.length;
@@ -2086,7 +2640,13 @@ function addCard() {
 
         answer: answer,
 
-        setId: selectedSetId
+        setId: selectedSetId,
+
+        known: false,
+
+        practiceCorrect: 0,
+
+        practiceAttempts: 0
 
     });
 
@@ -2139,6 +2699,7 @@ function showCardList() {
     const list =
         document.getElementById("cardList");
 
+
     list.innerHTML = "";
 
 
@@ -2162,6 +2723,7 @@ function showCardList() {
             </p>
 
         `;
+
 
         return;
 
@@ -2187,6 +2749,7 @@ function showCardList() {
                 </strong>
 
                 →
+
                 ${escapeHTML(card.answer)}
 
                 <button
@@ -2218,11 +2781,15 @@ function deleteCard(index) {
 
     cards.splice(index, 1);
 
+
     saveCards();
+
 
     shuffleOrder = [];
 
+
     currentCard = 0;
+
 
     updateEverything();
 
@@ -2282,7 +2849,15 @@ function closeStudyPopup() {
 
 function Normal() {
 
-    shuffleCards = false;
+    shuffleCards =
+        false;
+
+
+    useKnowDontKnow =
+        document.getElementById(
+            "knowDontKnowToggle"
+        ).checked;
+
 
     startStudying();
 
@@ -2291,7 +2866,15 @@ function Normal() {
 
 function shuffle() {
 
-    shuffleCards = true;
+    shuffleCards =
+        true;
+
+
+    useKnowDontKnow =
+        document.getElementById(
+            "knowDontKnowToggle"
+        ).checked;
+
 
     startStudying();
 
@@ -2319,17 +2902,13 @@ function startStudying() {
     }
 
 
-    /*
-        Make sure the Flashcards page is visible.
-        This is important when starting a study session
-        directly from the Home page.
-    */
-
     document.getElementById("homePage")
         .style.display = "none";
 
+
     document.getElementById("flashcardsPage")
         .style.display = "block";
+
 
     document.getElementById("setsArea")
         .style.display = "none";
@@ -2338,8 +2917,10 @@ function startStudying() {
     document.getElementById("homeNav")
         .classList.remove("active");
 
+
     document.getElementById("flashcardsNav")
         .classList.add("active");
+
 
     document.getElementById("setsNav")
         .classList.remove("active");
@@ -2349,13 +2930,24 @@ function startStudying() {
         .style.display = "none";
 
 
-    currentCard = 0;
+    document.getElementById("practiceComplete")
+        .style.display = "none";
 
-    correctCards = 0;
 
-    reviewCards = [];
+    currentCard =
+        0;
 
-    showingAnswer = false;
+
+    correctCards =
+        0;
+
+
+    reviewCards =
+        [];
+
+
+    showingAnswer =
+        false;
 
 
     if (shuffleCards) {
@@ -2391,7 +2983,8 @@ function startStudying() {
 
     } else {
 
-        shuffleOrder = [];
+        shuffleOrder =
+            [];
 
     }
 
@@ -2400,8 +2993,26 @@ function startStudying() {
         .style.display = "none";
 
 
+    document.getElementById("practiceArea")
+        .style.display = "none";
+
+
     document.getElementById("studyArea")
         .style.display = "block";
+
+
+    document.getElementById("studyTitle")
+        .textContent =
+            shuffleCards
+                ? "🔀 Shuffle Study"
+                : "📚 Normal Study";
+
+
+    document.getElementById("knowButtons")
+        .style.display =
+            useKnowDontKnow
+                ? "block"
+                : "none";
 
 
     document.getElementById("mainContent")
@@ -2455,7 +3066,8 @@ function showCard() {
         .classList.remove("flipped");
 
 
-    showingAnswer = false;
+    showingAnswer =
+        false;
 
 
     document.getElementById("progress")
@@ -2466,15 +3078,11 @@ function showCard() {
             currentCards.length;
 
 
-    /*
-        The final percentage is intentionally left
-        for the Study Complete screen.
-    */
-
     const progressPercent =
-        (currentCard /
-            currentCards.length) *
-        100;
+        (
+            currentCard /
+            currentCards.length
+        ) * 100;
 
 
     document.getElementById("progressFill")
@@ -2507,31 +3115,81 @@ function flipCard() {
 
 
 /* =====================================================
-   KNOW / DON'T KNOW
+   GET CURRENT STUDY CARD
+===================================================== */
+
+function getCurrentStudyCard() {
+
+    const currentCards =
+        getCurrentCards();
+
+
+    return shuffleCards
+        ? shuffleOrder[currentCard]
+        : currentCards[currentCard];
+
+}
+
+
+/* =====================================================
+   KNOW
 ===================================================== */
 
 function knowCard() {
 
+    const card =
+        getCurrentStudyCard();
+
+
+    if (!card) return;
+
+
     correctCards++;
+
+
+    card.known =
+        true;
+
+
+    saveCards();
+
 
     nextCard();
 
 }
 
 
+/* =====================================================
+   DON'T KNOW
+===================================================== */
+
 function dontKnowCard() {
 
-    const currentCards =
-        getCurrentCards();
-
-
     const card =
-        shuffleCards
-            ? shuffleOrder[currentCard]
-            : currentCards[currentCard];
+        getCurrentStudyCard();
 
 
-    reviewCards.push(card);
+    if (!card) return;
+
+
+    card.known =
+        false;
+
+
+    saveCards();
+
+
+    if (
+        !reviewCards.some(
+            missed =>
+                missed.id === card.id
+        )
+    ) {
+
+        reviewCards.push(card);
+
+    }
+
 
     nextCard();
 
@@ -2555,7 +3213,10 @@ function nextCard() {
 
         currentCard++;
 
-        showingAnswer = false;
+
+        showingAnswer =
+            false;
+
 
         showCard();
 
@@ -2578,7 +3239,10 @@ function previousCard() {
 
         currentCard--;
 
-        showingAnswer = false;
+
+        showingAnswer =
+            false;
+
 
         showCard();
 
@@ -2601,6 +3265,14 @@ function showStudyComplete() {
         .style.display = "none";
 
 
+    document.getElementById("practiceArea")
+        .style.display = "none";
+
+
+    document.getElementById("practiceComplete")
+        .style.display = "none";
+
+
     document.getElementById("studyComplete")
         .style.display = "block";
 
@@ -2616,20 +3288,835 @@ function showStudyComplete() {
 
     const masteredPercent =
         Math.round(
-            (correctCards /
-                currentCards.length) *
-            100
+            (
+                correctCards /
+                currentCards.length
+            ) * 100
         );
 
 
     const remainingPercent =
-        100 - masteredPercent;
+        100 -
+        masteredPercent;
 
 
     document.getElementById("reviewText")
         .textContent =
             remainingPercent +
             "% remaining to review.";
+
+
+    const missedButton =
+        document.getElementById(
+            "missedStudyButton"
+        );
+
+
+    if (reviewCards.length > 0) {
+
+        missedButton.style.display =
+            "inline-block";
+
+
+        missedButton.textContent =
+            "🔁 Study " +
+            reviewCards.length +
+            " Missed Card" +
+            (
+                reviewCards.length === 1
+                    ? ""
+                    : "s"
+            );
+
+    } else {
+
+        missedButton.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   STUDY MISSED CARDS
+===================================================== */
+
+function studyMissedCards() {
+
+    if (reviewCards.length === 0) {
+
+        return;
+
+    }
+
+
+    shuffleCards =
+        false;
+
+
+    useKnowDontKnow =
+        true;
+
+
+    document.getElementById("studyComplete")
+        .style.display = "none";
+
+
+    document.getElementById("practiceComplete")
+        .style.display = "none";
+
+
+    document.getElementById("createArea")
+        .style.display = "none";
+
+
+    document.getElementById("practiceArea")
+        .style.display = "none";
+
+
+    document.getElementById("studyArea")
+        .style.display = "block";
+
+
+    currentCard =
+        0;
+
+
+    correctCards =
+        0;
+
+
+    shuffleOrder =
+        reviewCards.slice();
+
+
+    const missedCards =
+        reviewCards.slice();
+
+
+    reviewCards =
+        missedCards;
+
+
+    document.getElementById("studyTitle")
+        .textContent =
+            "🔁 Review Missed Cards";
+
+
+    document.getElementById("knowButtons")
+        .style.display =
+            "block";
+
+
+    showReviewCard();
+
+}
+
+
+/* =====================================================
+   SHOW REVIEW CARD
+===================================================== */
+
+function showReviewCard() {
+
+    if (reviewCards.length === 0) {
+
+        backToCreate();
+
+        return;
+
+    }
+
+
+    const card =
+        reviewCards[currentCard];
+
+
+    document.getElementById("flashcardFront")
+        .textContent =
+            card.question;
+
+
+    document.getElementById("flashcardBack")
+        .textContent =
+            card.answer;
+
+
+    document.querySelector(".flashcard-inner")
+        .classList.remove("flipped");
+
+
+    showingAnswer =
+        false;
+
+
+    document.getElementById("progress")
+        .textContent =
+            "Review Card " +
+            (currentCard + 1) +
+            " of " +
+            reviewCards.length;
+
+
+    const percent =
+        (
+            currentCard /
+            reviewCards.length
+        ) * 100;
+
+
+    document.getElementById("progressFill")
+        .style.width =
+            percent + "%";
+
+}
+
+
+/* =====================================================
+   REVIEW KNOW
+===================================================== */
+
+function reviewKnowCard() {
+
+    const card =
+        reviewCards[currentCard];
+
+
+    if (!card) return;
+
+
+    card.known =
+        true;
+
+
+    saveCards();
+
+
+    nextReviewCard();
+
+}
+
+
+/* =====================================================
+   REVIEW NEXT
+===================================================== */
+
+function nextReviewCard() {
+
+    if (
+        currentCard <
+        reviewCards.length - 1
+    ) {
+
+        currentCard++;
+
+
+        showReviewCard();
+
+    } else {
+
+        reviewCards =
+            [];
+
+
+        alert(
+            "Nice! You finished reviewing the missed cards. 🦉"
+        );
+
+
+        backToCreate();
+
+    }
+
+}
+
+
+/* =====================================================
+   PRACTICE MODE
+===================================================== */
+
+function startPracticeMode() {
+
+    const currentCards =
+        getCurrentCards();
+
+
+    if (currentCards.length === 0) {
+
+        alert(
+            "Add some flashcards to this set first!"
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById("homePage")
+        .style.display = "none";
+
+
+    document.getElementById("flashcardsPage")
+        .style.display = "block";
+
+
+    document.getElementById("setsArea")
+        .style.display = "none";
+
+
+    document.getElementById("homeNav")
+        .classList.remove("active");
+
+
+    document.getElementById("flashcardsNav")
+        .classList.add("active");
+
+
+    document.getElementById("setsNav")
+        .classList.remove("active");
+
+
+    practiceCards =
+        currentCards.slice();
+
+
+    practiceCardIndex =
+        0;
+
+
+    practiceCorrect =
+        0;
+
+
+    practiceAnswered =
+        false;
+
+
+    /*
+
+        Shuffle practice questions so
+        practice does not always feel identical.
+
+    */
+
+    for (
+        let i = practiceCards.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const randomIndex =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        const temp =
+            practiceCards[i];
+
+
+        practiceCards[i] =
+            practiceCards[randomIndex];
+
+
+        practiceCards[randomIndex] =
+            temp;
+
+    }
+
+
+    document.getElementById("createArea")
+        .style.display = "none";
+
+
+    document.getElementById("studyArea")
+        .style.display = "none";
+
+
+    document.getElementById("studyComplete")
+        .style.display = "none";
+
+
+    document.getElementById("practiceComplete")
+        .style.display = "none";
+
+
+    document.getElementById("practiceArea")
+        .style.display = "block";
+
+
+    document.getElementById("mainContent")
+        .scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+    showPracticeQuestion();
+
+}
+
+
+/* =====================================================
+   CREATE MULTIPLE CHOICE ANSWERS
+===================================================== */
+
+function createPracticeChoices(correctCard) {
+
+    const choices =
+        [correctCard.answer];
+
+
+    const otherAnswers =
+        cards.filter(
+            card =>
+                card.setId === selectedSetId &&
+                card.id !== correctCard.id
+        );
+
+
+    const shuffledOthers =
+        otherAnswers.slice();
+
+
+    for (
+        let i = shuffledOthers.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const randomIndex =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        const temp =
+            shuffledOthers[i];
+
+
+        shuffledOthers[i] =
+            shuffledOthers[randomIndex];
+
+
+        shuffledOthers[randomIndex] =
+            temp;
+
+    }
+
+
+    for (
+        let i = 0;
+        i < shuffledOthers.length &&
+        choices.length < 4;
+        i++
+    ) {
+
+        if (
+            !choices.includes(
+                shuffledOthers[i].answer
+            )
+        ) {
+
+            choices.push(
+                shuffledOthers[i].answer
+            );
+
+        }
+
+    }
+
+
+    /*
+        If the set has fewer than 4 unique answers,
+        make simple placeholder choices so the layout
+        still works.
+    */
+
+    const fallbackAnswers = [
+        "None of the above",
+        "Not sure",
+        "Something else"
+    ];
+
+
+    for (
+        let i = 0;
+        choices.length < 4 &&
+        i < fallbackAnswers.length;
+        i++
+    ) {
+
+        if (
+            !choices.includes(
+                fallbackAnswers[i]
+            )
+        ) {
+
+            choices.push(
+                fallbackAnswers[i]
+            );
+
+        }
+
+    }
+
+
+    /* Shuffle the final choices */
+
+    for (
+        let i = choices.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const randomIndex =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+
+        const temp =
+            choices[i];
+
+
+        choices[i] =
+            choices[randomIndex];
+
+
+        choices[randomIndex] =
+            temp;
+
+    }
+
+
+    return choices;
+
+}
+
+
+/* =====================================================
+   SHOW PRACTICE QUESTION
+===================================================== */
+
+function showPracticeQuestion() {
+
+    if (
+        practiceCardIndex >=
+        practiceCards.length
+    ) {
+
+        showPracticeComplete();
+
+        return;
+
+    }
+
+
+    practiceAnswered =
+        false;
+
+
+    const card =
+        practiceCards[practiceCardIndex];
+
+
+    document.getElementById("practiceProgress")
+        .textContent =
+            "Question " +
+            (practiceCardIndex + 1) +
+            " of " +
+            practiceCards.length;
+
+
+    const percent =
+        (
+            practiceCardIndex /
+            practiceCards.length
+        ) * 100;
+
+
+    document.getElementById(
+        "practiceProgressFill"
+    ).style.width =
+        percent + "%";
+
+
+    document.getElementById(
+        "practiceQuestion"
+    ).textContent =
+        card.question;
+
+
+    document.getElementById(
+        "practiceFeedback"
+    ).textContent =
+        "";
+
+
+    document.getElementById(
+        "nextPracticeButton"
+    ).style.display =
+        "none";
+
+
+    const choicesContainer =
+        document.getElementById(
+            "practiceChoices"
+        );
+
+
+    choicesContainer.innerHTML = "";
+
+
+    const choices =
+        createPracticeChoices(card);
+
+
+    choices.forEach(choice => {
+
+        const button =
+            document.createElement("button");
+
+
+        button.className =
+            "practiceChoice";
+
+
+        button.textContent =
+            choice;
+
+
+        button.onclick =
+            () =>
+                selectPracticeAnswer(
+                    choice,
+                    card.answer,
+                    button
+                );
+
+
+        choicesContainer.appendChild(button);
+
+    });
+
+}
+
+
+/* =====================================================
+   SELECT PRACTICE ANSWER
+===================================================== */
+
+function selectPracticeAnswer(
+    selectedAnswer,
+    correctAnswer,
+    selectedButton
+) {
+
+    if (practiceAnswered) {
+
+        return;
+
+    }
+
+
+    practiceAnswered =
+        true;
+
+
+    const card =
+        practiceCards[practiceCardIndex];
+
+
+    card.practiceAttempts =
+        (card.practiceAttempts || 0) + 1;
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".practiceChoice"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.disabled =
+            true;
+
+
+        if (
+            button.textContent ===
+            correctAnswer
+        ) {
+
+            button.classList.add("correct");
+
+        }
+
+    });
+
+
+    if (
+        selectedAnswer ===
+        correctAnswer
+    ) {
+
+        practiceCorrect++;
+
+
+        card.practiceCorrect =
+            (card.practiceCorrect || 0) + 1;
+
+
+        card.known =
+            true;
+
+
+        selectedButton.classList.add(
+            "correct"
+        );
+
+
+        document.getElementById(
+            "practiceFeedback"
+        ).textContent =
+            "✅ Correct! Nice job!";
+
+
+        document.getElementById(
+            "practiceFeedback"
+        ).className =
+            "practiceCorrect";
+
+
+    } else {
+
+        card.known =
+            false;
+
+
+        selectedButton.classList.add(
+            "wrong"
+        );
+
+
+        document.getElementById(
+            "practiceFeedback"
+        ).textContent =
+            "❌ Not quite. The correct answer is: " +
+            correctAnswer;
+
+
+        document.getElementById(
+            "practiceFeedback"
+        ).className =
+            "practiceWrong";
+
+    }
+
+
+    saveCards();
+
+
+    document.getElementById(
+        "nextPracticeButton"
+    ).style.display =
+        "inline-block";
+
+}
+
+
+/* =====================================================
+   NEXT PRACTICE QUESTION
+===================================================== */
+
+function nextPracticeCard() {
+
+    if (!practiceAnswered) {
+
+        return;
+
+    }
+
+
+    practiceCardIndex++;
+
+
+    showPracticeQuestion();
+
+}
+
+
+/* =====================================================
+   PRACTICE COMPLETE
+===================================================== */
+
+function showPracticeComplete() {
+
+    document.getElementById("practiceArea")
+        .style.display = "none";
+
+
+    document.getElementById("studyArea")
+        .style.display = "none";
+
+
+    document.getElementById("studyComplete")
+        .style.display = "none";
+
+
+    document.getElementById("practiceComplete")
+        .style.display = "block";
+
+
+    const total =
+        practiceCards.length;
+
+
+    const percent =
+        Math.round(
+            (
+                practiceCorrect /
+                total
+            ) * 100
+        );
+
+
+    document.getElementById(
+        "practiceScoreText"
+    ).textContent =
+        "You got " +
+        practiceCorrect +
+        " out of " +
+        total +
+        " questions correct!";
+
+
+    document.getElementById(
+        "practiceReviewText"
+    ).textContent =
+        percent +
+        "% correct. Keep practicing! 🦉";
+
+}
+
+
+/* =====================================================
+   STUDY AGAIN
+===================================================== */
+
+function startStudyingAgain() {
+
+    useKnowDontKnow =
+        true;
+
+
+    shuffleCards =
+        false;
+
+
+    startStudying();
 
 }
 
@@ -2644,7 +4131,15 @@ function backToCreate() {
         .style.display = "none";
 
 
+    document.getElementById("practiceComplete")
+        .style.display = "none";
+
+
     document.getElementById("studyArea")
+        .style.display = "none";
+
+
+    document.getElementById("practiceArea")
         .style.display = "none";
 
 
@@ -2665,7 +4160,9 @@ function updateEverything() {
 
     updateCount();
 
+
     renderSets();
+
 
     renderHomeSets();
 
@@ -2743,9 +4240,11 @@ document.getElementById("quickSetName")
 
 updateEverything();
 
+
 showHome();
 
 </script>
 
 </body>
 </html>
+```
