@@ -1,8 +1,13 @@
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Owly - Study Smarter</title>
 
     <style>
@@ -90,7 +95,7 @@
             background: #0d1a35;
             border: 1px solid #203a63;
             border-radius: 12px;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
         }
 
         /* =========================
@@ -173,7 +178,7 @@
             margin: 16px 0;
             padding: 28px;
             border-radius: 14px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
         }
 
         .card h2 {
@@ -189,154 +194,13 @@
             display: none;
         }
 
-        .homeRoom {
-            position: relative;
-            min-height: 300px;
-            margin-bottom: 18px;
-            overflow: hidden;
-            border: 1px solid #203a63;
-            border-radius: 18px;
-            background:
-                radial-gradient(circle at 18% 20%, rgba(93,146,255,.18), transparent 26%),
-                radial-gradient(circle at 82% 18%, rgba(120,151,255,.12), transparent 24%),
-                linear-gradient(180deg, #101f3b 0%, #0c1730 65%, #0a1225 100%);
-            box-shadow: 0 14px 35px rgba(0,0,0,.28);
-        }
-
-        .roomStars {
-            position: absolute;
-            inset: 0 0 38% 0;
-            background-image:
-                radial-gradient(circle, rgba(255,255,255,.75) 1px, transparent 2px),
-                radial-gradient(circle, rgba(255,255,255,.38) 1px, transparent 2px);
-            background-size: 82px 70px, 127px 93px;
-            opacity: .5;
-        }
-
-        .roomWindow {
-            position: absolute;
-            right: 34px;
-            top: 28px;
-            width: 130px;
-            height: 105px;
-            border: 7px solid #203a63;
-            border-radius: 10px;
-            background: linear-gradient(180deg, #182f57, #101d37);
-            box-shadow: inset 0 0 25px rgba(94,145,255,.12);
-        }
-
-        .roomWindow:before,
-        .roomWindow:after {
-            content: "";
-            position: absolute;
-            background: #203a63;
-        }
-
-        .roomWindow:before {
-            width: 6px;
-            height: 100%;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-        }
-
-        .roomWindow:after {
-            height: 6px;
-            width: 100%;
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-
-        .roomFloor {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 95px;
-            background: linear-gradient(180deg, #101c33, #0a1122);
-            border-top: 1px solid #182c4d;
-        }
-
-        .roomDesk {
-            position: absolute;
-            left: 46px;
-            bottom: 46px;
-            width: 250px;
-            height: 18px;
-            border-radius: 8px;
-            background: #182e51;
-            box-shadow: 0 10px 0 #0a1224;
-        }
-
-        .roomDesk:before {
-            content: "";
-            position: absolute;
-            left: 22px;
-            top: 15px;
-            width: 14px;
-            height: 66px;
-            background: #152744;
-            box-shadow: 192px 0 0 #152744;
-        }
-
-        .deskLamp {
-            position: absolute;
-            left: 95px;
-            bottom: 66px;
-            width: 55px;
-            height: 48px;
-        }
-
-        .deskLamp:before {
-            content: "";
-            position: absolute;
-            left: 18px;
-            top: 0;
-            width: 4px;
-            height: 30px;
-            background: #6f87b3;
-        }
-
-        .deskLamp:after {
-            content: "💡";
-            position: absolute;
-            left: 5px;
-            top: -14px;
-            font-size: 24px;
-            filter: drop-shadow(0 0 8px rgba(255,236,146,.45));
-        }
-
-        .roomTitle {
-            position: absolute;
-            left: 28px;
-            top: 24px;
-            z-index: 5;
-            max-width: 500px;
-        }
-
-        .roomTitle h1 {
-            margin: 0;
-            font-size: 29px;
-        }
-
-        .roomTitle p {
-            margin: 8px 0 0;
-            color: #8fa4cc;
-            line-height: 1.5;
-        }
-
-        /* =========================
-           HOME SETS
-        ========================= */
-
         .homeHeader {
             background: #101f3b;
             border: 1px solid #203a63;
             border-radius: 14px;
             padding: 28px;
             margin-bottom: 18px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
         }
 
         .homeHeader h1 {
@@ -351,7 +215,10 @@
 
         .homeSetsGrid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(220px, 1fr)
+            );
             gap: 16px;
         }
 
@@ -369,7 +236,7 @@
         .homeSetCard:hover {
             transform: translateY(-4px);
             border-color: #4b8fff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.28);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.28);
         }
 
         .homeSetIcon {
@@ -469,6 +336,10 @@
             opacity: 0.92;
         }
 
+        button:disabled {
+            cursor: default;
+        }
+
         .primaryButton {
             background: #287cff;
         }
@@ -557,7 +428,10 @@
 
         #setGrid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            grid-template-columns: repeat(
+                auto-fill,
+                minmax(210px, 1fr)
+            );
             gap: 15px;
         }
 
@@ -575,12 +449,13 @@
         .setCard:hover {
             transform: translateY(-3px);
             border-color: #4b8fff;
-            box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
         }
 
         .setCard.selected {
             border-color: #4b8fff;
-            box-shadow: 0 0 0 2px rgba(75,143,255,0.18);
+            box-shadow:
+                0 0 0 2px rgba(75, 143, 255, 0.18);
         }
 
         .setIcon {
@@ -593,6 +468,7 @@
             font-weight: bold;
             margin-bottom: 7px;
             word-break: break-word;
+            padding-right: 32px;
         }
 
         .setInfo {
@@ -615,18 +491,13 @@
             color: #ff6b7a;
         }
 
-        #newSetBox input {
-            width: calc(100% - 125px);
-            max-width: none;
-            margin: 0;
-        }
-
         /* =========================
            STUDY AREA
         ========================= */
 
         #studyArea {
             display: none;
+            text-align: center;
         }
 
         #progress,
@@ -671,7 +542,8 @@
             position: relative;
             transform-style: preserve-3d;
             transform-origin: center center;
-            transition: transform 0.5s ease-in-out;
+            transition:
+                transform 0.5s ease-in-out;
         }
 
         .flashcard-inner.flipped {
@@ -693,7 +565,9 @@
             top: 0;
             left: 0;
             backface-visibility: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.3);
+            overflow-wrap: anywhere;
         }
 
         .flashcard-back {
@@ -734,7 +608,9 @@
             justify-content: center;
             font-size: 30px;
             font-weight: bold;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.3);
+            overflow-wrap: anywhere;
         }
 
         #practiceChoices {
@@ -795,28 +671,33 @@
            COMPLETE
         ========================= */
 
-        #studyComplete {
+        #studyComplete,
+        #practiceComplete {
             display: none;
             background: #101f3b;
             border: 1px solid #203a63;
             margin: 50px auto;
             padding: 40px;
             border-radius: 18px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.24);
             text-align: center;
         }
 
-        #studyComplete h2 {
+        #studyComplete h2,
+        #practiceComplete h2 {
             font-size: 34px;
             margin-top: 0;
         }
 
-        #scoreText {
+        #scoreText,
+        #practiceScoreText {
             font-size: 21px;
             margin: 15px 0;
         }
 
-        #reviewText {
+        #reviewText,
+        #practiceReviewText {
             font-size: 18px;
             margin: 10px 0 25px;
             font-weight: bold;
@@ -825,37 +706,6 @@
 
         #missedStudyButton {
             display: none;
-        }
-
-        /* =========================
-           PRACTICE COMPLETE
-        ========================= */
-
-        #practiceComplete {
-            display: none;
-            background: #101f3b;
-            border: 1px solid #203a63;
-            margin: 50px auto;
-            padding: 40px;
-            border-radius: 18px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.24);
-            text-align: center;
-        }
-
-        #practiceComplete h2 {
-            font-size: 34px;
-            margin-top: 0;
-        }
-
-        #practiceScoreText {
-            font-size: 21px;
-            margin: 15px 0;
-        }
-
-        #practiceReviewText {
-            font-size: 18px;
-            color: #a9c0e9;
-            margin-bottom: 25px;
         }
 
         /* =========================
@@ -996,28 +846,6 @@
             transform: none;
         }
 
-        .studyModeGrid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 14px;
-        }
-
-        .studyModeButton {
-            width: 100%;
-            margin: 0;
-            padding: 14px;
-            text-align: left;
-        }
-
-        .modeDescription {
-            display: block;
-            color: #8195bd;
-            font-size: 12px;
-            font-weight: normal;
-            margin-top: 5px;
-        }
-
         /* =========================
            FOOTER
         ========================= */
@@ -1035,6 +863,281 @@
         }
 
         /* =========================
+           OWLY HOME ROOM
+        ========================= */
+
+        .homeRoom {
+            position: relative;
+            min-height: 300px;
+            margin-bottom: 18px;
+            overflow: hidden;
+            border: 1px solid #203a63;
+            border-radius: 18px;
+            background:
+                radial-gradient(
+                    circle at 18% 20%,
+                    rgba(93, 146, 255, 0.18),
+                    transparent 26%
+                ),
+                radial-gradient(
+                    circle at 82% 18%,
+                    rgba(120, 151, 255, 0.12),
+                    transparent 24%
+                ),
+                linear-gradient(
+                    180deg,
+                    #101f3b 0%,
+                    #0c1730 65%,
+                    #0a1225 100%
+                );
+            box-shadow:
+                0 14px 35px rgba(0, 0, 0, 0.28);
+        }
+
+        .roomStars {
+            position: absolute;
+            inset: 0 0 38% 0;
+            background-image:
+                radial-gradient(
+                    circle,
+                    rgba(255, 255, 255, 0.75) 1px,
+                    transparent 2px
+                ),
+                radial-gradient(
+                    circle,
+                    rgba(255, 255, 255, 0.38) 1px,
+                    transparent 2px
+                );
+            background-size:
+                82px 70px,
+                127px 93px;
+            opacity: 0.5;
+        }
+
+        .roomWindow {
+            position: absolute;
+            right: 34px;
+            top: 28px;
+            width: 130px;
+            height: 105px;
+            border: 7px solid #203a63;
+            border-radius: 10px;
+            background:
+                linear-gradient(
+                    180deg,
+                    #182f57,
+                    #101d37
+                );
+            box-shadow:
+                inset 0 0 25px rgba(94, 145, 255, 0.12);
+        }
+
+        .roomWindow:before,
+        .roomWindow:after {
+            content: "";
+            position: absolute;
+            background: #203a63;
+        }
+
+        .roomWindow:before {
+            width: 6px;
+            height: 100%;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .roomWindow:after {
+            height: 6px;
+            width: 100%;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .roomFloor {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 95px;
+            background:
+                linear-gradient(
+                    180deg,
+                    #101c33,
+                    #0a1122
+                );
+            border-top: 1px solid #182c4d;
+        }
+
+        .roomDesk {
+            position: absolute;
+            left: 46px;
+            bottom: 46px;
+            width: 250px;
+            height: 18px;
+            border-radius: 8px;
+            background: #182e51;
+            box-shadow:
+                0 10px 0 #0a1224;
+        }
+
+        .roomDesk:before {
+            content: "";
+            position: absolute;
+            left: 22px;
+            top: 15px;
+            width: 14px;
+            height: 66px;
+            background: #152744;
+            box-shadow:
+                192px 0 0 #152744;
+        }
+
+        .deskLamp {
+            position: absolute;
+            left: 95px;
+            bottom: 66px;
+            width: 55px;
+            height: 48px;
+        }
+
+        .deskLamp:before {
+            content: "";
+            position: absolute;
+            left: 18px;
+            top: 0;
+            width: 4px;
+            height: 30px;
+            background: #6f87b3;
+        }
+
+        .deskLamp:after {
+            content: "💡";
+            position: absolute;
+            left: 5px;
+            top: -14px;
+            font-size: 24px;
+            filter:
+                drop-shadow(
+                    0 0 8px rgba(255, 236, 146, 0.45)
+                );
+        }
+
+        .roomOwlStanding {
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            left: 118px;
+            bottom: 74px;
+            object-fit: contain;
+            animation:
+                owlBob 3.2s ease-in-out infinite;
+            filter:
+                drop-shadow(
+                    0 8px 12px rgba(0, 0, 0, 0.35)
+                );
+            z-index: 3;
+        }
+
+        .roomOwlFlying {
+            position: absolute;
+            width: 68px;
+            height: 68px;
+            left: -90px;
+            top: 62px;
+            object-fit: contain;
+            animation:
+                owlFly 12s linear infinite;
+            filter:
+                drop-shadow(
+                    0 8px 12px rgba(0, 0, 0, 0.3)
+                );
+            z-index: 4;
+        }
+
+        .roomSpeech {
+            position: absolute;
+            left: 210px;
+            bottom: 105px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(16, 31, 59, 0.92);
+            border: 1px solid #29466f;
+            color: #dbe6ff;
+            font-size: 13px;
+            font-weight: 700;
+            z-index: 5;
+        }
+
+        .roomTitle {
+            position: absolute;
+            left: 28px;
+            top: 24px;
+            z-index: 5;
+            max-width: 360px;
+        }
+
+        .roomTitle h1 {
+            margin: 0;
+            font-size: 29px;
+        }
+
+        .roomTitle p {
+            margin: 8px 0 0;
+            color: #8fa4cc;
+            line-height: 1.5;
+        }
+
+        @keyframes owlFly {
+            0% {
+                transform:
+                    translateX(0)
+                    translateY(0)
+                    rotate(-2deg);
+            }
+
+            25% {
+                transform:
+                    translateX(28vw)
+                    translateY(-18px)
+                    rotate(2deg);
+            }
+
+            50% {
+                transform:
+                    translateX(54vw)
+                    translateY(5px)
+                    rotate(-2deg);
+            }
+
+            75% {
+                transform:
+                    translateX(78vw)
+                    translateY(-14px)
+                    rotate(2deg);
+            }
+
+            100% {
+                transform:
+                    translateX(110vw)
+                    translateY(0)
+                    rotate(-2deg);
+            }
+        }
+
+        @keyframes owlBob {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* =========================
            STUDY MODAL
         ========================= */
 
@@ -1046,13 +1149,13 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
-            background: rgba(3, 8, 18, .74);
+            background: rgba(3, 8, 18, 0.74);
             backdrop-filter: blur(7px);
         }
 
         #studyModal.open {
             display: flex;
-            animation: modalFade .18s ease-out;
+            animation: modalFade 0.18s ease-out;
         }
 
         .studyModalCard {
@@ -1062,9 +1165,18 @@
             border: 1px solid #2b4d7f;
             border-radius: 22px;
             background:
-                radial-gradient(circle at 12% 0%, rgba(74,139,255,.16), transparent 32%),
-                linear-gradient(180deg, #101f3b 0%, #0d1931 100%);
-            box-shadow: 0 25px 80px rgba(0,0,0,.48);
+                radial-gradient(
+                    circle at 12% 0%,
+                    rgba(74, 139, 255, 0.16),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    180deg,
+                    #101f3b 0%,
+                    #0d1931 100%
+                );
+            box-shadow:
+                0 25px 80px rgba(0, 0, 0, 0.48);
         }
 
         .studyModalTop {
@@ -1108,7 +1220,23 @@
             overflow: hidden;
             border-radius: 14px;
             border: 1px solid #27456f;
-            background: linear-gradient(180deg, #132747, #0d182d);
+            background:
+                linear-gradient(
+                    180deg,
+                    #132747,
+                    #0d182d
+                );
+        }
+
+        .studyRoomMini img {
+            position: absolute;
+            width: 62px;
+            height: 62px;
+            object-fit: contain;
+            left: 34px;
+            bottom: 19px;
+            animation:
+                owlBob 2.8s ease-in-out infinite;
         }
 
         .studyRoomMini:before {
@@ -1122,10 +1250,15 @@
             border-top: 1px solid #203a63;
         }
 
+        .studyModeGrid {
+            display: grid;
+            grid-template-columns:
+                repeat(3, 1fr);
+            gap: 13px;
+        }
+
         .studyModeGrid.modalModes {
             padding: 0 28px 8px;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 13px;
         }
 
         .modalModeButton {
@@ -1241,7 +1374,7 @@
             color: #65d68b;
             font-size: 13px;
             opacity: 0;
-            transition: .2s;
+            transition: 0.2s;
         }
 
         .settingsSaved.show {
@@ -1254,7 +1387,8 @@
 
         @media (max-width: 1050px) {
             #page {
-                grid-template-columns: 200px minmax(0, 1fr);
+                grid-template-columns:
+                    200px minmax(0, 1fr);
             }
 
             #rightRail {
@@ -1263,6 +1397,7 @@
         }
 
         @media (max-width: 760px) {
+
             #topbar {
                 gap: 12px;
                 padding: 0 14px;
@@ -1320,15 +1455,6 @@
                 grid-template-columns: 1fr;
             }
 
-            #newSetBox input {
-                width: 100%;
-                margin-bottom: 8px;
-            }
-
-            .studyModeGrid {
-                grid-template-columns: 1fr;
-            }
-
             .setsHeader {
                 align-items: flex-start;
                 flex-direction: column;
@@ -1346,7 +1472,13 @@
                 grid-template-columns: 1fr;
             }
 
-            .studyModalTop,
+            .studyModalTop {
+                margin-left: 18px;
+                margin-right: 18px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+
             .studyModalSettings {
                 margin-left: 18px;
                 margin-right: 18px;
@@ -1375,6 +1507,15 @@
                 width: 205px;
             }
 
+            .roomOwlStanding {
+                left: 93px;
+            }
+
+            .roomSpeech {
+                left: 165px;
+                bottom: 102px;
+            }
+
             .roomTitle {
                 max-width: 270px;
             }
@@ -1389,46 +1530,54 @@
     <img
         id="logo"
         src="./owly-logo.png"
-        alt="Owly Logo">
+        alt="Owly Logo"
+    >
 
     <nav id="nav" aria-label="Main navigation">
 
         <button
             class="navButton active"
             id="homeNav"
-            onclick="showHome()">
+            onclick="showHome()"
+        >
             Home
         </button>
 
         <button
             class="navButton"
             id="flashcardsNav"
-            onclick="showFlashcards()">
+            onclick="showFlashcards()"
+        >
             Flashcards
         </button>
 
         <button
             class="navButton"
             id="setsNav"
-            onclick="showSets()">
+            onclick="showSets()"
+        >
             Sets
         </button>
 
-        <button class="navButton">
+        <button
+            class="navButton"
+            id="progressNav"
+            onclick="showProgress()"
+        >
             Progress
         </button>
 
         <button
             class="navButton"
             id="settingsNav"
-            onclick="showSettings()">
+            onclick="showSettings()"
+        >
             Settings
         </button>
 
     </nav>
 
 </header>
-
 
 <div id="page">
 
@@ -1440,28 +1589,31 @@
 
         <button
             class="sideButton primary"
-            onclick="focusQuestion()">
+            onclick="focusQuestion()"
+        >
             ＋ New Flashcard
         </button>
 
         <button
             class="sideButton"
-            onclick="showFlashcards()">
+            onclick="showFlashcards()"
+        >
             ▣ All Flashcards
         </button>
 
         <button
             class="sideButton"
-            onclick="showSets()">
+            onclick="showSets()"
+        >
             🗂️ Sets
         </button>
 
         <p class="sideHint">
-            Organize your cards into sets and study exactly what you need.
+            Organize your cards into sets and study exactly
+            what you need.
         </p>
 
     </aside>
-
 
     <!-- MAIN -->
 
@@ -1472,6 +1624,7 @@
         <section id="homePage">
 
             <div class="homeRoom">
+
                 <div class="roomStars"></div>
                 <div class="roomWindow"></div>
                 <div class="roomFloor"></div>
@@ -1479,21 +1632,42 @@
                 <div class="deskLamp"></div>
 
                 <div class="roomTitle">
-                    <h1>Your Study Room 📚</h1>
+
+                    <h1>
+                        Your Study Room 🦉
+                    </h1>
+
                     <p>
-                        Pick a set below and let Owly help you turn a few
-                        minutes into real progress.
+                        Pick a set below and let Owly help you
+                        turn a few minutes into real progress.
                     </p>
+
                 </div>
+
+                <img
+                    class="roomOwlFlying"
+                    src="./owly-logo.png"
+                    alt="Owly flying"
+                >
+
+                <img
+                    class="roomOwlStanding"
+                    src="./owly-logo.png"
+                    alt="Owly standing at the desk"
+                >
+
+                <div class="roomSpeech">
+                    Ready to study?
+                </div>
+
             </div>
 
             <div
                 id="homeSetsGrid"
-                class="homeSetsGrid">
-            </div>
+                class="homeSetsGrid"
+            ></div>
 
         </section>
-
 
         <!-- FLASHCARDS -->
 
@@ -1501,7 +1675,9 @@
 
             <div class="hero">
 
-                <h1>Flashcards</h1>
+                <h1>
+                    Flashcards
+                </h1>
 
                 <p>
                     Study smarter, one card at a time. 🦉
@@ -1509,12 +1685,12 @@
 
             </div>
 
-
             <!-- CREATE -->
 
             <div
                 class="card"
-                id="createArea">
+                id="createArea"
+            >
 
                 <div id="selectedSetBar">
 
@@ -1536,90 +1712,86 @@
 
                 </div>
 
-
                 <h2>
                     Create a Flashcard
                 </h2>
 
-
                 <input
                     id="question"
                     type="text"
-                    placeholder="Question or term">
+                    placeholder="Question or term"
+                >
 
                 <br>
-
 
                 <input
                     id="answer"
                     type="text"
-                    placeholder="Answer or definition">
+                    placeholder="Answer or definition"
+                >
 
                 <br>
 
-
                 <button
                     class="primaryButton"
-                    onclick="addCard()">
+                    onclick="addCard()"
+                >
                     Add Flashcard
                 </button>
 
-
                 <button
                     class="secondaryButton"
-                    onclick="openStudyPopup()">
+                    onclick="openStudyPopup()"
+                >
                     📚 Study
                 </button>
-
 
                 <p id="cardCount">
                     0 flashcards
                 </p>
 
-
                 <div id="cardList"></div>
 
             </div>
 
-
-            <!-- NORMAL / SHUFFLE -->
+            <!-- STUDY -->
 
             <div
                 class="card"
-                id="studyArea">
+                id="studyArea"
+            >
 
                 <h2 id="studyTitle">
                     📚 Study Mode
                 </h2>
 
-
                 <p id="progress">
                     Card 0 of 0
                 </p>
 
-
                 <div id="progressBar">
-
                     <div id="progressFill"></div>
-
                 </div>
-
 
                 <div
                     id="flashcard"
-                    onclick="flipCard()">
+                    onclick="flipCard()"
+                    title="Click to flip"
+                >
 
                     <div class="flashcard-inner">
 
                         <div
                             class="flashcard-front"
-                            id="flashcardFront">
+                            id="flashcardFront"
+                        >
                             Add some flashcards first!
                         </div>
 
                         <div
                             class="flashcard-back"
-                            id="flashcardBack">
+                            id="flashcardBack"
+                        >
                             Add some flashcards first!
                         </div>
 
@@ -1627,57 +1799,62 @@
 
                 </div>
 
-
                 <div id="knowButtons">
 
-                    <button onclick="previousCard()">
+                    <button
+                        onclick="previousCard()"
+                    >
                         ⬅ Previous
                     </button>
 
                     <button
+                        id="knowButton"
                         class="primaryButton"
-                        onclick="knowCard()">
+                        onclick="knowCard()"
+                    >
                         ✅ Know
                     </button>
 
-                    <button onclick="dontKnowCard()">
+                    <button
+                        id="dontKnowButton"
+                        onclick="dontKnowCard()"
+                    >
                         ❌ Don't Know
                     </button>
 
-                    <button onclick="nextCard()">
+                    <button
+                        onclick="nextCard()"
+                    >
                         Next ➡
                     </button>
 
                 </div>
 
-
                 <br>
-
 
                 <button
                     class="secondaryButton"
-                    onclick="backToCreate()">
+                    onclick="backToCreate()"
+                >
                     Back to Create
                 </button>
 
             </div>
 
-
-            <!-- PRACTICE MODE -->
+            <!-- PRACTICE -->
 
             <div
                 class="card"
-                id="practiceArea">
+                id="practiceArea"
+            >
 
                 <h2>
                     ✏️ Practice Mode
                 </h2>
 
-
                 <p id="practiceProgress">
                     Question 0 of 0
                 </p>
-
 
                 <div id="practiceProgressBar">
 
@@ -1685,40 +1862,36 @@
 
                 </div>
 
-
                 <div
                     class="practiceQuestion"
-                    id="practiceQuestion">
+                    id="practiceQuestion"
+                >
                     Practice question
                 </div>
 
-
                 <div id="practiceChoices"></div>
 
-
                 <div id="practiceFeedback"></div>
-
 
                 <button
                     class="primaryButton"
                     id="nextPracticeButton"
                     onclick="nextPracticeCard()"
-                    style="display:none;">
+                    style="display:none;"
+                >
                     Next ➡
                 </button>
 
-
                 <br>
-
 
                 <button
                     class="secondaryButton"
-                    onclick="backToCreate()">
+                    onclick="backToCreate()"
+                >
                     Back to Create
                 </button>
 
             </div>
-
 
             <!-- STUDY COMPLETE -->
 
@@ -1728,35 +1901,32 @@
                     🎉 Study Complete!
                 </h2>
 
-
                 <p id="scoreText"></p>
 
-
                 <p id="reviewText"></p>
-
 
                 <button
                     class="primaryButton"
                     id="missedStudyButton"
-                    onclick="studyMissedCards()">
+                    onclick="studyMissedCards()"
+                >
                     🔁 Study Missed Cards
                 </button>
 
-
                 <button
                     class="primaryButton"
-                    onclick="startStudyingAgain()">
+                    onclick="startStudyingAgain()"
+                >
                     📚 Study Again
                 </button>
 
-
                 <button
-                    onclick="backToCreate()">
+                    onclick="backToCreate()"
+                >
                     Back to Create
                 </button>
 
             </div>
-
 
             <!-- PRACTICE COMPLETE -->
 
@@ -1766,29 +1936,26 @@
                     🎉 Practice Complete!
                 </h2>
 
-
                 <p id="practiceScoreText"></p>
-
 
                 <p id="practiceReviewText"></p>
 
-
                 <button
                     class="primaryButton"
-                    onclick="startPracticeMode()">
+                    onclick="startPracticeMode()"
+                >
                     ✏️ Practice Again
                 </button>
 
-
                 <button
-                    onclick="backToCreate()">
+                    onclick="backToCreate()"
+                >
                     Back to Create
                 </button>
 
             </div>
 
         </section>
-
 
         <!-- SETS -->
 
@@ -1801,11 +1968,11 @@
                 </h1>
 
                 <p>
-                    Keep your subjects organized and ready to study. 🗂️
+                    Keep your subjects organized and ready to
+                    study. 🗂️
                 </p>
 
             </div>
-
 
             <div class="card">
 
@@ -1818,15 +1985,16 @@
                         </h2>
 
                         <p class="rightText">
-                            Create a set for each subject, unit, or topic.
+                            Create a set for each subject,
+                            unit, or topic.
                         </p>
 
                     </div>
 
-
                     <button
                         class="primaryButton"
-                        onclick="openSetPopup()">
+                        onclick="openSetPopup()"
+                    >
                         ＋ New Set
                     </button>
 
@@ -1838,21 +2006,21 @@
 
         </section>
 
-
         <!-- SETTINGS -->
 
         <section id="settingsArea">
 
             <div class="hero">
 
-                <h1>Settings</h1>
+                <h1>
+                    Settings
+                </h1>
 
                 <p>
                     Make Owly feel the way you like to study. ⚙️
                 </p>
 
             </div>
-
 
             <div class="settingsGrid">
 
@@ -1863,9 +2031,9 @@
                     </h3>
 
                     <p class="rightText">
-                        Choose what Owly should use when you start studying.
+                        Choose how you want your study controls
+                        to work.
                     </p>
-
 
                     <div class="toggleRow">
 
@@ -1876,8 +2044,8 @@
                             </strong>
 
                             <span>
-                                Show buttons for tracking cards you know
-                                or need to review.
+                                Show buttons for tracking cards
+                                you know or need to review.
                             </span>
 
                         </div>
@@ -1887,7 +2055,8 @@
                             <input
                                 type="checkbox"
                                 id="settingsKnowToggle"
-                                checked>
+                                checked
+                            >
 
                             <span class="slider"></span>
 
@@ -1895,21 +2064,21 @@
 
                     </div>
 
-
                     <label
                         for="defaultStudyMode"
                         style="
                             display:block;
                             margin:16px 0 8px;
                             font-weight:700;
-                        ">
-                        Default study mode
+                        "
+                    >
+                        Preferred study mode
                     </label>
-
 
                     <select
                         id="defaultStudyMode"
-                        class="settingSelect">
+                        class="settingSelect"
+                    >
 
                         <option value="normal">
                             Normal
@@ -1927,6 +2096,47 @@
 
                 </div>
 
+                <div class="settingsGroup">
+
+                    <h3>
+                        Owly room
+                    </h3>
+
+                    <p class="rightText">
+                        Turn the Home page Owly animations on
+                        or off.
+                    </p>
+
+                    <div class="toggleRow">
+
+                        <div class="toggleText">
+
+                            <strong>
+                                Animated Owly
+                            </strong>
+
+                            <span>
+                                Keep Owly flying around the room
+                                and bobbing at the desk.
+                            </span>
+
+                        </div>
+
+                        <label class="switch">
+
+                            <input
+                                type="checkbox"
+                                id="animatedOwlyToggle"
+                                checked
+                            >
+
+                            <span class="slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
 
                 <div class="settingsGroup">
 
@@ -1935,18 +2145,21 @@
                     </h3>
 
                     <p class="rightText">
-                        Everything is stored in your browser using local storage.
+                        Everything is stored in your browser
+                        using local storage.
                     </p>
 
                     <button
                         onclick="saveSettings()"
-                        class="primaryButton">
+                        class="primaryButton"
+                    >
                         Save Settings
                     </button>
 
                     <span
                         id="settingsSaved"
-                        class="settingsSaved">
+                        class="settingsSaved"
+                    >
                         Saved ✓
                     </span>
 
@@ -1954,7 +2167,8 @@
 
                     <button
                         onclick="resetOwlyData()"
-                        class="dangerButton">
+                        class="dangerButton"
+                    >
                         Reset Flashcards & Sets
                     </button>
 
@@ -1966,7 +2180,6 @@
 
     </main>
 
-
     <!-- RIGHT RAIL -->
 
     <aside id="rightRail">
@@ -1977,13 +2190,12 @@
                 Your Progress
             </h3>
 
-
             <div
                 class="statValue"
-                id="rightCardCount">
+                id="rightCardCount"
+            >
                 0
             </div>
-
 
             <div class="rightText">
                 flashcards in your library
@@ -1991,29 +2203,27 @@
 
         </div>
 
-
         <div class="panel rightCard">
 
             <h3>
                 Current Set
             </h3>
 
-
             <div
                 class="statValue"
-                id="rightSetCount">
+                id="rightSetCount"
+            >
                 0
             </div>
 
-
             <div
                 class="rightText"
-                id="rightSetName">
+                id="rightSetName"
+            >
                 General
             </div>
 
         </div>
-
 
         <div class="panel rightCard">
 
@@ -2021,20 +2231,18 @@
                 Quick Study
             </h3>
 
-
             <div class="rightText">
                 Ready to review your current set?
             </div>
 
-
             <button
                 class="primaryButton"
-                onclick="openStudyPopup()">
+                onclick="openStudyPopup()"
+            >
                 📚 Start Studying
             </button>
 
         </div>
-
 
         <div class="panel rightCard">
 
@@ -2042,10 +2250,9 @@
                 Study Tips
             </h3>
 
-
             <div class="rightText">
-                Tap a card to flip it, then mark whether you know it.
-                Missed cards can be reviewed again at the end.
+                Tap a card to flip it, then mark whether you know
+                it. Missed cards can be reviewed again at the end.
             </div>
 
         </div>
@@ -2053,7 +2260,6 @@
     </aside>
 
 </div>
-
 
 <footer>
 
@@ -2063,11 +2269,9 @@
 
     🦉
 
-
     <div style="margin-top:8px;">
         Owly helps you learn, one question at a time.
     </div>
-
 
     <div style="margin-top:22px;font-size:12px;">
         © 2026 Owly. Study Smarter.
@@ -2075,26 +2279,27 @@
 
 </footer>
 
-
 <!-- STUDY MODE MODAL -->
 
 <div
     id="studyModal"
-    aria-hidden="true">
+    aria-hidden="true"
+>
 
     <div
         class="studyModalCard"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="studyModalTitle">
+        aria-labelledby="studyModalTitle"
+    >
 
         <button
             class="studyModalClose"
             onclick="closeStudyPopup()"
-            aria-label="Close">
+            aria-label="Close"
+        >
             ✕
         </button>
-
 
         <div class="studyModalTop">
 
@@ -2108,15 +2313,21 @@
 
         </div>
 
+        <div class="studyRoomMini">
 
-        <div class="studyRoomMini"></div>
+            <img
+                src="./owly-logo.png"
+                alt="Owly ready to study"
+            >
 
+        </div>
 
         <div class="studyModeGrid modalModes">
 
             <button
                 class="modalModeButton"
-                onclick="Normal()">
+                onclick="Normal()"
+            >
 
                 <span class="modalModeIcon">
                     📖
@@ -2127,15 +2338,16 @@
                 </span>
 
                 <span class="modalModeDescription">
-                    Go through every card in order and flip each one.
+                    Go through every card in order and flip
+                    each one.
                 </span>
 
             </button>
 
-
             <button
                 class="modalModeButton"
-                onclick="shuffle()">
+                onclick="shuffle()"
+            >
 
                 <span class="modalModeIcon">
                     🔀
@@ -2146,15 +2358,16 @@
                 </span>
 
                 <span class="modalModeDescription">
-                    Mix the cards so your brain cannot rely on the same order.
+                    Mix the cards so your brain cannot rely
+                    on the same order.
                 </span>
 
             </button>
 
-
             <button
                 class="modalModeButton"
-                onclick="startPracticeMode()">
+                onclick="startPracticeMode()"
+            >
 
                 <span class="modalModeIcon">
                     ✏️
@@ -2165,13 +2378,13 @@
                 </span>
 
                 <span class="modalModeDescription">
-                    Answer the question using multiple-choice answers.
+                    Answer the question using multiple-choice
+                    answers.
                 </span>
 
             </button>
 
         </div>
-
 
         <div class="studyModalSettings">
 
@@ -2194,7 +2407,8 @@
                     <input
                         type="checkbox"
                         id="knowDontKnowToggle"
-                        checked>
+                        checked
+                    >
 
                     <span class="slider"></span>
 
@@ -2208,13 +2422,13 @@
 
 </div>
 
-
 <!-- SIMPLE SET CREATOR -->
 
 <div
     id="setCreator"
     class="inlineChooser"
-    style="display:none;">
+    style="display:none;"
+>
 
     <div class="chooserHeader">
 
@@ -2233,41 +2447,68 @@
         <button
             class="closeChooser"
             onclick="closeSetPopup()"
-            aria-label="Close">
+            aria-label="Close"
+        >
             ✕
         </button>
 
     </div>
 
-
     <input
         id="setNameInput"
         type="text"
-        placeholder="Example: Chemistry">
-
+        placeholder="Example: Chemistry"
+    >
 
     <button
         class="primaryButton"
-        onclick="createSet()">
+        onclick="createSet()"
+    >
         Create Set
     </button>
 
 </div>
 
-
 <script>
+
+/* =====================================================
+   SAFE STORAGE
+===================================================== */
+
+function loadJSON(key, fallback) {
+
+    try {
+
+        const value = localStorage.getItem(key);
+
+        if (!value) {
+            return fallback;
+        }
+
+        const parsed = JSON.parse(value);
+
+        return parsed;
+
+    } catch (error) {
+
+        console.warn(
+            "Could not load localStorage item:",
+            key,
+            error
+        );
+
+        return fallback;
+    }
+}
+
 
 /* =====================================================
    DATA
 ===================================================== */
 
-let cards =
-    JSON.parse(localStorage.getItem("owlyCards")) || [];
+let cards = loadJSON("owlyCards", []);
 
-
-let sets =
-    JSON.parse(localStorage.getItem("owlySets")) || [];
-
+let sets = loadJSON("owlySets", []);
 
 let selectedSetId =
     localStorage.getItem("owlySelectedSet");
@@ -2279,34 +2520,41 @@ let selectedSetId =
 
 function createId() {
 
-    return Date.now().toString() +
+    return (
+        Date.now().toString() +
         Math.random()
             .toString(36)
-            .substring(2);
-
+            .substring(2)
+    );
 }
 
 
 /* =====================================================
-   MIGRATION
+   DATA CLEANUP / MIGRATION
 ===================================================== */
+
+if (!Array.isArray(cards)) {
+    cards = [];
+}
+
+if (!Array.isArray(sets)) {
+    sets = [];
+}
 
 if (sets.length === 0) {
 
     sets.push({
-
         id: createId(),
-
         name: "General"
-
     });
 
 }
 
-
 if (
     !selectedSetId ||
-    !sets.some(set => set.id === selectedSetId)
+    !sets.some(
+        set => set.id === selectedSetId
+    )
 ) {
 
     selectedSetId =
@@ -2314,11 +2562,17 @@ if (
 
 }
 
-
 let changedCards = false;
 
-
 cards.forEach(card => {
+
+    if (!card.id) {
+
+        card.id = createId();
+
+        changedCards = true;
+
+    }
 
     if (!card.setId) {
 
@@ -2329,6 +2583,23 @@ cards.forEach(card => {
 
     }
 
+    if (typeof card.question !== "string") {
+
+        card.question =
+            String(card.question || "");
+
+        changedCards = true;
+
+    }
+
+    if (typeof card.answer !== "string") {
+
+        card.answer =
+            String(card.answer || "");
+
+        changedCards = true;
+
+    }
 
     if (typeof card.known !== "boolean") {
 
@@ -2338,7 +2609,6 @@ cards.forEach(card => {
 
     }
 
-
     if (typeof card.practiceCorrect !== "number") {
 
         card.practiceCorrect = 0;
@@ -2346,7 +2616,6 @@ cards.forEach(card => {
         changedCards = true;
 
     }
-
 
     if (typeof card.practiceAttempts !== "number") {
 
@@ -2358,16 +2627,9 @@ cards.forEach(card => {
 
 });
 
-
 if (changedCards) {
-
-    localStorage.setItem(
-        "owlyCards",
-        JSON.stringify(cards)
-    );
-
+    saveCards();
 }
-
 
 saveSets();
 
@@ -2391,6 +2653,10 @@ let showingAnswer = false;
 let studyMode = "normal";
 
 let useKnowDontKnow = true;
+
+let reviewMode = false;
+
+let answeredStudyCards = new Set();
 
 
 /* =====================================================
@@ -2426,7 +2692,6 @@ function saveSets() {
         "owlySets",
         JSON.stringify(sets)
     );
-
 
     localStorage.setItem(
         "owlySelectedSet",
@@ -2464,10 +2729,10 @@ function getCurrentCards() {
    NAVIGATION
 ===================================================== */
 
-function showHome() {
+function hideAllPages() {
 
     document.getElementById("homePage")
-        .style.display = "block";
+        .style.display = "none";
 
     document.getElementById("flashcardsPage")
         .style.display = "none";
@@ -2478,9 +2743,13 @@ function showHome() {
     document.getElementById("settingsArea")
         .style.display = "none";
 
+}
+
+
+function clearNavActive() {
 
     document.getElementById("homeNav")
-        .classList.add("active");
+        .classList.remove("active");
 
     document.getElementById("flashcardsNav")
         .classList.remove("active");
@@ -2488,77 +2757,163 @@ function showHome() {
     document.getElementById("setsNav")
         .classList.remove("active");
 
+    document.getElementById("progressNav")
+        .classList.remove("active");
+
     document.getElementById("settingsNav")
         .classList.remove("active");
 
+}
+
+
+function showHome() {
+
+    hideAllPages();
+
+    document.getElementById("homePage")
+        .style.display = "block";
+
+    clearNavActive();
+
+    document.getElementById("homeNav")
+        .classList.add("active");
+
+    closeStudyPopup();
 
     renderHomeSets();
+
+    applyOwlyAnimationSetting();
 
 }
 
 
 function showFlashcards() {
 
-    document.getElementById("homePage")
-        .style.display = "none";
+    hideAllPages();
 
     document.getElementById("flashcardsPage")
         .style.display = "block";
 
-    document.getElementById("setsArea")
-        .style.display = "none";
-
-    document.getElementById("settingsArea")
-        .style.display = "none";
-
-
-    document.getElementById("homeNav")
-        .classList.remove("active");
+    clearNavActive();
 
     document.getElementById("flashcardsNav")
         .classList.add("active");
 
-    document.getElementById("setsNav")
-        .classList.remove("active");
+    closeStudyPopup();
 
-    document.getElementById("settingsNav")
-        .classList.remove("active");
-
-
-    backToCreate();
+    backToCreate(false);
 
 }
 
 
 function showSets() {
 
-    document.getElementById("homePage")
-        .style.display = "none";
-
-    document.getElementById("flashcardsPage")
-        .style.display = "none";
+    hideAllPages();
 
     document.getElementById("setsArea")
         .style.display = "block";
 
-    document.getElementById("settingsArea")
-        .style.display = "none";
-
-
-    document.getElementById("homeNav")
-        .classList.remove("active");
-
-    document.getElementById("flashcardsNav")
-        .classList.remove("active");
+    clearNavActive();
 
     document.getElementById("setsNav")
         .classList.add("active");
 
-    document.getElementById("settingsNav")
-        .classList.remove("active");
-
+    closeStudyPopup();
 
     renderSets();
+
+    closeSetPopup();
+
+}
+
+
+function showProgress() {
+
+    hideAllPages();
+
+    document.getElementById("flashcardsPage")
+        .style.display = "block";
+
+    clearNavActive();
+
+    document.getElementById("progressNav")
+        .classList.add("active");
+
+    closeStudyPopup();
+
+    backToCreate(false);
+
+    const currentCards = getCurrentCards();
+
+    const total = currentCards.length;
+
+    const known =
+        currentCards.filter(
+            card => card.known
+        ).length;
+
+    const needsReview =
+        total - known;
+
+    const percent =
+        total === 0
+            ? 0
+            : Math.round(
+                (known / total) * 100
+            );
+
+    const set =
+        getCurrentSet();
+
+    alert(
+        "📊 Owly Progress\n\n" +
+        "Current Set: " +
+        (set ? set.name : "General") +
+        "\n\n" +
+        "Cards: " +
+        total +
+        "\n" +
+        "Known: " +
+        known +
+        "\n" +
+        "Needs Review: " +
+        needsReview +
+        "\n\n" +
+        "Progress: " +
+        percent +
+        "%"
+    );
+
+}
+
+
+function showSettings() {
+
+    hideAllPages();
+
+    document.getElementById("settingsArea")
+        .style.display = "block";
+
+    clearNavActive();
+
+    document.getElementById("settingsNav")
+        .classList.add("active");
+
+    closeStudyPopup();
+
+    document.getElementById("studyArea")
+        .style.display = "none";
+
+    document.getElementById("practiceArea")
+        .style.display = "none";
+
+    document.getElementById("studyComplete")
+        .style.display = "none";
+
+    document.getElementById("practiceComplete")
+        .style.display = "none";
+
+    loadSettings();
 
 }
 
@@ -2570,11 +2925,11 @@ function showSets() {
 function renderHomeSets() {
 
     const grid =
-        document.getElementById("homeSetsGrid");
-
+        document.getElementById(
+            "homeSetsGrid"
+        );
 
     grid.innerHTML = "";
-
 
     if (sets.length === 0) {
 
@@ -2583,7 +2938,7 @@ function renderHomeSets() {
             <div class="emptyHome">
 
                 <h2>
-                    No sets yet 📚
+                    No sets yet 🦉
                 </h2>
 
                 <p>
@@ -2592,20 +2947,16 @@ function renderHomeSets() {
 
                 <button
                     class="primaryButton"
-                    onclick="openSetPopup()">
-
+                    onclick="openSetPopup()"
+                >
                     ＋ Create a Set
-
                 </button>
 
             </div>
-
         `;
 
         return;
-
     }
-
 
     sets.forEach(set => {
 
@@ -2615,21 +2966,17 @@ function renderHomeSets() {
                     card.setId === set.id
             ).length;
 
-
         const div =
             document.createElement("div");
 
-
         div.className =
             "homeSetCard";
-
 
         div.onclick = function() {
 
             studySetFromHome(set.id);
 
         };
-
 
         div.innerHTML = `
 
@@ -2655,17 +3002,26 @@ function renderHomeSets() {
 
             <button
                 class="homeStudyButton"
-                onclick="
-                    event.stopPropagation();
-                    studySetFromHome('${set.id}');
-                ">
-
+                type="button"
+            >
                 Study →
-
             </button>
 
         `;
 
+        const studyButton =
+            div.querySelector(
+                ".homeStudyButton"
+            );
+
+        studyButton.onclick =
+            function(event) {
+
+                event.stopPropagation();
+
+                studySetFromHome(set.id);
+
+            };
 
         grid.appendChild(div);
 
@@ -2680,40 +3036,42 @@ function renderHomeSets() {
 
 function studySetFromHome(setId) {
 
-    selectedSetId =
-        setId;
+    if (
+        !sets.some(
+            set =>
+                set.id === setId
+        )
+    ) {
+        return;
+    }
 
+    selectedSetId = setId;
 
     saveSets();
 
-
     const currentCards =
         getCurrentCards();
-
 
     if (currentCards.length === 0) {
 
         showFlashcards();
 
-
         alert(
             "This set has no flashcards yet. Add some first!"
         );
-
 
         return;
 
     }
 
-
     showFlashcards();
 
-
-    setTimeout(() => {
-
-        openStudyPopup();
-
-    }, 50);
+    setTimeout(
+        () => {
+            openStudyPopup();
+        },
+        50
+    );
 
 }
 
@@ -2725,32 +3083,36 @@ function studySetFromHome(setId) {
 function openSetPopup() {
 
     const creator =
-        document.getElementById("setCreator");
-
+        document.getElementById(
+            "setCreator"
+        );
 
     creator.style.display = "block";
-
 
     creator.scrollIntoView({
         behavior: "smooth",
         block: "nearest"
     });
 
+    setTimeout(
+        () => {
 
-    setTimeout(() => {
+            document
+                .getElementById("setNameInput")
+                .focus();
 
-        document.getElementById("setNameInput")
-            .focus();
-
-    }, 50);
+        },
+        50
+    );
 
 }
 
 
 function closeSetPopup() {
 
-    document.getElementById("setCreator")
-        .style.display = "none";
+    document.getElementById(
+        "setCreator"
+    ).style.display = "none";
 
 }
 
@@ -2758,12 +3120,12 @@ function closeSetPopup() {
 function createSet() {
 
     const input =
-        document.getElementById("setNameInput");
-
+        document.getElementById(
+            "setNameInput"
+        );
 
     const name =
         input.value.trim();
-
 
     if (name === "") {
 
@@ -2775,14 +3137,14 @@ function createSet() {
 
     }
 
-
     const alreadyExists =
         sets.some(
             set =>
-                set.name.toLowerCase() ===
+                String(set.name)
+                    .trim()
+                    .toLowerCase() ===
                 name.toLowerCase()
         );
-
 
     if (alreadyExists) {
 
@@ -2794,7 +3156,6 @@ function createSet() {
 
     }
 
-
     const newSet = {
 
         id: createId(),
@@ -2803,25 +3164,18 @@ function createSet() {
 
     };
 
-
     sets.push(newSet);
-
 
     selectedSetId =
         newSet.id;
 
-
     saveSets();
-
 
     input.value = "";
 
-
     closeSetPopup();
 
-
     updateEverything();
-
 
     showSets();
 
@@ -2834,8 +3188,9 @@ function createSet() {
 
 function deleteSet(id, event) {
 
-    event.stopPropagation();
-
+    if (event) {
+        event.stopPropagation();
+    }
 
     if (sets.length === 1) {
 
@@ -2847,16 +3202,15 @@ function deleteSet(id, event) {
 
     }
 
-
     const set =
         sets.find(
             s =>
                 s.id === id
         );
 
-
-    if (!set) return;
-
+    if (!set) {
+        return;
+    }
 
     const cardAmount =
         cards.filter(
@@ -2864,12 +3218,10 @@ function deleteSet(id, event) {
                 card.setId === id
         ).length;
 
-
     let message =
         'Delete the set "' +
         set.name +
         '"?';
-
 
     if (cardAmount > 0) {
 
@@ -2886,13 +3238,9 @@ function deleteSet(id, event) {
 
     }
 
-
     if (!confirm(message)) {
-
         return;
-
     }
-
 
     sets =
         sets.filter(
@@ -2900,21 +3248,24 @@ function deleteSet(id, event) {
                 set.id !== id
         );
 
-
     cards =
         cards.filter(
             card =>
                 card.setId !== id
         );
 
-
-    if (selectedSetId === id) {
+    if (
+        selectedSetId === id ||
+        !sets.some(
+            set =>
+                set.id === selectedSetId
+        )
+    ) {
 
         selectedSetId =
             sets[0].id;
 
     }
-
 
     saveCards();
 
@@ -2931,17 +3282,22 @@ function deleteSet(id, event) {
 
 function selectSet(id) {
 
-    selectedSetId =
-        id;
+    if (
+        !sets.some(
+            set =>
+                set.id === id
+        )
+    ) {
+        return;
+    }
 
+    selectedSetId = id;
 
     saveSets();
 
+    updateEverything();
 
     showFlashcards();
-
-
-    updateEverything();
 
 }
 
@@ -2953,11 +3309,11 @@ function selectSet(id) {
 function renderSets() {
 
     const grid =
-        document.getElementById("setGrid");
-
+        document.getElementById(
+            "setGrid"
+        );
 
     grid.innerHTML = "";
-
 
     sets.forEach(set => {
 
@@ -2967,10 +3323,8 @@ function renderSets() {
                     card.setId === set.id
             ).length;
 
-
         const div =
             document.createElement("div");
-
 
         div.className =
             "setCard" +
@@ -2980,35 +3334,26 @@ function renderSets() {
                     : ""
             );
 
-
         div.onclick =
             () => selectSet(set.id);
-
 
         div.innerHTML = `
 
             <button
                 class="deleteSet"
-                onclick="
-                    deleteSet('${set.id}', event)
-                ">
-
+                type="button"
+                aria-label="Delete set"
+            >
                 🗑️
-
             </button>
-
 
             <div class="setIcon">
                 📁
             </div>
 
-
             <div class="setName">
-
                 ${escapeHTML(set.name)}
-
             </div>
-
 
             <div class="setInfo">
 
@@ -3024,6 +3369,17 @@ function renderSets() {
 
         `;
 
+        const deleteButton =
+            div.querySelector(
+                ".deleteSet"
+            );
+
+        deleteButton.onclick =
+            event =>
+                deleteSet(
+                    set.id,
+                    event
+                );
 
         grid.appendChild(div);
 
@@ -3041,10 +3397,8 @@ function escapeHTML(text) {
     const div =
         document.createElement("div");
 
-
     div.textContent =
-        text;
-
+        String(text);
 
     return div.innerHTML;
 
@@ -3060,61 +3414,57 @@ function updateCount() {
     const currentCards =
         getCurrentCards();
 
-
     const total =
         cards.length;
 
+    document.getElementById(
+        "cardCount"
+    ).textContent =
+        currentCards.length +
+        (
+            currentCards.length === 1
+                ? " flashcard"
+                : " flashcards"
+        ) +
+        " in this set";
 
-    document.getElementById("cardCount")
-        .textContent =
-            currentCards.length +
-            (
-                currentCards.length === 1
-                    ? " flashcard"
-                    : " flashcards"
-            ) +
-            " in this set";
+    document.getElementById(
+        "rightCardCount"
+    ).textContent =
+        total;
 
-
-    document.getElementById("rightCardCount")
-        .textContent =
-            total;
-
-
-    document.getElementById("rightSetCount")
-        .textContent =
-            currentCards.length;
-
+    document.getElementById(
+        "rightSetCount"
+    ).textContent =
+        currentCards.length;
 
     const set =
         getCurrentSet();
-
 
     const setName =
         set
             ? set.name
             : "General";
 
+    document.getElementById(
+        "rightSetName"
+    ).textContent =
+        setName;
 
-    document.getElementById("rightSetName")
-        .textContent =
-            setName;
+    document.getElementById(
+        "selectedSetName"
+    ).textContent =
+        setName;
 
-
-    document.getElementById("selectedSetName")
-        .textContent =
-            setName;
-
-
-    document.getElementById("selectedSetCount")
-        .textContent =
-            currentCards.length +
-            (
-                currentCards.length === 1
-                    ? " card"
-                    : " cards"
-            );
-
+    document.getElementById(
+        "selectedSetCount"
+    ).textContent =
+        currentCards.length +
+        (
+            currentCards.length === 1
+                ? " card"
+                : " cards"
+        );
 
     showCardList();
 
@@ -3128,14 +3478,18 @@ function updateCount() {
 function addCard() {
 
     const question =
-        document.getElementById("question")
-            .value.trim();
-
+        document.getElementById(
+            "question"
+        )
+        .value
+        .trim();
 
     const answer =
-        document.getElementById("answer")
-            .value.trim();
-
+        document.getElementById(
+            "answer"
+        )
+        .value
+        .trim();
 
     if (
         question === "" ||
@@ -3149,7 +3503,6 @@ function addCard() {
         return;
 
     }
-
 
     cards.push({
 
@@ -3169,23 +3522,21 @@ function addCard() {
 
     });
 
-
     saveCards();
 
+    document.getElementById(
+        "question"
+    ).value = "";
 
-    document.getElementById("question")
-        .value = "";
-
-
-    document.getElementById("answer")
-        .value = "";
-
+    document.getElementById(
+        "answer"
+    ).value = "";
 
     updateEverything();
 
-
-    document.getElementById("question")
-        .focus();
+    document.getElementById(
+        "question"
+    ).focus();
 
 }
 
@@ -3198,13 +3549,16 @@ function focusQuestion() {
 
     showFlashcards();
 
+    setTimeout(
+        () => {
 
-    setTimeout(() => {
+            document
+                .getElementById("question")
+                .focus();
 
-        document.getElementById("question")
-            .focus();
-
-    }, 50);
+        },
+        50
+    );
 
 }
 
@@ -3216,15 +3570,14 @@ function focusQuestion() {
 function showCardList() {
 
     const list =
-        document.getElementById("cardList");
-
+        document.getElementById(
+            "cardList"
+        );
 
     list.innerHTML = "";
 
-
     const currentCards =
         getCurrentCards();
-
 
     if (currentCards.length === 0) {
 
@@ -3237,55 +3590,71 @@ function showCardList() {
             ">
 
                 No flashcards in this set yet.
-                Create your first one above! 📚
+                Create your first one above! 🦉
 
             </p>
 
         `;
 
-
         return;
 
     }
-
 
     currentCards.forEach(card => {
 
         const originalIndex =
             cards.indexOf(card);
 
-
         const cardDiv =
             document.createElement("div");
 
+        const paragraph =
+            document.createElement("p");
 
-        cardDiv.innerHTML = `
+        const strong =
+            document.createElement("strong");
 
-            <p>
+        strong.textContent =
+            card.question;
 
-                <strong>
-                    ${escapeHTML(card.question)}
-                </strong>
+        const deleteButton =
+            document.createElement("button");
 
-                →
+        deleteButton.textContent =
+            "Delete";
 
-                ${escapeHTML(card.answer)}
+        deleteButton.type =
+            "button";
 
-                <button
-                    onclick="
-                        deleteCard(${originalIndex})
-                    ">
+        deleteButton.onclick =
+            function() {
 
-                    Delete
+                deleteCard(
+                    originalIndex
+                );
 
-                </button>
+            };
 
-            </p>
+        paragraph.appendChild(strong);
 
-        `;
+        paragraph.appendChild(
+            document.createTextNode(
+                " → " +
+                card.answer
+            )
+        );
 
+        paragraph.appendChild(
+            deleteButton
+        );
 
-        list.appendChild(cardDiv);
+        cardDiv.appendChild(
+            paragraph
+        );
+
+        list.appendChild(
+            cardDiv
+        );
 
     });
 
@@ -3298,17 +3667,21 @@ function showCardList() {
 
 function deleteCard(index) {
 
-    cards.splice(index, 1);
+    if (
+        index < 0 ||
+        index >= cards.length
+    ) {
+        return;
+    }
 
+    cards.splice(
+        index,
+        1
+    );
 
     saveCards();
 
-
-    shuffleOrder = [];
-
-
-    currentCard = 0;
-
+    resetStudyState();
 
     updateEverything();
 
@@ -3324,7 +3697,6 @@ function openStudyPopup() {
     const currentCards =
         getCurrentCards();
 
-
     if (currentCards.length === 0) {
 
         alert(
@@ -3335,41 +3707,40 @@ function openStudyPopup() {
 
     }
 
-
     const set =
         getCurrentSet();
 
-
     const modal =
-        document.getElementById("studyModal");
+        document.getElementById(
+            "studyModal"
+        );
 
-
-    document.getElementById("studyChooserDescription")
-        .textContent =
-            'Studying "' +
-            set.name +
-            '" • ' +
-            currentCards.length +
-            (
-                currentCards.length === 1
-                    ? " card"
-                    : " cards"
-            );
-
+    document.getElementById(
+        "studyChooserDescription"
+    ).textContent =
+        'Studying "' +
+        (set ? set.name : "General") +
+        '" • " +
+        currentCards.length +
+        (
+            currentCards.length === 1
+                ? " card"
+                : " cards"
+        );
 
     const savedKnow =
-        localStorage.getItem("owlyKnowDontKnow");
+        localStorage.getItem(
+            "owlyKnowDontKnow"
+        );
 
-
-    document.getElementById("knowDontKnowToggle")
-        .checked =
-            savedKnow === null
-                ? true
-                : savedKnow === "true";
-
+    document.getElementById(
+        "knowDontKnowToggle"
+    ).checked =
+        savedKnow === null
+            ? true
+            : savedKnow === "true";
 
     modal.classList.add("open");
-
 
     modal.setAttribute(
         "aria-hidden",
@@ -3382,14 +3753,15 @@ function openStudyPopup() {
 function closeStudyPopup() {
 
     const modal =
-        document.getElementById("studyModal");
+        document.getElementById(
+            "studyModal"
+        );
 
-
-    if (!modal) return;
-
+    if (!modal) {
+        return;
+    }
 
     modal.classList.remove("open");
-
 
     modal.setAttribute(
         "aria-hidden",
@@ -3407,22 +3779,16 @@ function Normal() {
 
     closeStudyPopup();
 
+    shuffleCards = false;
 
-    shuffleCards =
-        false;
-
+    studyMode = "normal";
 
     useKnowDontKnow =
         document.getElementById(
             "knowDontKnowToggle"
         ).checked;
 
-
-    localStorage.setItem(
-        "owlyKnowDontKnow",
-        String(useKnowDontKnow)
-    );
-
+    saveStudyPreference();
 
     startStudying();
 
@@ -3433,24 +3799,52 @@ function shuffle() {
 
     closeStudyPopup();
 
+    shuffleCards = true;
 
-    shuffleCards =
-        true;
-
+    studyMode = "shuffle";
 
     useKnowDontKnow =
         document.getElementById(
             "knowDontKnowToggle"
         ).checked;
 
+    saveStudyPreference();
+
+    startStudying();
+
+}
+
+
+function saveStudyPreference() {
 
     localStorage.setItem(
         "owlyKnowDontKnow",
         String(useKnowDontKnow)
     );
 
+}
 
-    startStudying();
+
+/* =====================================================
+   RESET STUDY STATE
+===================================================== */
+
+function resetStudyState() {
+
+    currentCard = 0;
+
+    correctCards = 0;
+
+    reviewCards = [];
+
+    shuffleOrder = [];
+
+    showingAnswer = false;
+
+    reviewMode = false;
+
+    answeredStudyCards =
+        new Set();
 
 }
 
@@ -3464,7 +3858,6 @@ function startStudying() {
     const currentCards =
         getCurrentCards();
 
-
     if (currentCards.length === 0) {
 
         alert(
@@ -3475,60 +3868,43 @@ function startStudying() {
 
     }
 
+    reviewMode = false;
 
-    document.getElementById("homePage")
-        .style.display = "none";
-
-
-    document.getElementById("flashcardsPage")
-        .style.display = "block";
-
-
-    document.getElementById("setsArea")
-        .style.display = "none";
-
-
-    document.getElementById("homeNav")
-        .classList.remove("active");
-
-
-    document.getElementById("flashcardsNav")
-        .classList.add("active");
-
-
-    document.getElementById("setsNav")
-        .classList.remove("active");
-
-
-    document.getElementById("settingsNav")
-        .classList.remove("active");
-
-
-    document.getElementById("studyComplete")
-        .style.display = "none";
-
-
-    document.getElementById("practiceComplete")
-        .style.display = "none";
-
+    answeredStudyCards =
+        new Set();
 
     currentCard = 0;
 
-
     correctCards = 0;
-
 
     reviewCards = [];
 
-
     showingAnswer = false;
 
+    document.getElementById(
+        "studyComplete"
+    ).style.display = "none";
+
+    document.getElementById(
+        "practiceComplete"
+    ).style.display = "none";
+
+    document.getElementById(
+        "createArea"
+    ).style.display = "none";
+
+    document.getElementById(
+        "practiceArea"
+    ).style.display = "none";
+
+    document.getElementById(
+        "studyArea"
+    ).style.display = "block";
 
     if (shuffleCards) {
 
         shuffleOrder =
             currentCards.slice();
-
 
         for (
             let i = shuffleOrder.length - 1;
@@ -3541,17 +3917,13 @@ function startStudying() {
                     Math.random() * (i + 1)
                 );
 
-
-            const temp =
-                shuffleOrder[i];
-
-
-            shuffleOrder[i] =
-                shuffleOrder[randomIndex];
-
-
-            shuffleOrder[randomIndex] =
-                temp;
+            [
+                shuffleOrder[i],
+                shuffleOrder[randomIndex]
+            ] = [
+                shuffleOrder[randomIndex],
+                shuffleOrder[i]
+            ];
 
         }
 
@@ -3561,41 +3933,46 @@ function startStudying() {
 
     }
 
+    document.getElementById(
+        "studyTitle"
+    ).textContent =
+        shuffleCards
+            ? "🔀 Shuffle Study"
+            : "📚 Normal Study";
 
-    document.getElementById("createArea")
-        .style.display = "none";
+    updateKnowControls();
 
-
-    document.getElementById("practiceArea")
-        .style.display = "none";
-
-
-    document.getElementById("studyArea")
-        .style.display = "block";
-
-
-    document.getElementById("studyTitle")
-        .textContent =
-            shuffleCards
-                ? "🔀 Shuffle Study"
-                : "📚 Normal Study";
-
-
-    document.getElementById("knowButtons")
-        .style.display =
-            useKnowDontKnow
-                ? "block"
-                : "none";
-
-
-    document.getElementById("mainContent")
-        .scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
+    document.getElementById(
+        "mainContent"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
     showCard();
+
+}
+
+
+/* =====================================================
+   KNOW CONTROL VISIBILITY
+===================================================== */
+
+function updateKnowControls() {
+
+    document.getElementById(
+        "knowButton"
+    ).style.display =
+        useKnowDontKnow
+            ? "inline-block"
+            : "none";
+
+    document.getElementById(
+        "dontKnowButton"
+    ).style.display =
+        useKnowDontKnow
+            ? "inline-block"
+            : "none";
 
 }
 
@@ -3606,9 +3983,16 @@ function startStudying() {
 
 function showCard() {
 
+    if (reviewMode) {
+
+        showReviewCard();
+
+        return;
+
+    }
+
     const currentCards =
         getCurrentCards();
-
 
     if (currentCards.length === 0) {
 
@@ -3618,48 +4002,66 @@ function showCard() {
 
     }
 
+    if (
+        currentCard < 0 ||
+        currentCard >= currentCards.length
+    ) {
+
+        currentCard = 0;
+
+    }
 
     const card =
         shuffleCards
             ? shuffleOrder[currentCard]
             : currentCards[currentCard];
 
+    if (!card) {
 
-    document.getElementById("flashcardFront")
-        .textContent =
-            card.question;
+        backToCreate();
 
+        return;
 
-    document.getElementById("flashcardBack")
-        .textContent =
-            card.answer;
+    }
 
+    document.getElementById(
+        "flashcardFront"
+    ).textContent =
+        card.question;
 
-    document.querySelector(".flashcard-inner")
-        .classList.remove("flipped");
+    document.getElementById(
+        "flashcardBack"
+    ).textContent =
+        card.answer;
 
+    document.querySelector(
+        ".flashcard-inner"
+    ).classList.remove(
+        "flipped"
+    );
 
     showingAnswer = false;
 
-
-    document.getElementById("progress")
-        .textContent =
-            "Card " +
-            (currentCard + 1) +
-            " of " +
-            currentCards.length;
-
+    document.getElementById(
+        "progress"
+    ).textContent =
+        "Card " +
+        (currentCard + 1) +
+        " of " +
+        currentCards.length;
 
     const progressPercent =
-        (
-            currentCard /
-            currentCards.length
-        ) * 100;
+        currentCards.length === 0
+            ? 0
+            : (
+                currentCard /
+                currentCards.length
+            ) * 100;
 
-
-    document.getElementById("progressFill")
-        .style.width =
-            progressPercent + "%";
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        progressPercent + "%";
 
 }
 
@@ -3670,18 +4072,23 @@ function showCard() {
 
 function flipCard() {
 
-    const flashcardInner =
+    const inner =
         document.querySelector(
             ".flashcard-inner"
         );
 
+    if (!inner) {
+        return;
+    }
 
-    flashcardInner
-        .classList.toggle("flipped");
-
+    inner.classList.toggle(
+        "flipped"
+    );
 
     showingAnswer =
-        !showingAnswer;
+        inner.classList.contains(
+            "flipped"
+        );
 
 }
 
@@ -3692,9 +4099,16 @@ function flipCard() {
 
 function getCurrentStudyCard() {
 
+    if (reviewMode) {
+
+        return reviewCards[
+            currentCard
+        ];
+
+    }
+
     const currentCards =
         getCurrentCards();
-
 
     return shuffleCards
         ? shuffleOrder[currentCard]
@@ -3712,18 +4126,51 @@ function knowCard() {
     const card =
         getCurrentStudyCard();
 
+    if (!card) {
+        return;
+    }
 
-    if (!card) return;
+    if (
+        answeredStudyCards.has(
+            card.id
+        )
+    ) {
 
+        nextCard();
 
-    correctCards++;
+        return;
 
+    }
+
+    answeredStudyCards.add(
+        card.id
+    );
 
     card.known = true;
 
-
     saveCards();
 
+    if (reviewMode) {
+
+        currentCard++;
+
+        if (
+            currentCard >= reviewCards.length
+        ) {
+
+            finishMissedReview();
+
+        } else {
+
+            showReviewCard();
+
+        }
+
+        return;
+
+    }
+
+    correctCards++;
 
     nextCard();
 
@@ -3739,15 +4186,49 @@ function dontKnowCard() {
     const card =
         getCurrentStudyCard();
 
+    if (!card) {
+        return;
+    }
 
-    if (!card) return;
+    if (
+        answeredStudyCards.has(
+            card.id
+        )
+    ) {
 
+        nextCard();
+
+        return;
+
+    }
+
+    answeredStudyCards.add(
+        card.id
+    );
 
     card.known = false;
 
-
     saveCards();
 
+    if (reviewMode) {
+
+        currentCard++;
+
+        if (
+            currentCard >= reviewCards.length
+        ) {
+
+            finishMissedReview();
+
+        } else {
+
+            showReviewCard();
+
+        }
+
+        return;
+
+    }
 
     if (
         !reviewCards.some(
@@ -3760,7 +4241,6 @@ function dontKnowCard() {
 
     }
 
-
     nextCard();
 
 }
@@ -3772,26 +4252,49 @@ function dontKnowCard() {
 
 function nextCard() {
 
-    const currentCards =
-        getCurrentCards();
+    const totalCards =
+        reviewMode
+            ? reviewCards.length
+            : getCurrentCards().length;
 
+    if (totalCards === 0) {
+
+        backToCreate();
+
+        return;
+
+    }
 
     if (
         currentCard <
-        currentCards.length - 1
+        totalCards - 1
     ) {
 
         currentCard++;
 
-
         showingAnswer = false;
 
+        if (reviewMode) {
 
-        showCard();
+            showReviewCard();
+
+        } else {
+
+            showCard();
+
+        }
 
     } else {
 
-        showStudyComplete();
+        if (reviewMode) {
+
+            finishMissedReview();
+
+        } else {
+
+            showStudyComplete();
+
+        }
 
     }
 
@@ -3804,13 +4307,19 @@ function nextCard() {
 
 function previousCard() {
 
-    if (currentCard > 0) {
+    if (currentCard <= 0) {
+        return;
+    }
 
-        currentCard--;
+    currentCard--;
 
+    showingAnswer = false;
 
-        showingAnswer = false;
+    if (reviewMode) {
 
+        showReviewCard();
+
+    } else {
 
         showCard();
 
@@ -3828,63 +4337,58 @@ function showStudyComplete() {
     const currentCards =
         getCurrentCards();
 
+    const total =
+        currentCards.length;
 
-    document.getElementById("studyArea")
-        .style.display = "none";
+    document.getElementById(
+        "studyArea"
+    ).style.display = "none";
 
+    document.getElementById(
+        "practiceArea"
+    ).style.display = "none";
 
-    document.getElementById("practiceArea")
-        .style.display = "none";
+    document.getElementById(
+        "practiceComplete"
+    ).style.display = "none";
 
+    document.getElementById(
+        "studyComplete"
+    ).style.display = "block";
 
-    document.getElementById("practiceComplete")
-        .style.display = "none";
+    const percent =
+        total === 0
+            ? 0
+            : Math.round(
+                (correctCards / total) * 100
+            );
 
+    document.getElementById(
+        "scoreText"
+    ).textContent =
+        "You knew " +
+        correctCards +
+        " out of " +
+        total +
+        " cards!";
 
-    document.getElementById("studyComplete")
-        .style.display = "block";
-
-
-    document.getElementById("scoreText")
-        .textContent =
-            "You knew " +
-            correctCards +
-            " out of " +
-            currentCards.length +
-            " cards!";
-
-
-    const masteredPercent =
-        Math.round(
-            (
-                correctCards /
-                currentCards.length
-            ) * 100
-        );
-
-
-    const remainingPercent =
-        100 -
-        masteredPercent;
-
-
-    document.getElementById("reviewText")
-        .textContent =
-            remainingPercent +
-            "% remaining to review.";
-
+    document.getElementById(
+        "reviewText"
+    ).textContent =
+        (
+            100 - percent
+        ) +
+        "% remaining to review.";
 
     const missedButton =
         document.getElementById(
             "missedStudyButton"
         );
 
-
     if (reviewCards.length > 0) {
 
         missedButton.style.display =
             "inline-block";
-
 
         missedButton.textContent =
             "🔁 Study " +
@@ -3913,65 +4417,69 @@ function showStudyComplete() {
 function studyMissedCards() {
 
     if (reviewCards.length === 0) {
+        return;
+    }
+
+    // Make a copy so the original missed-card list
+    // is not accidentally mutated during review.
+    reviewCards =
+        reviewCards
+            .map(
+                card =>
+                    cards.find(
+                        item =>
+                            item.id === card.id
+                    )
+            )
+            .filter(Boolean);
+
+    if (reviewCards.length === 0) {
+
+        backToCreate();
 
         return;
 
     }
 
+    reviewMode = true;
 
-    shuffleCards = false;
-
-
-    useKnowDontKnow = true;
-
-
-    document.getElementById("studyComplete")
-        .style.display = "none";
-
-
-    document.getElementById("practiceComplete")
-        .style.display = "none";
-
-
-    document.getElementById("createArea")
-        .style.display = "none";
-
-
-    document.getElementById("practiceArea")
-        .style.display = "none";
-
-
-    document.getElementById("studyArea")
-        .style.display = "block";
-
+    answeredStudyCards =
+        new Set();
 
     currentCard = 0;
 
-
     correctCards = 0;
 
+    shuffleCards = false;
 
-    shuffleOrder =
-        reviewCards.slice();
+    useKnowDontKnow = true;
 
+    document.getElementById(
+        "studyComplete"
+    ).style.display = "none";
 
-    const missedCards =
-        reviewCards.slice();
+    document.getElementById(
+        "practiceComplete"
+    ).style.display = "none";
 
+    document.getElementById(
+        "createArea"
+    ).style.display = "none";
 
-    reviewCards =
-        missedCards;
+    document.getElementById(
+        "practiceArea"
+    ).style.display = "none";
 
+    document.getElementById(
+        "studyArea"
+    ).style.display = "block";
 
-    document.getElementById("studyTitle")
-        .textContent =
-            "🔁 Review Missed Cards";
+    document.getElementById(
+        "studyTitle"
+    ).textContent =
+        "🔁 Review Missed Cards";
 
-
-    document.getElementById("knowButtons")
-        .style.display =
-            "block";
-
+    updateKnowControls();
 
     showReviewCard();
 
@@ -3984,7 +4492,10 @@ function studyMissedCards() {
 
 function showReviewCard() {
 
-    if (reviewCards.length === 0) {
+    if (
+        !reviewMode ||
+        reviewCards.length === 0
+    ) {
 
         backToCreate();
 
@@ -3992,35 +4503,53 @@ function showReviewCard() {
 
     }
 
+    if (
+        currentCard < 0 ||
+        currentCard >= reviewCards.length
+    ) {
+
+        finishMissedReview();
+
+        return;
+
+    }
 
     const card =
         reviewCards[currentCard];
 
+    if (!card) {
 
-    document.getElementById("flashcardFront")
-        .textContent =
-            card.question;
+        finishMissedReview();
 
+        return;
 
-    document.getElementById("flashcardBack")
-        .textContent =
-            card.answer;
+    }
 
+    document.getElementById(
+        "flashcardFront"
+    ).textContent =
+        card.question;
 
-    document.querySelector(".flashcard-inner")
-        .classList.remove("flipped");
+    document.getElementById(
+        "flashcardBack"
+    ).textContent =
+        card.answer;
 
+    document.querySelector(
+        ".flashcard-inner"
+    ).classList.remove(
+        "flipped"
+    );
 
     showingAnswer = false;
 
-
-    document.getElementById("progress")
-        .textContent =
-            "Review Card " +
-            (currentCard + 1) +
-            " of " +
-            reviewCards.length;
-
+    document.getElementById(
+        "progress"
+    ).textContent =
+        "Review Card " +
+        (currentCard + 1) +
+        " of " +
+        reviewCards.length;
 
     const percent =
         (
@@ -4028,67 +4557,39 @@ function showReviewCard() {
             reviewCards.length
         ) * 100;
 
-
-    document.getElementById("progressFill")
-        .style.width =
-            percent + "%";
-
-}
-
-
-/* =====================================================
-   REVIEW KNOW
-===================================================== */
-
-function reviewKnowCard() {
-
-    const card =
-        reviewCards[currentCard];
-
-
-    if (!card) return;
-
-
-    card.known = true;
-
-
-    saveCards();
-
-
-    nextReviewCard();
+    document.getElementById(
+        "progressFill"
+    ).style.width =
+        percent + "%";
 
 }
 
 
 /* =====================================================
-   REVIEW NEXT
+   FINISH MISSED REVIEW
 ===================================================== */
 
-function nextReviewCard() {
+function finishMissedReview() {
 
-    if (
-        currentCard <
-        reviewCards.length - 1
-    ) {
+    const count =
+        reviewCards.length;
 
-        currentCard++;
+    reviewMode = false;
 
+    answeredStudyCards =
+        new Set();
 
-        showReviewCard();
+    reviewCards = [];
 
-    } else {
+    alert(
+        "Nice! You finished reviewing " +
+        count +
+        " missed card" +
+        (count === 1 ? "" : "s") +
+        ". 🦉"
+    );
 
-        reviewCards = [];
-
-
-        alert(
-            "Nice! You finished reviewing the missed cards. 📚"
-        );
-
-
-        backToCreate();
-
-    }
+    backToCreate();
 
 }
 
@@ -4101,10 +4602,8 @@ function startPracticeMode() {
 
     closeStudyPopup();
 
-
     const currentCards =
         getCurrentCards();
-
 
     if (currentCards.length === 0) {
 
@@ -4116,47 +4615,28 @@ function startPracticeMode() {
 
     }
 
+    hideAllPages();
 
-    document.getElementById("homePage")
-        .style.display = "none";
+    document.getElementById(
+        "flashcardsPage"
+    ).style.display = "block";
 
+    clearNavActive();
 
-    document.getElementById("flashcardsPage")
-        .style.display = "block";
+    document.getElementById(
+        "flashcardsNav"
+    ).classList.add("active");
 
-
-    document.getElementById("setsArea")
-        .style.display = "none";
-
-
-    document.getElementById("homeNav")
-        .classList.remove("active");
-
-
-    document.getElementById("flashcardsNav")
-        .classList.add("active");
-
-
-    document.getElementById("setsNav")
-        .classList.remove("active");
-
-
-    document.getElementById("settingsNav")
-        .classList.remove("active");
-
+    reviewMode = false;
 
     practiceCards =
         currentCards.slice();
 
-
     practiceCardIndex = 0;
-
 
     practiceCorrect = 0;
 
-
     practiceAnswered = false;
-
 
     for (
         let i = practiceCards.length - 1;
@@ -4169,47 +4649,42 @@ function startPracticeMode() {
                 Math.random() * (i + 1)
             );
 
-
-        const temp =
-            practiceCards[i];
-
-
-        practiceCards[i] =
-            practiceCards[randomIndex];
-
-
-        practiceCards[randomIndex] =
-            temp;
+        [
+            practiceCards[i],
+            practiceCards[randomIndex]
+        ] = [
+            practiceCards[randomIndex],
+            practiceCards[i]
+        ];
 
     }
 
+    document.getElementById(
+        "createArea"
+    ).style.display = "none";
 
-    document.getElementById("createArea")
-        .style.display = "none";
+    document.getElementById(
+        "studyArea"
+    ).style.display = "none";
 
+    document.getElementById(
+        "studyComplete"
+    ).style.display = "none";
 
-    document.getElementById("studyArea")
-        .style.display = "none";
+    document.getElementById(
+        "practiceComplete"
+    ).style.display = "none";
 
+    document.getElementById(
+        "practiceArea"
+    ).style.display = "block";
 
-    document.getElementById("studyComplete")
-        .style.display = "none";
-
-
-    document.getElementById("practiceComplete")
-        .style.display = "none";
-
-
-    document.getElementById("practiceArea")
-        .style.display = "block";
-
-
-    document.getElementById("mainContent")
-        .scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
+    document.getElementById(
+        "mainContent"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
     showPracticeQuestion();
 
@@ -4217,30 +4692,38 @@ function startPracticeMode() {
 
 
 /* =====================================================
-   CREATE MULTIPLE CHOICE ANSWERS
+   CREATE MULTIPLE CHOICE
 ===================================================== */
 
-function createPracticeChoices(correctCard) {
+function createPracticeChoices(
+    correctCard
+) {
 
     const correctAnswer =
-        String(correctCard.answer).trim();
-
+        String(
+            correctCard.answer
+        ).trim();
 
     const otherAnswers =
         cards
-            .filter(card =>
-                card.setId === selectedSetId &&
-                card.id !== correctCard.id &&
-                String(card.answer).trim() !== correctAnswer
+            .filter(
+                card =>
+                    card.setId === selectedSetId &&
+                    card.id !== correctCard.id &&
+                    String(card.answer).trim() !==
+                        correctAnswer
             )
-            .map(card =>
-                String(card.answer).trim()
+            .map(
+                card =>
+                    String(card.answer).trim()
             );
 
-
     const uniqueOthers =
-        [...new Set(otherAnswers)];
-
+        [
+            ...new Set(
+                otherAnswers
+            )
+        ];
 
     for (
         let i = uniqueOthers.length - 1;
@@ -4253,24 +4736,21 @@ function createPracticeChoices(correctCard) {
                 Math.random() * (i + 1)
             );
 
-
         [
             uniqueOthers[i],
             uniqueOthers[randomIndex]
-        ] =
-            [
-                uniqueOthers[randomIndex],
-                uniqueOthers[i]
-            ];
+        ] = [
+            uniqueOthers[randomIndex],
+            uniqueOthers[i]
+        ];
 
     }
 
-
-    const choices = [
-        correctAnswer,
-        ...uniqueOthers.slice(0, 3)
-    ];
-
+    const choices =
+        [
+            correctAnswer,
+            ...uniqueOthers.slice(0, 3)
+        ];
 
     const fallbacks = [
         "No other answer available",
@@ -4278,20 +4758,19 @@ function createPracticeChoices(correctCard) {
         "No additional answer"
     ];
 
+    for (
+        const fallback of fallbacks
+    ) {
 
-    for (const fallback of fallbacks) {
-
-        if (choices.length >= 4) break;
-
+        if (choices.length >= 4) {
+            break;
+        }
 
         if (!choices.includes(fallback)) {
-
             choices.push(fallback);
-
         }
 
     }
-
 
     for (
         let i = choices.length - 1;
@@ -4304,23 +4783,24 @@ function createPracticeChoices(correctCard) {
                 Math.random() * (i + 1)
             );
 
-
         [
             choices[i],
             choices[randomIndex]
-        ] =
-            [
-                choices[randomIndex],
-                choices[i]
-            ];
+        ] = [
+            choices[randomIndex],
+            choices[i]
+        ];
 
     }
-
 
     return choices;
 
 }
 
+
+/* =====================================================
+   SHOW PRACTICE QUESTION
+===================================================== */
 
 function showPracticeQuestion() {
 
@@ -4335,105 +4815,107 @@ function showPracticeQuestion() {
 
     }
 
-
     practiceAnswered = false;
 
-
     const card =
-        practiceCards[practiceCardIndex];
+        practiceCards[
+            practiceCardIndex
+        ];
 
-
-    document.getElementById("practiceProgress")
-        .textContent =
-            "Question " +
-            (practiceCardIndex + 1) +
-            " of " +
-            practiceCards.length;
-
+    document.getElementById(
+        "practiceProgress"
+    ).textContent =
+        "Question " +
+        (practiceCardIndex + 1) +
+        " of " +
+        practiceCards.length;
 
     const percent =
-        (
-            practiceCardIndex /
-            practiceCards.length
-        ) * 100;
+        practiceCards.length === 0
+            ? 0
+            : (
+                practiceCardIndex /
+                practiceCards.length
+            ) * 100;
 
+    document.getElementById(
+        "practiceProgressFill"
+    ).style.width =
+        percent + "%";
 
-    document.getElementById("practiceProgressFill")
-        .style.width =
-            percent + "%";
+    document.getElementById(
+        "practiceQuestion"
+    ).textContent =
+        card.question;
 
+    document.getElementById(
+        "practiceFeedback"
+    ).textContent = "";
 
-    document.getElementById("practiceQuestion")
-        .textContent =
-            card.question;
+    document.getElementById(
+        "practiceFeedback"
+    ).className = "";
 
-
-    document.getElementById("practiceFeedback")
-        .textContent = "";
-
-
-    document.getElementById("practiceFeedback")
-        .className = "";
-
-
-    document.getElementById("nextPracticeButton")
-        .style.display = "none";
-
+    document.getElementById(
+        "nextPracticeButton"
+    ).style.display = "none";
 
     const choicesContainer =
         document.getElementById(
             "practiceChoices"
         );
 
-
     choicesContainer.innerHTML = "";
 
-
     const choices =
-        createPracticeChoices(card);
-
-
-    choices.forEach((choice, index) => {
-
-        const button =
-            document.createElement("button");
-
-
-        button.type = "button";
-
-
-        button.className =
-            "practiceChoice";
-
-
-        button.textContent =
-            choice;
-
-
-        button.dataset.choiceIndex =
-            index;
-
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                selectPracticeAnswer(
-                    choice,
-                    String(card.answer).trim(),
-                    button
-                );
-
-            }
+        createPracticeChoices(
+            card
         );
 
+    choices.forEach(
+        choice => {
 
-        choicesContainer.appendChild(button);
+            const button =
+                document.createElement(
+                    "button"
+                );
 
-    });
+            button.type = "button";
+
+            button.className =
+                "practiceChoice";
+
+            button.textContent =
+                choice;
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    selectPracticeAnswer(
+                        choice,
+                        String(
+                            card.answer
+                        ).trim(),
+                        button
+                    );
+
+                }
+            );
+
+            choicesContainer.appendChild(
+                button
+            );
+
+        }
+    );
 
 }
 
+
+/* =====================================================
+   SELECT PRACTICE ANSWER
+===================================================== */
 
 function selectPracticeAnswer(
     selectedAnswer,
@@ -4441,121 +4923,125 @@ function selectPracticeAnswer(
     selectedButton
 ) {
 
-    if (practiceAnswered) return;
-
+    if (practiceAnswered) {
+        return;
+    }
 
     practiceAnswered = true;
 
-
     const card =
-        practiceCards[practiceCardIndex];
-
+        practiceCards[
+            practiceCardIndex
+        ];
 
     const selected =
-        String(selectedAnswer).trim();
-
+        String(
+            selectedAnswer
+        ).trim();
 
     const correct =
-        String(correctAnswer).trim();
-
+        String(
+            correctAnswer
+        ).trim();
 
     const isCorrect =
         selected === correct;
 
-
     card.practiceAttempts =
         (card.practiceAttempts || 0) + 1;
-
 
     const buttons =
         document.querySelectorAll(
             "#practiceChoices .practiceChoice"
         );
 
+    buttons.forEach(
+        button => {
 
-    buttons.forEach(button => {
+            button.disabled = true;
 
-        button.disabled = true;
+            if (
+                String(
+                    button.textContent
+                ).trim() === correct
+            ) {
 
+                button.classList.add(
+                    "correct"
+                );
 
-        if (
-            String(button.textContent).trim() ===
-            correct
-        ) {
-
-            button.classList.add("correct");
+            }
 
         }
-
-    });
-
+    );
 
     if (isCorrect) {
 
         practiceCorrect++;
 
-
         card.practiceCorrect =
             (card.practiceCorrect || 0) + 1;
 
-
         card.known = true;
 
+        selectedButton.classList.add(
+            "correct"
+        );
 
-        selectedButton.classList.add("correct");
+        const feedback =
+            document.getElementById(
+                "practiceFeedback"
+            );
 
+        feedback.textContent =
+            "✅ Correct! Nice job!";
 
-        document.getElementById("practiceFeedback")
-            .textContent =
-                "✅ Correct! Nice job!";
-
-
-        document.getElementById("practiceFeedback")
-            .className =
-                "practiceCorrect";
+        feedback.className =
+            "practiceCorrect";
 
     } else {
 
         card.known = false;
 
+        selectedButton.classList.add(
+            "wrong"
+        );
 
-        selectedButton.classList.add("wrong");
+        const feedback =
+            document.getElementById(
+                "practiceFeedback"
+            );
 
+        feedback.textContent =
+            "❌ Not quite. The correct answer is: " +
+            correct;
 
-        document.getElementById("practiceFeedback")
-            .textContent =
-                "❌ Not quite. The correct answer is: " +
-                correct;
-
-
-        document.getElementById("practiceFeedback")
-            .className =
-                "practiceWrong";
+        feedback.className =
+            "practiceWrong";
 
     }
 
-
     saveCards();
 
-
-    document.getElementById("nextPracticeButton")
-        .style.display =
-            "inline-block";
+    document.getElementById(
+        "nextPracticeButton"
+    ).style.display =
+        "inline-block";
 
 }
 
 
+/* =====================================================
+   NEXT PRACTICE
+===================================================== */
+
 function nextPracticeCard() {
 
     if (!practiceAnswered) {
-
         return;
-
     }
 
-
     practiceCardIndex++;
-
 
     showPracticeQuestion();
 
@@ -4568,34 +5054,34 @@ function nextPracticeCard() {
 
 function showPracticeComplete() {
 
-    document.getElementById("practiceArea")
-        .style.display = "none";
+    document.getElementById(
+        "practiceArea"
+    ).style.display = "none";
 
+    document.getElementById(
+        "studyArea"
+    ).style.display = "none";
 
-    document.getElementById("studyArea")
-        .style.display = "none";
+    document.getElementById(
+        "studyComplete"
+    ).style.display = "none";
 
-
-    document.getElementById("studyComplete")
-        .style.display = "none";
-
-
-    document.getElementById("practiceComplete")
-        .style.display = "block";
-
+    document.getElementById(
+        "practiceComplete"
+    ).style.display = "block";
 
     const total =
         practiceCards.length;
 
-
     const percent =
-        Math.round(
-            (
-                practiceCorrect /
-                total
-            ) * 100
-        );
-
+        total === 0
+            ? 0
+            : Math.round(
+                (
+                    practiceCorrect /
+                    total
+                ) * 100
+            );
 
     document.getElementById(
         "practiceScoreText"
@@ -4606,12 +5092,11 @@ function showPracticeComplete() {
         total +
         " questions correct!";
 
-
     document.getElementById(
         "practiceReviewText"
     ).textContent =
         percent +
-        "% correct. Keep practicing! 📚";
+        "% correct. Keep practicing! 🦉";
 
 }
 
@@ -4622,11 +5107,12 @@ function showPracticeComplete() {
 
 function startStudyingAgain() {
 
-    useKnowDontKnow = true;
-
+    useKnowDontKnow =
+        loadKnowDontKnowPreference();
 
     shuffleCards = false;
 
+    studyMode = "normal";
 
     startStudying();
 
@@ -4637,29 +5123,35 @@ function startStudyingAgain() {
    BACK TO CREATE
 ===================================================== */
 
-function backToCreate() {
+function backToCreate(
+    updateEverythingNow = true
+) {
 
-    document.getElementById("studyComplete")
-        .style.display = "none";
+    reviewMode = false;
 
+    document.getElementById(
+        "studyComplete"
+    ).style.display = "none";
 
-    document.getElementById("practiceComplete")
-        .style.display = "none";
+    document.getElementById(
+        "practiceComplete"
+    ).style.display = "none";
 
+    document.getElementById(
+        "studyArea"
+    ).style.display = "none";
 
-    document.getElementById("studyArea")
-        .style.display = "none";
+    document.getElementById(
+        "practiceArea"
+    ).style.display = "none";
 
+    document.getElementById(
+        "createArea"
+    ).style.display = "block";
 
-    document.getElementById("practiceArea")
-        .style.display = "none";
-
-
-    document.getElementById("createArea")
-        .style.display = "block";
-
-
-    updateEverything();
+    if (updateEverythingNow) {
+        updateEverything();
+    }
 
 }
 
@@ -4672,9 +5164,7 @@ function updateEverything() {
 
     updateCount();
 
-
     renderSets();
-
 
     renderHomeSets();
 
@@ -4685,6 +5175,20 @@ function updateEverything() {
    SETTINGS
 ===================================================== */
 
+function loadKnowDontKnowPreference() {
+
+    const saved =
+        localStorage.getItem(
+            "owlyKnowDontKnow"
+        );
+
+    return saved === null
+        ? true
+        : saved === "true";
+
+}
+
+
 function loadSettings() {
 
     const know =
@@ -4692,12 +5196,15 @@ function loadSettings() {
             "owlyKnowDontKnow"
         );
 
-
     const mode =
         localStorage.getItem(
             "owlyDefaultStudyMode"
         ) || "normal";
 
+    const animated =
+        localStorage.getItem(
+            "owlyAnimatedOwly"
+        );
 
     document.getElementById(
         "settingsKnowToggle"
@@ -4706,11 +5213,29 @@ function loadSettings() {
             ? true
             : know === "true";
 
-
     document.getElementById(
         "defaultStudyMode"
     ).value =
-        mode;
+        ["normal", "shuffle", "practice"]
+            .includes(mode)
+            ? mode
+            : "normal";
+
+    document.getElementById(
+        "animatedOwlyToggle"
+    ).checked =
+        animated === null
+            ? true
+            : animated === "true";
+
+    document.getElementById(
+        "knowDontKnowToggle"
+    ).checked =
+        know === null
+            ? true
+            : know === "true";
+
+    applyOwlyAnimationSetting();
 
 }
 
@@ -4722,77 +5247,82 @@ function saveSettings() {
             "settingsKnowToggle"
         ).checked;
 
-
     const mode =
         document.getElementById(
             "defaultStudyMode"
         ).value;
 
+    const animated =
+        document.getElementById(
+            "animatedOwlyToggle"
+        ).checked;
 
     localStorage.setItem(
         "owlyKnowDontKnow",
         String(know)
     );
 
-
     localStorage.setItem(
         "owlyDefaultStudyMode",
         mode
     );
 
+    localStorage.setItem(
+        "owlyAnimatedOwly",
+        String(animated)
+    );
+
+    document.getElementById(
+        "knowDontKnowToggle"
+    ).checked = know;
+
+    applyOwlyAnimationSetting();
 
     const saved =
         document.getElementById(
             "settingsSaved"
         );
 
-
     saved.classList.add("show");
 
-
-    setTimeout(() =>
-        saved.classList.remove("show"),
+    setTimeout(
+        () => {
+            saved.classList.remove("show");
+        },
         1600
     );
 
 }
 
 
-function showSettings() {
+function applyOwlyAnimationSetting() {
 
-    document.getElementById("homePage")
-        .style.display = "none";
+    const toggle =
+        document.getElementById(
+            "animatedOwlyToggle"
+        );
 
+    if (!toggle) {
+        return;
+    }
 
-    document.getElementById("flashcardsPage")
-        .style.display = "none";
+    const enabled =
+        toggle.checked;
 
+    document
+        .querySelectorAll(
+            ".roomOwlFlying, .roomOwlStanding, .studyRoomMini img"
+        )
+        .forEach(
+            owl => {
 
-    document.getElementById("setsArea")
-        .style.display = "none";
+                owl.style.animationPlayState =
+                    enabled
+                        ? "running"
+                        : "paused";
 
-
-    document.getElementById("settingsArea")
-        .style.display = "block";
-
-
-    document.getElementById("homeNav")
-        .classList.remove("active");
-
-
-    document.getElementById("flashcardsNav")
-        .classList.remove("active");
-
-
-    document.getElementById("setsNav")
-        .classList.remove("active");
-
-
-    document.getElementById("settingsNav")
-        .classList.add("active");
-
-
-    loadSettings();
+            }
+        );
 
 }
 
@@ -4804,24 +5334,33 @@ function resetOwlyData() {
             "Reset all Owly flashcards and sets? This cannot be undone."
         );
 
+    if (!ok) {
+        return;
+    }
 
-    if (!ok) return;
+    localStorage.removeItem(
+        "owlyCards"
+    );
 
+    localStorage.removeItem(
+        "owlySets"
+    );
 
-    localStorage.removeItem("owlyCards");
+    localStorage.removeItem(
+        "owlySelectedSet"
+    );
 
+    localStorage.removeItem(
+        "owlyKnowDontKnow"
+    );
 
-    localStorage.removeItem("owlySets");
+    localStorage.removeItem(
+        "owlyDefaultStudyMode"
+    );
 
-
-    localStorage.removeItem("owlySelectedSet");
-
-
-    localStorage.removeItem("owlyKnowDontKnow");
-
-
-    localStorage.removeItem("owlyDefaultStudyMode");
-
+    localStorage.removeItem(
+        "owlyAnimatedOwly"
+    );
 
     location.reload();
 
@@ -4829,32 +5368,119 @@ function resetOwlyData() {
 
 
 /* =====================================================
+   SETTINGS EVENT LISTENERS
+===================================================== */
+
+document
+    .getElementById(
+        "animatedOwlyToggle"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            applyOwlyAnimationSetting();
+
+            localStorage.setItem(
+                "owlyAnimatedOwly",
+                String(this.checked)
+            );
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "settingsKnowToggle"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            const enabled =
+                this.checked;
+
+            document.getElementById(
+                "knowDontKnowToggle"
+            ).checked =
+                enabled;
+
+            localStorage.setItem(
+                "owlyKnowDontKnow",
+                String(enabled)
+            );
+
+            useKnowDontKnow =
+                enabled;
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "knowDontKnowToggle"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            const enabled =
+                this.checked;
+
+            document.getElementById(
+                "settingsKnowToggle"
+            ).checked =
+                enabled;
+
+            localStorage.setItem(
+                "owlyKnowDontKnow",
+                String(enabled)
+            );
+
+            useKnowDontKnow =
+                enabled;
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "defaultStudyMode"
+    )
+    .addEventListener(
+        "change",
+        function() {
+
+            localStorage.setItem(
+                "owlyDefaultStudyMode",
+                this.value
+            );
+
+        }
+    );
+
+
+/* =====================================================
    STUDY MODAL EVENTS
 ===================================================== */
 
 const studyModal =
-    document.getElementById("studyModal");
+    document.getElementById(
+        "studyModal"
+    );
 
 
 studyModal.addEventListener(
     "click",
     function(event) {
 
-        if (event.target === studyModal) {
-
-            closeStudyPopup();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (event.key === "Escape") {
+        if (
+            event.target ===
+            studyModal
+        ) {
 
             closeStudyPopup();
 
@@ -4865,40 +5491,20 @@ document.addEventListener(
 
 
 /* =====================================================
-   SETTINGS EVENTS
+   KEYBOARD SUPPORT
 ===================================================== */
 
-document.getElementById(
-    "settingsKnowToggle"
-).addEventListener(
-    "change",
-    function() {
+document.addEventListener(
+    "keydown",
+    function(event) {
 
-        document.getElementById(
-            "knowDontKnowToggle"
-        ).checked =
-            this.checked;
+        if (
+            event.key === "Escape"
+        ) {
 
+            closeStudyPopup();
 
-        localStorage.setItem(
-            "owlyKnowDontKnow",
-            String(this.checked)
-        );
-
-    }
-);
-
-
-document.getElementById(
-    "defaultStudyMode"
-).addEventListener(
-    "change",
-    function() {
-
-        localStorage.setItem(
-            "owlyDefaultStudyMode",
-            this.value
-        );
+        }
 
     }
 );
@@ -4908,14 +5514,20 @@ document.getElementById(
    ENTER KEY SUPPORT
 ===================================================== */
 
-document.getElementById("question")
+document
+    .getElementById("question")
     .addEventListener(
         "keydown",
         function(event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.key === "Enter"
+            ) {
 
-                document.getElementById("answer")
+                event.preventDefault();
+
+                document
+                    .getElementById("answer")
                     .focus();
 
             }
@@ -4924,12 +5536,17 @@ document.getElementById("question")
     );
 
 
-document.getElementById("answer")
+document
+    .getElementById("answer")
     .addEventListener(
         "keydown",
         function(event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
 
                 addCard();
 
@@ -4939,12 +5556,17 @@ document.getElementById("answer")
     );
 
 
-document.getElementById("setNameInput")
+document
+    .getElementById("setNameInput")
     .addEventListener(
         "keydown",
         function(event) {
 
-            if (event.key === "Enter") {
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
 
                 createSet();
 
@@ -4958,11 +5580,12 @@ document.getElementById("setNameInput")
    INITIALIZE
 ===================================================== */
 
+useKnowDontKnow =
+    loadKnowDontKnowPreference();
+
 updateEverything();
 
-
 loadSettings();
-
 
 showHome();
 
@@ -4970,3 +5593,4 @@ showHome();
 
 </body>
 </html>
+```
